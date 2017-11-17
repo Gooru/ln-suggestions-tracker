@@ -32,7 +32,6 @@ public final class Constants {
         public static final String MSG_API_VERSION = "api.version";
         public static final String MSG_SESSION_TOKEN = "session.token";
         public static final String MSG_KEY_SESSION = "session";
-        public static final String MSG_HDR_KEY_CONTEXT = "user.context";
         public static final String MSG_USER_ANONYMOUS = "anonymous";
         public static final String MSG_USER_ID = "user_id";
         public static final String MSG_HTTP_STATUS = "http.status";

@@ -3,8 +3,8 @@ package org.gooru.suggestions.bootstrap.verticles;
 import org.gooru.suggestions.constants.Constants;
 import org.gooru.suggestions.exceptions.HttpResponseWrapperException;
 import org.gooru.suggestions.exceptions.MessageResponseWrapperException;
+import org.gooru.suggestions.processor.MessageProcessor;
 import org.gooru.suggestions.responses.MessageResponse;
-import org.gooru.suggestions.responses.MessageResponseFactory;
 import org.gooru.suggestions.responses.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,16 +43,20 @@ public class SuggestionsTrackerVerticle extends AbstractVerticle {
         String op = message.headers().get(Constants.Message.MSG_OP);
         switch (op) {
         case Constants.Message.MSG_OP_SUGGESTION_ACCEPTANCE:
-            dummyProcess().setHandler(event -> finishResponse(message, event));
+            MessageProcessor.buildStubbedProcessor(vertx, message).process()
+                .setHandler(event -> finishResponse(message, event));
             break;
         case Constants.Message.MSG_OP_TEACHER_SUGGESTIONS_ADD:
-            dummyProcess().setHandler(event -> finishResponse(message, event));
+            MessageProcessor.buildStubbedProcessor(vertx, message).process()
+                .setHandler(event -> finishResponse(message, event));
             break;
         case Constants.Message.MSG_OP_USER_SUGGESTIONS_FOR_COURSE:
-            dummyProcess().setHandler(event -> finishResponse(message, event));
+            MessageProcessor.buildStubbedProcessor(vertx, message).process()
+                .setHandler(event -> finishResponse(message, event));
             break;
         case Constants.Message.MSG_OP_USER_SUGGESTIONS_IN_CLASS:
-            dummyProcess().setHandler(event -> finishResponse(message, event));
+            MessageProcessor.buildStubbedProcessor(vertx, message).process()
+                .setHandler(event -> finishResponse(message, event));
             break;
         default:
             LOGGER.warn("Invalid operation type");
@@ -79,13 +83,6 @@ public class SuggestionsTrackerVerticle extends AbstractVerticle {
                     .put(Constants.Message.MSG_HTTP_HEADERS, new JsonObject()));
             }
         }
-    }
-
-    private Future<MessageResponse> dummyProcess() {
-        Future<MessageResponse> result = Future.future();
-        result.complete(MessageResponseFactory
-            .createOkayResponse(new JsonObject().put("message", "This is stubbed " + "response")));
-        return result;
     }
 
 }
