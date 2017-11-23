@@ -43,7 +43,7 @@ public class SuggestionsTrackerVerticle extends AbstractVerticle {
         String op = message.headers().get(Constants.Message.MSG_OP);
         switch (op) {
         case Constants.Message.MSG_OP_SUGGESTION_ACCEPTANCE:
-            MessageProcessor.buildStubbedProcessor(vertx, message).process()
+            MessageProcessor.buildSuggestionAcceptanceProcessor(vertx, message).process()
                 .setHandler(event -> finishResponse(message, event));
             break;
         case Constants.Message.MSG_OP_TEACHER_SUGGESTIONS_ADD:

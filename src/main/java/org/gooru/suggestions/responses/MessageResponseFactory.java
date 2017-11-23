@@ -55,6 +55,15 @@ public final class MessageResponseFactory {
         return new MessageResponse.Builder().setStatusOkay().setResponseBody(body).build();
     }
 
+    public static MessageResponse createCreatedResponse(String location) {
+        return new MessageResponse.Builder().setStatusCreated().setHeader(HttpConstants.HEADER_LOCATION, location)
+            .build();
+    }
+
+    public static MessageResponse createNoContentResponse() {
+        return new MessageResponse.Builder().setStatusNoOutput().setResponseBody(new JsonObject()).build();
+    }
+
     public static MessageResponse createVersionDeprecatedResponse() {
         return new MessageResponse.Builder().setStatusHttpCode(HttpConstants.HttpStatus.GONE).setContentTypeJson()
             .setResponseBody(new JsonObject().put(Constants.Message.MSG_MESSAGE, API_VERSION_DEPRECATED)).build();
