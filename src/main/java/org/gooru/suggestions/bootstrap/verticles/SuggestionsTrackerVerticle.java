@@ -47,7 +47,7 @@ public class SuggestionsTrackerVerticle extends AbstractVerticle {
                 .setHandler(event -> finishResponse(message, event));
             break;
         case Constants.Message.MSG_OP_TEACHER_SUGGESTIONS_ADD:
-            MessageProcessor.buildStubbedProcessor(vertx, message).process()
+            MessageProcessor.buildAddTeacherSuggestionsProcessor(vertx, message).process()
                 .setHandler(event -> finishResponse(message, event));
             break;
         case Constants.Message.MSG_OP_USER_SUGGESTIONS_FOR_COURSE:

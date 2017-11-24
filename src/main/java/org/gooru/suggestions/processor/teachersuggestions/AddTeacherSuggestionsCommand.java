@@ -34,6 +34,26 @@ public class AddTeacherSuggestionsCommand {
         return result;
     }
 
+    public AddTeacherSuggestionsBean getBean() {
+        AddTeacherSuggestionsBean result = new AddTeacherSuggestionsBean();
+        result.ctxClassId = ctxClassId;
+        result.ctxUserId = ctxUserId;
+        result.ctxCourseId = ctxCourseId;
+        result.ctxUnitId = ctxUnitId;
+        result.ctxLessonId = ctxLessonId;
+        result.ctxCollectionId = ctxCollectionId;
+        result.pathId = pathId;
+        result.suggestedContentId = suggestedContentId;
+        result.suggestedContentType = suggestedContentType != null ? suggestedContentType.getName() : null;
+        result.suggestedContentSubType = suggestedContentSubType != null ? suggestedContentSubType.getName() : null;
+        result.targetCourseId = targetCourseId;
+        result.targetUnitId = targetUnitId;
+        result.targetLessonId = targetLessonId;
+        result.targetCollectionId = targetCollectionId;
+
+        return result;
+    }
+
     public UUID getCtxUserId() {
         return ctxUserId;
     }
@@ -105,6 +125,8 @@ public class AddTeacherSuggestionsCommand {
         } else if (suggestedContentType == null) {
             throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
                 "Invalid suggested content type");
+        } else if (pathId == null) {
+            throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST, "Invalid path id");
         }
     }
 
@@ -112,29 +134,18 @@ public class AddTeacherSuggestionsCommand {
         AddTeacherSuggestionsCommand command = new AddTeacherSuggestionsCommand();
 
         try {
-            command.ctxUserId =
-                toUuid(input, CommandAttributes.USER_ID);
-            command.ctxClassId =
-                toUuid(input, CommandAttributes.CLASS_ID);
-            command.ctxCourseId =
-                toUuid(input, CommandAttributes.COURSE_ID);
-            command.ctxUnitId =
-                toUuid(input, CommandAttributes.UNIT_ID);
-            command.ctxLessonId =
-                toUuid(input, CommandAttributes.LESSON_ID);
-            command.ctxCollectionId =
-                toUuid(input, CommandAttributes.COLLECTION_ID);
-            command.suggestedContentId =
-                toUuid(input, CommandAttributes.SUGGESTED_CONTENT_ID);
+            command.ctxUserId = toUuid(input, CommandAttributes.USER_ID);
+            command.ctxClassId = toUuid(input, CommandAttributes.CLASS_ID);
+            command.ctxCourseId = toUuid(input, CommandAttributes.COURSE_ID);
+            command.ctxUnitId = toUuid(input, CommandAttributes.UNIT_ID);
+            command.ctxLessonId = toUuid(input, CommandAttributes.LESSON_ID);
+            command.ctxCollectionId = toUuid(input, CommandAttributes.COLLECTION_ID);
+            command.suggestedContentId = toUuid(input, CommandAttributes.SUGGESTED_CONTENT_ID);
             command.pathId = input.getLong(CommandAttributes.PATH_ID);
-            command.targetCourseId =
-                toUuid(input, CommandAttributes.TARGET_COURSE_ID);
-            command.targetUnitId =
-                toUuid(input, CommandAttributes.TARGET_UNIT_ID);
-            command.targetLessonId =
-                toUuid(input, CommandAttributes.TARGET_LESSON_ID);
-            command.targetCollectionId =
-                toUuid(input, CommandAttributes.TARGET_COLLECTION_ID);
+            command.targetCourseId = toUuid(input, CommandAttributes.TARGET_COURSE_ID);
+            command.targetUnitId = toUuid(input, CommandAttributes.TARGET_UNIT_ID);
+            command.targetLessonId = toUuid(input, CommandAttributes.TARGET_LESSON_ID);
+            command.targetCollectionId = toUuid(input, CommandAttributes.TARGET_COLLECTION_ID);
             String value = input.getString(CommandAttributes.SUGGESTED_CONTENT_TYPE);
             command.suggestedContentType =
                 (value != null && !value.isEmpty()) ? SuggestedContentType.builder(value) : null;
@@ -175,6 +186,135 @@ public class AddTeacherSuggestionsCommand {
 
         private CommandAttributes() {
             throw new AssertionError();
+        }
+    }
+
+    public static final class AddTeacherSuggestionsBean {
+        private UUID ctxUserId;
+        private UUID ctxClassId;
+        private UUID ctxCourseId;
+        private UUID ctxUnitId;
+        private UUID ctxLessonId;
+        private UUID ctxCollectionId;
+        private Long pathId;
+        private UUID suggestedContentId;
+        private String suggestedContentType;
+        private String suggestedContentSubType;
+        private UUID targetCourseId;
+        private UUID targetUnitId;
+        private UUID targetLessonId;
+        private UUID targetCollectionId;
+
+        public UUID getCtxUserId() {
+            return ctxUserId;
+        }
+
+        public void setCtxUserId(UUID ctxUserId) {
+            this.ctxUserId = ctxUserId;
+        }
+
+        public UUID getCtxClassId() {
+            return ctxClassId;
+        }
+
+        public void setCtxClassId(UUID ctxClassId) {
+            this.ctxClassId = ctxClassId;
+        }
+
+        public UUID getCtxCourseId() {
+            return ctxCourseId;
+        }
+
+        public void setCtxCourseId(UUID ctxCourseId) {
+            this.ctxCourseId = ctxCourseId;
+        }
+
+        public UUID getCtxUnitId() {
+            return ctxUnitId;
+        }
+
+        public void setCtxUnitId(UUID ctxUnitId) {
+            this.ctxUnitId = ctxUnitId;
+        }
+
+        public UUID getCtxLessonId() {
+            return ctxLessonId;
+        }
+
+        public void setCtxLessonId(UUID ctxLessonId) {
+            this.ctxLessonId = ctxLessonId;
+        }
+
+        public UUID getCtxCollectionId() {
+            return ctxCollectionId;
+        }
+
+        public void setCtxCollectionId(UUID ctxCollectionId) {
+            this.ctxCollectionId = ctxCollectionId;
+        }
+
+        public Long getPathId() {
+            return pathId;
+        }
+
+        public void setPathId(Long pathId) {
+            this.pathId = pathId;
+        }
+
+        public UUID getSuggestedContentId() {
+            return suggestedContentId;
+        }
+
+        public void setSuggestedContentId(UUID suggestedContentId) {
+            this.suggestedContentId = suggestedContentId;
+        }
+
+        public String getSuggestedContentType() {
+            return suggestedContentType;
+        }
+
+        public void setSuggestedContentType(String suggestedContentType) {
+            this.suggestedContentType = suggestedContentType;
+        }
+
+        public String getSuggestedContentSubType() {
+            return suggestedContentSubType;
+        }
+
+        public void setSuggestedContentSubType(String suggestedContentSubType) {
+            this.suggestedContentSubType = suggestedContentSubType;
+        }
+
+        public UUID getTargetCourseId() {
+            return targetCourseId;
+        }
+
+        public void setTargetCourseId(UUID targetCourseId) {
+            this.targetCourseId = targetCourseId;
+        }
+
+        public UUID getTargetUnitId() {
+            return targetUnitId;
+        }
+
+        public void setTargetUnitId(UUID targetUnitId) {
+            this.targetUnitId = targetUnitId;
+        }
+
+        public UUID getTargetLessonId() {
+            return targetLessonId;
+        }
+
+        public void setTargetLessonId(UUID targetLessonId) {
+            this.targetLessonId = targetLessonId;
+        }
+
+        public UUID getTargetCollectionId() {
+            return targetCollectionId;
+        }
+
+        public void setTargetCollectionId(UUID targetCollectionId) {
+            this.targetCollectionId = targetCollectionId;
         }
     }
 }

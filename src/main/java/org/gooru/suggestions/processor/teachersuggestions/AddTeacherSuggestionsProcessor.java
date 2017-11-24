@@ -1,7 +1,12 @@
 package org.gooru.suggestions.processor.teachersuggestions;
 
 import org.gooru.suggestions.processor.MessageProcessor;
+import org.gooru.suggestions.processor.data.EventBusMessage;
+import org.gooru.suggestions.processor.utilities.jdbi.DBICreator;
 import org.gooru.suggestions.responses.MessageResponse;
+import org.gooru.suggestions.responses.MessageResponseFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
@@ -15,14 +20,48 @@ public class AddTeacherSuggestionsProcessor implements MessageProcessor {
 
     private final Message<JsonObject> message;
     private final Vertx vertx;
+    private final Future<MessageResponse> result;
+    private EventBusMessage eventBusMessage;
+    private static final Logger LOGGER = LoggerFactory.getLogger(AddTeacherSuggestionsProcessor.class);
+    private final AddTeacherSuggestionsService addTeacherSuggestionsService =
+        new AddTeacherSuggestionsService(DBICreator.getDbiForDefaultDS());
 
     public AddTeacherSuggestionsProcessor(Vertx vertx, Message<JsonObject> message) {
         this.vertx = vertx;
         this.message = message;
+        this.result = Future.future();
     }
 
     @Override
     public Future<MessageResponse> process() {
-        return null;
+        try {
+            this.eventBusMessage = EventBusMessage.eventBusMessageBuilder(message);
+            AddTeacherSuggestionsCommand command =
+                AddTeacherSuggestionsCommand.builder(eventBusMessage.getRequestBody());
+            addTeacherSuggestion(command);
+        } catch (Throwable throwable) {
+            LOGGER.warn("Encountered exception", throwable);
+            result.fail(throwable);
+        }
+        return result;
+    }
+
+    private void addTeacherSuggestion(AddTeacherSuggestionsCommand command) {
+        vertx.executeBlocking(future -> {
+            try {
+                Long result = addTeacherSuggestionsService.addTeacherSuggestion(command);
+                future.complete(result);
+            } catch (Throwable throwable) {
+                LOGGER.warn("Encountered exception accepting suggestion", throwable);
+                future.fail(throwable);
+            }
+        }, asyncResult -> {
+            if (asyncResult.succeeded()) {
+                result.complete(MessageResponseFactory.createCreatedResponse(asyncResult.result().toString()));
+            } else {
+                result.fail(asyncResult.cause());
+            }
+        });
+
     }
 }
