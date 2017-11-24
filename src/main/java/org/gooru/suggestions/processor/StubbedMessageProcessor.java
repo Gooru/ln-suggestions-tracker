@@ -24,8 +24,8 @@ public class StubbedMessageProcessor implements MessageProcessor {
     @Override
     public Future<MessageResponse> process() {
         Future<MessageResponse> result = Future.future();
-        result.complete(MessageResponseFactory
-            .createOkayResponse(new JsonObject().put("message", "This is stubbed response")));
+        result.complete(
+            MessageResponseFactory.createOkayResponse(new JsonObject().put("message", "This is stubbed response")));
         return result;
     }
 }

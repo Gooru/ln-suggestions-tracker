@@ -36,29 +36,33 @@ public class RouteSuggestionsConfigurator implements RouteConfigurator {
     private void addTeacherSuggestion(RoutingContext routingContext) {
         DeliveryOptions options = DeliveryOptionsBuilder.buildWithApiVersion(routingContext).setSendTimeout(mbusTimeout)
             .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_TEACHER_SUGGESTIONS_ADD);
-        eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER, RouteRequestUtility.getBodyForMessage(routingContext),
-            options, reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
+        eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER,
+            RouteRequestUtility.getBodyForMessage(routingContext), options,
+            reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
     }
 
     private void userSuggestionsForCourse(RoutingContext routingContext) {
         DeliveryOptions options = DeliveryOptionsBuilder.buildWithApiVersion(routingContext).setSendTimeout(mbusTimeout)
             .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_USER_SUGGESTIONS_FOR_COURSE);
-        eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER, RouteRequestUtility.getBodyForMessage(routingContext),
-            options, reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
+        eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER,
+            RouteRequestUtility.getBodyForMessage(routingContext, true), options,
+            reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
     }
 
     private void userSuggestionsInClass(RoutingContext routingContext) {
         DeliveryOptions options = DeliveryOptionsBuilder.buildWithApiVersion(routingContext).setSendTimeout(mbusTimeout)
             .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_USER_SUGGESTIONS_IN_CLASS);
-        eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER, RouteRequestUtility.getBodyForMessage(routingContext),
-            options, reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
+        eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER,
+            RouteRequestUtility.getBodyForMessage(routingContext, true), options,
+            reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
     }
 
     private void userSuggestionAcceptance(RoutingContext routingContext) {
         DeliveryOptions options = DeliveryOptionsBuilder.buildWithApiVersion(routingContext).setSendTimeout(mbusTimeout)
             .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_SUGGESTION_ACCEPTANCE);
-        eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER, RouteRequestUtility.getBodyForMessage(routingContext),
-            options, reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
+        eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER,
+            RouteRequestUtility.getBodyForMessage(routingContext), options,
+            reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
     }
 
 }

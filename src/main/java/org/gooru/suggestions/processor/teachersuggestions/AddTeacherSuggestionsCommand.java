@@ -12,7 +12,7 @@ import io.vertx.core.json.JsonObject;
 /**
  * @author ashish on 17/11/17.
  */
-public class AddTeacherSuggestionsCommand {
+class AddTeacherSuggestionsCommand {
     private UUID ctxUserId;
     private UUID ctxClassId;
     private UUID ctxCourseId;
@@ -28,13 +28,13 @@ public class AddTeacherSuggestionsCommand {
     private UUID targetLessonId;
     private UUID targetCollectionId;
 
-    public static AddTeacherSuggestionsCommand builder(JsonObject input) {
+    static AddTeacherSuggestionsCommand builder(JsonObject input) {
         AddTeacherSuggestionsCommand result = buildFromJsonObject(input);
         result.validate();
         return result;
     }
 
-    public AddTeacherSuggestionsBean getBean() {
+    AddTeacherSuggestionsBean getBean() {
         AddTeacherSuggestionsBean result = new AddTeacherSuggestionsBean();
         result.ctxClassId = ctxClassId;
         result.ctxUserId = ctxUserId;
@@ -169,20 +169,20 @@ public class AddTeacherSuggestionsCommand {
 
     public static final class CommandAttributes {
 
-        public static final String USER_ID = "ctx_class_id";
-        public static final String CLASS_ID = "ctx_class_id";
-        public static final String COURSE_ID = "ctx_course_id";
-        public static final String LESSON_ID = "ctx_lesson_id";
-        public static final String UNIT_ID = "ctx_unit_id";
-        public static final String COLLECTION_ID = "ctx_collection_id";
-        public static final String SUGGESTED_CONTENT_ID = "suggested_content_id";
-        public static final String SUGGESTED_CONTENT_TYPE = "suggested_content_type";
-        public static final String SUGGESTED_CONTENT_SUBTYPE = "suggested_content_subtype";
-        public static final String PATH_ID = "path_id";
-        public static final String TARGET_COURSE_ID = "target_course_id";
-        public static final String TARGET_UNIT_ID = "target_unit_id";
-        public static final String TARGET_LESSON_ID = "target_lesson_id";
-        public static final String TARGET_COLLECTION_ID = "target_collection_id";
+        static final String USER_ID = "ctx_class_id";
+        static final String CLASS_ID = "ctx_class_id";
+        static final String COURSE_ID = "ctx_course_id";
+        static final String LESSON_ID = "ctx_lesson_id";
+        static final String UNIT_ID = "ctx_unit_id";
+        static final String COLLECTION_ID = "ctx_collection_id";
+        static final String SUGGESTED_CONTENT_ID = "suggested_content_id";
+        static final String SUGGESTED_CONTENT_TYPE = "suggested_content_type";
+        static final String SUGGESTED_CONTENT_SUBTYPE = "suggested_content_subtype";
+        static final String PATH_ID = "path_id";
+        static final String TARGET_COURSE_ID = "target_course_id";
+        static final String TARGET_UNIT_ID = "target_unit_id";
+        static final String TARGET_LESSON_ID = "target_lesson_id";
+        static final String TARGET_COLLECTION_ID = "target_collection_id";
 
         private CommandAttributes() {
             throw new AssertionError();

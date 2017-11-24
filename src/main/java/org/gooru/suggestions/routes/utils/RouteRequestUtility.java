@@ -1,12 +1,10 @@
 package org.gooru.suggestions.routes.utils;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import org.gooru.suggestions.constants.Constants;
 
-import io.netty.handler.codec.http.QueryStringDecoder;
+import io.vertx.core.MultiMap;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
@@ -26,33 +24,62 @@ public final class RouteRequestUtility {
      * and not path matchers. In case of no query parameters send out empty Json
      * object, but don't send null
      */
-
     public static JsonObject getBodyForMessage(RoutingContext routingContext) {
-        JsonObject httpBody, result = new JsonObject();
-        if (routingContext.request().method().name().equals(HttpMethod.POST.name()) || routingContext.request().method()
-            .name().equals(HttpMethod.PUT.name())) {
+        return getBodyForMessage(routingContext, false);
+    }
+
+    public static JsonObject getBodyForMessage(RoutingContext routingContext, boolean withPathParams) {
+        JsonObject result = new JsonObject();
+        result.put(Constants.Message.MSG_HTTP_BODY, getHttpBody(routingContext, withPathParams));
+        result.put(Constants.Message.MSG_KEY_SESSION, getSession(routingContext));
+        result.put(Constants.Message.MSG_USER_ID, getUserId(routingContext));
+        result.put(Constants.Message.MSG_SESSION_TOKEN, getSessionToken(routingContext));
+        return result;
+    }
+
+    private static String getSessionToken(RoutingContext routingContext) {
+        return (String) routingContext.get(Constants.Message.MSG_SESSION_TOKEN);
+    }
+
+    private static String getUserId(RoutingContext routingContext) {
+        return (String) routingContext.get(Constants.Message.MSG_USER_ID);
+    }
+
+    private static JsonObject getSession(RoutingContext routingContext) {
+        return (JsonObject) routingContext.get(Constants.Message.MSG_KEY_SESSION);
+    }
+
+    private static JsonObject getHttpBody(RoutingContext routingContext, boolean withParams) {
+        JsonObject httpBody;
+        if (requestIsPostOrPut(routingContext)) {
             httpBody = routingContext.getBodyAsJson();
-        } else if (Objects.equals(routingContext.request().method().name(), HttpMethod.GET.name())) {
+            if (withParams) {
+                applyParams(routingContext, httpBody);
+            }
+        } else if (requestIsGet(routingContext)) {
             httpBody = new JsonObject();
-            String uri = routingContext.request().query();
-            if (uri != null) {
-                QueryStringDecoder queryStringDecoder = new QueryStringDecoder(uri, false);
-                Map<String, List<String>> prms = queryStringDecoder.parameters();
-                if (!prms.isEmpty()) {
-                    for (Map.Entry<String, List<String>> entry : prms.entrySet()) {
-                        httpBody.put(entry.getKey(), entry.getValue());
-                    }
-                }
+            if (withParams) {
+                applyParams(routingContext, httpBody);
             }
         } else {
             httpBody = new JsonObject();
         }
-        result.put(Constants.Message.MSG_HTTP_BODY, httpBody);
-        result
-            .put(Constants.Message.MSG_KEY_SESSION, (JsonObject) routingContext.get(Constants.Message.MSG_KEY_SESSION));
-        result.put(Constants.Message.MSG_USER_ID, (String) routingContext.get(Constants.Message.MSG_USER_ID));
-        result
-            .put(Constants.Message.MSG_SESSION_TOKEN, (String) routingContext.get(Constants.Message.MSG_SESSION_TOKEN));
-        return result;
+        return httpBody;
+    }
+
+    private static void applyParams(RoutingContext routingContext, JsonObject httpBody) {
+        MultiMap params = routingContext.request().params();
+        for (String paramName : params.names()) {
+            httpBody.put(paramName, params.get(paramName));
+        }
+    }
+
+    private static boolean requestIsGet(RoutingContext routingContext) {
+        return Objects.equals(routingContext.request().method().name(), HttpMethod.GET.name());
+    }
+
+    private static boolean requestIsPostOrPut(RoutingContext routingContext) {
+        return routingContext.request().method().name().equals(HttpMethod.POST.name()) || routingContext.request()
+            .method().name().equals(HttpMethod.PUT.name());
     }
 }

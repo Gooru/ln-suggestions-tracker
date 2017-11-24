@@ -17,14 +17,15 @@ interface SuggestionAcceptanceDao {
     @SqlQuery("select id from suggestions_tracker where ctx_user_id = :ctxUserId and ctx_course_id = :ctxCourseId and "
                   + " ctx_unit_id = :ctxUnitId and ctx_lesson_id = :ctxLessonId and  ctx_collection_id = "
                   + " :ctxCollectionId and suggested_content_id = :suggestedContentId and  ctx_class_id is null")
-    Long findSuggestionForCourseRootedAtCollection(@BindBean
-        SuggestionAcceptanceCommand.SuggestionAcceptanceBean command);
+    Long findSuggestionForCourseRootedAtCollection(
+        @BindBean SuggestionAcceptanceCommand.SuggestionAcceptanceBean command);
 
     @SqlQuery("select id from suggestions_tracker where ctx_user_id = :ctxUserId and ctx_course_id = :ctxCourseId and "
                   + " ctx_unit_id = :ctxUnitId and ctx_lesson_id = :ctxLessonId and  "
                   + " ctx_collection_id = :ctxCollectionId and suggested_content_id = :suggestedContentId and "
                   + " ctx_class_id = :ctxClassId")
-    Long findSuggestionForClassRootedAtCollection(@BindBean SuggestionAcceptanceCommand.SuggestionAcceptanceBean command);
+    Long findSuggestionForClassRootedAtCollection(
+        @BindBean SuggestionAcceptanceCommand.SuggestionAcceptanceBean command);
 
     @SqlQuery("select id from suggestions_tracker where ctx_user_id = :ctxUserId and ctx_course_id = :ctxCourseId and "
                   + " ctx_unit_id = :ctxUnitId and ctx_lesson_id = :ctxLessonId and "

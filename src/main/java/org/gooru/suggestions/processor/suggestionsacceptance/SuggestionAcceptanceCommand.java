@@ -62,8 +62,7 @@ class SuggestionAcceptanceCommand {
         if (ctxUserId == null) {
             throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST, "Invalid user id");
         } else if (ctxCourseId == null) {
-            throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
-                "Course should be provided");
+            throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST, "Course should be provided");
         } else if ((ctxUnitId == null || ctxLessonId == null)) {
             throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
                 "Invalid unit or lesson for suggestion");

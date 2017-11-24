@@ -17,5 +17,5 @@ interface AddTeacherSuggestionsDao {
                    + ":targetLessonId, :targetCollectionId, :suggestedContentId, :suggestedContentType, "
                    + ":suggestedContentSubType, 'teacher', null, null)")
     @GetGeneratedKeys
-    public Long addTeacherSuggestion(@BindBean AddTeacherSuggestionsCommand.AddTeacherSuggestionsBean command);
+    Long addTeacherSuggestion(@BindBean AddTeacherSuggestionsCommand.AddTeacherSuggestionsBean command);
 }

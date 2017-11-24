@@ -38,7 +38,6 @@ public final class Constants {
         public static final String MSG_HTTP_BODY = "http.body";
         public static final String MSG_HTTP_HEADERS = "http.headers";
 
-
         public static final String MSG_MESSAGE = "message";
         public static final String PROCESSING_AUTH_TIME = "auth.processing.time";
         public static final String PROCESSING_HANDLER_START_TIME = "handler.start.time";
@@ -73,10 +72,10 @@ public final class Constants {
         public static final String API_INTERNAL_BANNER = "/api/internal/banner";
         public static final String API_INTERNAL_METRICS = "/api/internal/metrics";
         private static final String API_BASE_ROUTE = "/api/s/suggestions/:version/";
-        public static final String API_TEACHER_SUGGESTION_ADD = API_BASE_ROUTE  + "teacher";
-        public static final String API_USER_SUGGESTIONS_IN_CLASS = API_BASE_ROUTE  + "user/:user/class/:class";
-        public static final String API_USER_SUGGESTIONS_FOR_COURSE = API_BASE_ROUTE  + "user/:user/course/:course";
-        public static final String API_SUGGESTIONS_ACCEPTANCE = API_BASE_ROUTE  + "acceptance";
+        public static final String API_TEACHER_SUGGESTION_ADD = API_BASE_ROUTE + "teacher";
+        public static final String API_USER_SUGGESTIONS_IN_CLASS = API_BASE_ROUTE + "user/:userId/class/:classId";
+        public static final String API_USER_SUGGESTIONS_FOR_COURSE = API_BASE_ROUTE + "user/:userId/course/:courseId";
+        public static final String API_SUGGESTIONS_ACCEPTANCE = API_BASE_ROUTE + "acceptance";
 
         private Route() {
             throw new AssertionError();

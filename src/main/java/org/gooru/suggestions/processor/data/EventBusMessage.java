@@ -10,7 +10,7 @@ import io.vertx.core.json.JsonObject;
 /**
  * @author ashish on 23/11/17.
  */
-public class EventBusMessage {
+public final class EventBusMessage {
 
     private final String sessionToken;
     private final JsonObject requestBody;
@@ -39,7 +39,6 @@ public class EventBusMessage {
         this.userId = userId;
         this.session = session;
     }
-
 
     public static EventBusMessage eventBusMessageBuilder(Message<JsonObject> message) {
         String sessionToken = message.body().getString(Constants.Message.MSG_SESSION_TOKEN);
