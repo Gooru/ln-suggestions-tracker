@@ -16,4 +16,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'suggestions'
+rootProject.name = 'suggestions-tracker'

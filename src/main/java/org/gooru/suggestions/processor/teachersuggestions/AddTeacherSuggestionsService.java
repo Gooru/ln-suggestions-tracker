@@ -18,7 +18,7 @@ class AddTeacherSuggestionsService {
         this.addTeacherSuggestionsDao = dbi.onDemand(AddTeacherSuggestionsDao.class);
     }
 
-    Long addTeacherSuggestion(AddTeacherSuggestionsCommand command) {
-        return addTeacherSuggestionsDao.addTeacherSuggestion(command.getBean());
+    void addTeacherSuggestion(AddTeacherSuggestionsCommand command) {
+        addTeacherSuggestionsDao.addTeacherSuggestion(command.getBean(), command.getCtxUserIds());
     }
 }

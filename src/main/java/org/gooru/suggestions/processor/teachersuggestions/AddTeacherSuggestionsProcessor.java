@@ -49,15 +49,15 @@ public class AddTeacherSuggestionsProcessor implements MessageProcessor {
     private void addTeacherSuggestion(AddTeacherSuggestionsCommand command) {
         vertx.executeBlocking(future -> {
             try {
-                Long result = addTeacherSuggestionsService.addTeacherSuggestion(command);
-                future.complete(result);
+                addTeacherSuggestionsService.addTeacherSuggestion(command);
+                future.complete();
             } catch (Throwable throwable) {
                 LOGGER.warn("Encountered exception accepting suggestion", throwable);
                 future.fail(throwable);
             }
         }, asyncResult -> {
             if (asyncResult.succeeded()) {
-                result.complete(MessageResponseFactory.createCreatedResponse(asyncResult.result().toString()));
+                result.complete(MessageResponseFactory.createNoContentResponse());
             } else {
                 result.fail(asyncResult.cause());
             }

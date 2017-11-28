@@ -1,5 +1,8 @@
 package org.gooru.suggestions.processor.teachersuggestions;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 import org.gooru.suggestions.constants.HttpConstants;
@@ -7,13 +10,14 @@ import org.gooru.suggestions.exceptions.HttpResponseWrapperException;
 import org.gooru.suggestions.processor.data.SuggestedContentSubType;
 import org.gooru.suggestions.processor.data.SuggestedContentType;
 
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 /**
  * @author ashish on 17/11/17.
  */
 class AddTeacherSuggestionsCommand {
-    private UUID ctxUserId;
+    private List<UUID> ctxUserIds;
     private UUID ctxClassId;
     private UUID ctxCourseId;
     private UUID ctxUnitId;
@@ -37,7 +41,6 @@ class AddTeacherSuggestionsCommand {
     AddTeacherSuggestionsBean getBean() {
         AddTeacherSuggestionsBean result = new AddTeacherSuggestionsBean();
         result.ctxClassId = ctxClassId;
-        result.ctxUserId = ctxUserId;
         result.ctxCourseId = ctxCourseId;
         result.ctxUnitId = ctxUnitId;
         result.ctxLessonId = ctxLessonId;
@@ -54,8 +57,8 @@ class AddTeacherSuggestionsCommand {
         return result;
     }
 
-    public UUID getCtxUserId() {
-        return ctxUserId;
+    public List<UUID> getCtxUserIds() {
+        return ctxUserIds;
     }
 
     public UUID getCtxClassId() {
@@ -111,7 +114,7 @@ class AddTeacherSuggestionsCommand {
     }
 
     private void validate() {
-        if (ctxUserId == null) {
+        if (ctxUserIds == null || ctxUserIds.isEmpty()) {
             throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST, "Invalid user id");
         } else if (ctxClassId == null || ctxCourseId == null) {
             throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
@@ -134,7 +137,7 @@ class AddTeacherSuggestionsCommand {
         AddTeacherSuggestionsCommand command = new AddTeacherSuggestionsCommand();
 
         try {
-            command.ctxUserId = toUuid(input, CommandAttributes.USER_ID);
+            command.ctxUserIds = initializeUsers(input);
             command.ctxClassId = toUuid(input, CommandAttributes.CLASS_ID);
             command.ctxCourseId = toUuid(input, CommandAttributes.COURSE_ID);
             command.ctxUnitId = toUuid(input, CommandAttributes.UNIT_ID);
@@ -159,8 +162,28 @@ class AddTeacherSuggestionsCommand {
         return command;
     }
 
+    private static List<UUID> initializeUsers(JsonObject input) {
+        JsonArray userArray = input.getJsonArray(CommandAttributes.USER_ID);
+        if (userArray != null) {
+            List<UUID> result = new ArrayList<>(userArray.size());
+            for (Object user : userArray) {
+                UUID userId = convertStringToUuid(user.toString());
+                if (userId == null) {
+                    throw new IllegalArgumentException("Invalid userid");
+                }
+                result.add(userId);
+            }
+            return result;
+        }
+        return Collections.emptyList();
+    }
+
     private static UUID toUuid(JsonObject input, String key) {
         String value = input.getString(key);
+        return convertStringToUuid(value);
+    }
+
+    private static UUID convertStringToUuid(String value) {
         if (value == null || value.isEmpty()) {
             return null;
         }
@@ -169,7 +192,7 @@ class AddTeacherSuggestionsCommand {
 
     public static final class CommandAttributes {
 
-        static final String USER_ID = "ctx_class_id";
+        static final String USER_ID = "ctx_user_id";
         static final String CLASS_ID = "ctx_class_id";
         static final String COURSE_ID = "ctx_course_id";
         static final String LESSON_ID = "ctx_lesson_id";
@@ -190,7 +213,6 @@ class AddTeacherSuggestionsCommand {
     }
 
     public static final class AddTeacherSuggestionsBean {
-        private UUID ctxUserId;
         private UUID ctxClassId;
         private UUID ctxCourseId;
         private UUID ctxUnitId;
@@ -204,14 +226,6 @@ class AddTeacherSuggestionsCommand {
         private UUID targetUnitId;
         private UUID targetLessonId;
         private UUID targetCollectionId;
-
-        public UUID getCtxUserId() {
-            return ctxUserId;
-        }
-
-        public void setCtxUserId(UUID ctxUserId) {
-            this.ctxUserId = ctxUserId;
-        }
 
         public UUID getCtxClassId() {
             return ctxClassId;

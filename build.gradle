@@ -29,7 +29,7 @@ if (useLocalBuild) {
 defaultTasks 'shadowJar'
 
 if (!JavaVersion.current().java8Compatible) {
-    throw new IllegalStateException('''Suggestions: This needs Java 8. You are using something else, try again.'''.stripMargin())
+    throw new IllegalStateException('''Suggestions-Tracker: This needs Java 8. You are using something else, try again.'''.stripMargin())
 }
 
 // Define a version registry so that we can avoid hard coding of the version numbers
