@@ -1,0 +1,200 @@
+{
+	"id": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
+	"name": "suggestions-tracker",
+	"description": "",
+	"order": [
+		"c473cedd-690c-10c3-c84b-9b13b48b400c",
+		"7777e9b3-2ee6-926b-e08f-57ad104d54b4",
+		"29164b09-8cb3-85f7-39c0-4702afb0595e",
+		"ec7583f1-7f81-18d9-d26a-36eaaa2d5edf",
+		"917e28c8-22f5-9d00-7728-68bc76a69582"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1510907933583,
+	"owner": "1962403",
+	"public": false,
+	"requests": [
+		{
+			"id": "29164b09-8cb3-85f7-39c0-4702afb0595e",
+			"headers": "Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/api/s/suggestions/v1/acceptance",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1511429090116,
+			"name": "Local: Suggestion Acceptance",
+			"description": "",
+			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
+			"responses": [],
+			"rawModeData": "{\n\t\"ctx_user_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"path_id\": 1\n}"
+		},
+		{
+			"id": "7777e9b3-2ee6-926b-e08f-57ad104d54b4",
+			"headers": "Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/api/s/suggestions/v1/system",
+			"folder": null,
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1511934369175,
+			"name": "Local: Add System Suggestion",
+			"description": "",
+			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
+			"responses": [],
+			"rawModeData": "{\n  \"ctx_user_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_type\": \"assessment\",\n  \"suggested_content_subtype\": \"pre-test\",\n  \"target_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"target_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"target_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"target_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\"\n\n}"
+		},
+		{
+			"id": "917e28c8-22f5-9d00-7728-68bc76a69582",
+			"headers": "Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/api/s/suggestions/v1/user/e7d051d8-9bd8-4888-8085-1028e41b7391/course/e7d051d8-9bd8-4888-8085-1028e41b7391",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1511516303414,
+			"name": "Local: User Suggestions for Course",
+			"description": "",
+			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
+			"responses": [],
+			"rawModeData": "{}"
+		},
+		{
+			"id": "c473cedd-690c-10c3-c84b-9b13b48b400c",
+			"headers": "Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"enabled": true,
+					"description": ""
+				}
+			],
+			"url": "http://localhost:8080/api/s/suggestions/v1/teacher",
+			"folder": null,
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": null,
+			"helperAttributes": null,
+			"time": 1511847914839,
+			"name": "Local: Add Teacher Suggestion",
+			"description": "",
+			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
+			"responses": [],
+			"auth": null,
+			"events": null,
+			"descriptionFormat": "html",
+			"variables": null,
+			"rawModeData": "{\n  \"ctx_user_id\": [\"e7d051d8-9bd8-4888-8085-1028e41b7391\", \"6f005dbf-7db9-40a8-aa8d-e62b954283d0\"],\n  \"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_type\": \"assessment\",\n  \"path_id\": 1,\n  \"target_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"target_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"target_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"target_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\"\n\n}"
+		},
+		{
+			"id": "ec7583f1-7f81-18d9-d26a-36eaaa2d5edf",
+			"headers": "Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/api/s/suggestions/v1/user/e7d051d8-9bd8-4888-8085-1028e41b7391/class/e7d051d8-9bd8-4888-8085-1028e41b7391",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1511517843878,
+			"name": "Local: User Suggestions In Class",
+			"description": "",
+			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
+			"responses": [],
+			"rawModeData": "{}"
+		}
+	]
+}
