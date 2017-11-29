@@ -1,6 +1,7 @@
 package org.gooru.suggestions.processor;
 
 import org.gooru.suggestions.processor.suggestionsacceptance.SuggestionAcceptanceProcessor;
+import org.gooru.suggestions.processor.systemsuggestions.AddSystemSuggestionsProcessor;
 import org.gooru.suggestions.processor.teachersuggestions.AddTeacherSuggestionsProcessor;
 import org.gooru.suggestions.processor.usersuggestions.UserSuggestionsForCourseProcessor;
 import org.gooru.suggestions.processor.usersuggestions.UserSuggestionsInClassProcessor;
@@ -20,6 +21,10 @@ public interface MessageProcessor {
 
     static MessageProcessor buildAddTeacherSuggestionsProcessor(Vertx vertx, Message<JsonObject> message) {
         return new AddTeacherSuggestionsProcessor(vertx, message);
+    }
+
+    static MessageProcessor buildAddSystemSuggestionsProcessor(Vertx vertx, Message<JsonObject> message) {
+        return new AddSystemSuggestionsProcessor(vertx, message);
     }
 
     static MessageProcessor buildSuggestionAcceptanceProcessor(Vertx vertx, Message<JsonObject> message) {

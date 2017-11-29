@@ -25,6 +25,7 @@ public final class Constants {
         public static final String MSG_OP_STATUS_SUCCESS = "mb.op.status.success";
         public static final String MSG_OP_STATUS_FAIL = "mb.op.status.fail";
         public static final String MSG_OP_TEACHER_SUGGESTIONS_ADD = "mb.op.teacher.suggestions.add";
+        public static final String MSG_OP_SYSTEM_SUGGESTIONS_ADD = "mb.op.system.suggestions.add";
         public static final String MSG_OP_USER_SUGGESTIONS_IN_CLASS = "mb.op.user.suggestions.in.class";
         public static final String MSG_OP_USER_SUGGESTIONS_FOR_COURSE = "mb.op.user.suggestions.for.course";
         public static final String MSG_OP_SUGGESTION_ACCEPTANCE = "mb.op.suggestion.acceptance";
@@ -76,6 +77,7 @@ public final class Constants {
         public static final String API_USER_SUGGESTIONS_IN_CLASS = API_BASE_ROUTE + "user/:userId/class/:classId";
         public static final String API_USER_SUGGESTIONS_FOR_COURSE = API_BASE_ROUTE + "user/:userId/course/:courseId";
         public static final String API_SUGGESTIONS_ACCEPTANCE = API_BASE_ROUTE + "acceptance";
+        public static final String API_SYSTEM_SUGGESTIONS = API_BASE_ROUTE + "system";
 
         private Route() {
             throw new AssertionError();

@@ -58,6 +58,10 @@ public class SuggestionsTrackerVerticle extends AbstractVerticle {
             MessageProcessor.buildUserSuggestionsInClassProcessor(vertx, message).process()
                 .setHandler(event -> finishResponse(message, event));
             break;
+        case Constants.Message.MSG_OP_SYSTEM_SUGGESTIONS_ADD:
+            MessageProcessor.buildAddSystemSuggestionsProcessor(vertx, message).process()
+                .setHandler(event -> finishResponse(message, event));
+            break;
         default:
             LOGGER.warn("Invalid operation type");
             ResponseUtil.processFailure(message);
