@@ -49,12 +49,17 @@ public final class CollectionUtils {
         return Arrays.stream(from).map(func).toArray(generator);
     }
 
-    public static PGArray<String> convertToSqlArrayOfString(List<String> input) {
+    public static PGArray<String> convertFromListStringToSqlArrayOfString(List<String> input) {
         return PGArray.arrayOf(String.class, input);
     }
 
-    public static PGArray<UUID> convertToSqlArrayOfUUID(List<String> input) {
+    public static PGArray<UUID> convertFromListStringToSqlArrayOfUUID(List<String> input) {
         List<UUID> uuids = convertList(input, UUID::fromString);
         return PGArray.arrayOf(UUID.class, uuids);
     }
+
+    public static PGArray<UUID> convertFromListUUIDToSqlArrayOfUUID(List<UUID> input) {
+        return PGArray.arrayOf(UUID.class, input);
+    }
+
 }
