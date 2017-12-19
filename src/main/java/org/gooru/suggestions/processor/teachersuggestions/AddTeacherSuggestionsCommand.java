@@ -27,10 +27,6 @@ class AddTeacherSuggestionsCommand {
     private UUID suggestedContentId;
     private SuggestedContentType suggestedContentType;
     private SuggestedContentSubType suggestedContentSubType;
-    private UUID targetCourseId;
-    private UUID targetUnitId;
-    private UUID targetLessonId;
-    private UUID targetCollectionId;
 
     static AddTeacherSuggestionsCommand builder(JsonObject input) {
         AddTeacherSuggestionsCommand result = buildFromJsonObject(input);
@@ -49,10 +45,6 @@ class AddTeacherSuggestionsCommand {
         result.suggestedContentId = suggestedContentId;
         result.suggestedContentType = suggestedContentType != null ? suggestedContentType.getName() : null;
         result.suggestedContentSubType = suggestedContentSubType != null ? suggestedContentSubType.getName() : null;
-        result.targetCourseId = targetCourseId;
-        result.targetUnitId = targetUnitId;
-        result.targetLessonId = targetLessonId;
-        result.targetCollectionId = targetCollectionId;
 
         return result;
     }
@@ -97,22 +89,6 @@ class AddTeacherSuggestionsCommand {
         return suggestedContentSubType;
     }
 
-    public UUID getTargetCourseId() {
-        return targetCourseId;
-    }
-
-    public UUID getTargetUnitId() {
-        return targetUnitId;
-    }
-
-    public UUID getTargetLessonId() {
-        return targetLessonId;
-    }
-
-    public UUID getTargetCollectionId() {
-        return targetCollectionId;
-    }
-
     private void validate() {
         if (ctxUserIds == null || ctxUserIds.isEmpty()) {
             throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST, "Invalid user id");
@@ -145,10 +121,6 @@ class AddTeacherSuggestionsCommand {
             command.ctxCollectionId = toUuid(input, CommandAttributes.COLLECTION_ID);
             command.suggestedContentId = toUuid(input, CommandAttributes.SUGGESTED_CONTENT_ID);
             command.pathId = input.getLong(CommandAttributes.PATH_ID);
-            command.targetCourseId = toUuid(input, CommandAttributes.TARGET_COURSE_ID);
-            command.targetUnitId = toUuid(input, CommandAttributes.TARGET_UNIT_ID);
-            command.targetLessonId = toUuid(input, CommandAttributes.TARGET_LESSON_ID);
-            command.targetCollectionId = toUuid(input, CommandAttributes.TARGET_COLLECTION_ID);
             String value = input.getString(CommandAttributes.SUGGESTED_CONTENT_TYPE);
             command.suggestedContentType =
                 (value != null && !value.isEmpty()) ? SuggestedContentType.builder(value) : null;
@@ -202,10 +174,6 @@ class AddTeacherSuggestionsCommand {
         static final String SUGGESTED_CONTENT_TYPE = "suggested_content_type";
         static final String SUGGESTED_CONTENT_SUBTYPE = "suggested_content_subtype";
         static final String PATH_ID = "path_id";
-        static final String TARGET_COURSE_ID = "target_course_id";
-        static final String TARGET_UNIT_ID = "target_unit_id";
-        static final String TARGET_LESSON_ID = "target_lesson_id";
-        static final String TARGET_COLLECTION_ID = "target_collection_id";
 
         private CommandAttributes() {
             throw new AssertionError();
@@ -222,10 +190,6 @@ class AddTeacherSuggestionsCommand {
         private UUID suggestedContentId;
         private String suggestedContentType;
         private String suggestedContentSubType;
-        private UUID targetCourseId;
-        private UUID targetUnitId;
-        private UUID targetLessonId;
-        private UUID targetCollectionId;
 
         public UUID getCtxClassId() {
             return ctxClassId;
@@ -297,38 +261,6 @@ class AddTeacherSuggestionsCommand {
 
         public void setSuggestedContentSubType(String suggestedContentSubType) {
             this.suggestedContentSubType = suggestedContentSubType;
-        }
-
-        public UUID getTargetCourseId() {
-            return targetCourseId;
-        }
-
-        public void setTargetCourseId(UUID targetCourseId) {
-            this.targetCourseId = targetCourseId;
-        }
-
-        public UUID getTargetUnitId() {
-            return targetUnitId;
-        }
-
-        public void setTargetUnitId(UUID targetUnitId) {
-            this.targetUnitId = targetUnitId;
-        }
-
-        public UUID getTargetLessonId() {
-            return targetLessonId;
-        }
-
-        public void setTargetLessonId(UUID targetLessonId) {
-            this.targetLessonId = targetLessonId;
-        }
-
-        public UUID getTargetCollectionId() {
-            return targetCollectionId;
-        }
-
-        public void setTargetCollectionId(UUID targetCollectionId) {
-            this.targetCollectionId = targetCollectionId;
         }
     }
 }

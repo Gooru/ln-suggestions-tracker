@@ -79,12 +79,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1511934369175,
+			"time": 1513675539387,
 			"name": "Local: Add System Suggestion",
 			"description": "",
 			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
 			"responses": [],
-			"rawModeData": "{\n  \"ctx_user_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_type\": \"assessment\",\n  \"suggested_content_subtype\": \"pre-test\",\n  \"target_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"target_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"target_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"target_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\"\n\n}"
+			"rawModeData": "{\n  \"ctx_user_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_type\": \"assessment\",\n  \"suggested_content_subtype\": \"pre-test\"\n}"
 		},
 		{
 			"id": "917e28c8-22f5-9d00-7728-68bc76a69582",
@@ -128,14 +128,14 @@
 				{
 					"key": "Authorization",
 					"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				},
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				}
 			],
 			"url": "http://localhost:8080/api/s/suggestions/v1/teacher",
@@ -148,18 +148,14 @@
 			"data": [],
 			"dataMode": "raw",
 			"tests": null,
-			"currentHelper": null,
-			"helperAttributes": null,
-			"time": 1511847914839,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1513675528631,
 			"name": "Local: Add Teacher Suggestion",
 			"description": "",
 			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
 			"responses": [],
-			"auth": null,
-			"events": null,
-			"descriptionFormat": "html",
-			"variables": null,
-			"rawModeData": "{\n  \"ctx_user_id\": [\"e7d051d8-9bd8-4888-8085-1028e41b7391\", \"6f005dbf-7db9-40a8-aa8d-e62b954283d0\"],\n  \"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_type\": \"assessment\",\n  \"path_id\": 1,\n  \"target_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"target_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"target_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"target_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\"\n\n}"
+			"rawModeData": "{\n  \"ctx_user_id\": [\"e7d051d8-9bd8-4888-8085-1028e41b7391\", \"6f005dbf-7db9-40a8-aa8d-e62b954283d0\", \"add37191-faa8-4330-821e-f351287d2713\"],\n  \"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_type\": \"assessment\",\n  \"path_id\": 1\n}"
 		},
 		{
 			"id": "ec7583f1-7f81-18d9-d26a-36eaaa2d5edf",

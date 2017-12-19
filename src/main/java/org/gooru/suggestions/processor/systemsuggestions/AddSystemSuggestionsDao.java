@@ -10,12 +10,10 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 interface AddSystemSuggestionsDao {
 
     @SqlUpdate("insert into suggestions_tracker (ctx_user_id, ctx_course_id, ctx_unit_id, ctx_lesson_id, "
-                   + "ctx_class_id, ctx_collection_id, path_id, target_course_id, target_unit_id, target_lesson_id, "
-                   + "target_collection_id, suggested_content_id, suggested_content_type, suggested_content_subtype, "
-                   + "suggestion_type, accepted_by_user, accepted_at) values (:ctxUserId, :ctxCourseId, :ctxUnitId, "
-                   + ":ctxLessonId, :ctxClassId, :ctxCollectionId, null, :targetCourseId, :targetUnitId, "
-                   + ":targetLessonId, :targetCollectionId, :suggestedContentId, :suggestedContentType, "
-                   + ":suggestedContentSubType, 'system', false, null)")
+                   + "ctx_class_id, ctx_collection_id, path_id,   suggested_content_id, suggested_content_type, "
+                   + "suggested_content_subtype, suggestion_type, accepted_by_user, accepted_at) values (:ctxUserId, "
+                   + ":ctxCourseId, :ctxUnitId, :ctxLessonId, :ctxClassId, :ctxCollectionId, null,   "
+                   + ":suggestedContentId, :suggestedContentType, :suggestedContentSubType, 'system', false, null)")
     void addSystemSuggestion(@BindBean AddSystemSuggestionsCommand.AddSystemSuggestionsBean command);
 
     @SqlQuery("select id from suggestions_tracker where ctx_user_id = :ctxUserId and ctx_course_id = :ctxCourseId and "

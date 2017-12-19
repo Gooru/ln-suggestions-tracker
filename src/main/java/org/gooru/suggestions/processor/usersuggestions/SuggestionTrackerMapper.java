@@ -30,10 +30,6 @@ public class SuggestionTrackerMapper implements ResultSetMapper<SuggestionTracke
         result.setSuggestedContentId(safeStringToUUID(r.getString(MapperFields.SUGGESTED_CONTENT_ID)));
         result.setSuggestedContentType(r.getString(MapperFields.SUGGESTED_CONTENT_TYPE));
         result.setSuggestedContentSubType(r.getString(MapperFields.SUGGESTED_CONTENT_SUBTYPE));
-        result.setTargetCourseId(safeStringToUUID(r.getString(MapperFields.TARGET_COURSE_ID)));
-        result.setTargetUnitId(safeStringToUUID(r.getString(MapperFields.TARGET_UNIT_ID)));
-        result.setTargetLessonId(safeStringToUUID(r.getString(MapperFields.TARGET_LESSON_ID)));
-        result.setTargetCollectionId(safeStringToUUID(r.getString(MapperFields.TARGET_COLLECTION_ID)));
         result.setSuggestionType(r.getString(MapperFields.SUGGESTION_TYPE));
         result.setAcceptedByUser(r.getBoolean(MapperFields.ACCEPTED_BY_USER));
         result.setAcceptedAt(r.getDate(MapperFields.ACCEPTED_AT));
@@ -67,10 +63,6 @@ public class SuggestionTrackerMapper implements ResultSetMapper<SuggestionTracke
         private static final String SUGGESTED_CONTENT_ID = "suggested_content_id";
         private static final String SUGGESTED_CONTENT_TYPE = "suggested_content_type";
         private static final String SUGGESTED_CONTENT_SUBTYPE = "suggested_content_subtype";
-        private static final String TARGET_COURSE_ID = "target_course_id";
-        private static final String TARGET_UNIT_ID = "target_unit_id";
-        private static final String TARGET_LESSON_ID = "target_lesson_id";
-        private static final String TARGET_COLLECTION_ID = "target_collection_id";
         private static final String SUGGESTION_TYPE = "suggestion_type";
         private static final String ACCEPTED_BY_USER = "accepted_by_user";
         private static final String ACCEPTED_AT = "accepted_at";

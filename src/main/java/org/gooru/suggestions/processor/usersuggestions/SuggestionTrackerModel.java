@@ -18,10 +18,6 @@ class SuggestionTrackerModel {
     private UUID suggestedContentId;
     private String suggestedContentType;
     private String suggestedContentSubType;
-    private UUID targetCourseId;
-    private UUID targetUnitId;
-    private UUID targetLessonId;
-    private UUID targetCollectionId;
     private Boolean acceptedByUser;
     private String suggestionType;
     private Date acceptedAt;
@@ -114,38 +110,6 @@ class SuggestionTrackerModel {
 
     public void setSuggestedContentSubType(String suggestedContentSubType) {
         this.suggestedContentSubType = suggestedContentSubType;
-    }
-
-    public UUID getTargetCourseId() {
-        return targetCourseId;
-    }
-
-    public void setTargetCourseId(UUID targetCourseId) {
-        this.targetCourseId = targetCourseId;
-    }
-
-    public UUID getTargetUnitId() {
-        return targetUnitId;
-    }
-
-    public void setTargetUnitId(UUID targetUnitId) {
-        this.targetUnitId = targetUnitId;
-    }
-
-    public UUID getTargetLessonId() {
-        return targetLessonId;
-    }
-
-    public void setTargetLessonId(UUID targetLessonId) {
-        this.targetLessonId = targetLessonId;
-    }
-
-    public UUID getTargetCollectionId() {
-        return targetCollectionId;
-    }
-
-    public void setTargetCollectionId(UUID targetCollectionId) {
-        this.targetCollectionId = targetCollectionId;
     }
 
     public Boolean getAcceptedByUser() {
