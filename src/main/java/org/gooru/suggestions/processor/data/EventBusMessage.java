@@ -46,6 +46,6 @@ public final class EventBusMessage {
         JsonObject requestBody = message.body().getJsonObject(Constants.Message.MSG_HTTP_BODY);
         JsonObject session = message.body().getJsonObject(Constants.Message.MSG_KEY_SESSION);
 
-        return new EventBusMessage(sessionToken, requestBody, UUID.fromString(userId), session);
+        return new EventBusMessage(sessionToken, requestBody, userId != null ? UUID.fromString(userId) : null, session);
     }
 }

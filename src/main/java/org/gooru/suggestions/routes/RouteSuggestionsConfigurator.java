@@ -31,7 +31,11 @@ public class RouteSuggestionsConfigurator implements RouteConfigurator {
         router.get(Constants.Route.API_USER_SUGGESTIONS_FOR_COURSE).handler(this::userSuggestionsForCourse);
         router.get(Constants.Route.API_USER_SUGGESTIONS_IN_CLASS).handler(this::userSuggestionsInClass);
         router.put(Constants.Route.API_SUGGESTIONS_ACCEPTANCE).handler(this::userSuggestionAcceptance);
-        router.post(Constants.Route.API_SYSTEM_SUGGESTIONS).handler(this::addSystemSuggestion);
+        router.post(Constants.Route.API_SYSTEM_SUGGESTIONS_ADD).handler(this::addSystemSuggestion);
+        // Internal routes
+        router.post(Constants.Route.API_INTERNAL_TEACHER_SUGGESTION_ADD).handler(this::addTeacherSuggestion);
+        router.put(Constants.Route.API_INTERNAL_SUGGESTIONS_ACCEPTANCE).handler(this::userSuggestionAcceptance);
+        router.post(Constants.Route.API_INTERNAL_SYSTEM_SUGGESTIONS_ADD).handler(this::addSystemSuggestion);
     }
 
     private void addTeacherSuggestion(RoutingContext routingContext) {

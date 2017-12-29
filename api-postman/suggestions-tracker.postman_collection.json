@@ -4,8 +4,11 @@
 	"description": "",
 	"order": [
 		"c473cedd-690c-10c3-c84b-9b13b48b400c",
+		"37456d83-4331-8546-fc81-6c133ad0ffd2",
 		"7777e9b3-2ee6-926b-e08f-57ad104d54b4",
+		"e15c5484-50e7-d413-5f42-825cd6ba5246",
 		"29164b09-8cb3-85f7-39c0-4702afb0595e",
+		"9d2f6710-9dda-c788-45c2-3dcf2b560743",
 		"ec7583f1-7f81-18d9-d26a-36eaaa2d5edf",
 		"917e28c8-22f5-9d00-7728-68bc76a69582"
 	],
@@ -49,6 +52,36 @@
 			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
 			"responses": [],
 			"rawModeData": "{\n\t\"ctx_user_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"path_id\": 1\n}"
+		},
+		{
+			"id": "37456d83-4331-8546-fc81-6c133ad0ffd2",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/api/internal/suggestions/v1/teacher",
+			"folder": null,
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1514371031673,
+			"name": "Local: Add Teacher Suggestion Internal",
+			"description": "",
+			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
+			"responses": [],
+			"rawModeData": "{\n  \"ctx_user_id\": [\"e7d051d8-9bd8-4888-8085-1028e41b7391\", \"6f005dbf-7db9-40a8-aa8d-e62b954283d0\", \"add37191-faa8-4330-821e-f351287d2713\"],\n  \"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_type\": \"assessment\",\n  \"path_id\": 1\n}"
 		},
 		{
 			"id": "7777e9b3-2ee6-926b-e08f-57ad104d54b4",
@@ -122,6 +155,35 @@
 			"rawModeData": "{}"
 		},
 		{
+			"id": "9d2f6710-9dda-c788-45c2-3dcf2b560743",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/api/internal/suggestions/v1/acceptance",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1514371042281,
+			"name": "Local: Suggestion Acceptance Internal",
+			"description": "",
+			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
+			"responses": [],
+			"rawModeData": "{\n\t\"ctx_user_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"path_id\": 1\n}"
+		},
+		{
 			"id": "c473cedd-690c-10c3-c84b-9b13b48b400c",
 			"headers": "Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==\nContent-Type: application/json\n",
 			"headerData": [
@@ -156,6 +218,36 @@
 			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
 			"responses": [],
 			"rawModeData": "{\n  \"ctx_user_id\": [\"e7d051d8-9bd8-4888-8085-1028e41b7391\", \"6f005dbf-7db9-40a8-aa8d-e62b954283d0\", \"add37191-faa8-4330-821e-f351287d2713\"],\n  \"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_type\": \"assessment\",\n  \"path_id\": 1\n}"
+		},
+		{
+			"id": "e15c5484-50e7-d413-5f42-825cd6ba5246",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/api/internal/suggestions/v1/system",
+			"folder": null,
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1514371037120,
+			"name": "Local: Add System Suggestion Internal",
+			"description": "",
+			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
+			"responses": [],
+			"rawModeData": "{\n  \"ctx_user_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_type\": \"assessment\",\n  \"suggested_content_subtype\": \"pre-test\"\n}"
 		},
 		{
 			"id": "ec7583f1-7f81-18d9-d26a-36eaaa2d5edf",
