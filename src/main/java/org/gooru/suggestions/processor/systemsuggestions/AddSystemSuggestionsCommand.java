@@ -83,9 +83,8 @@ class AddSystemSuggestionsCommand {
     private void validate() {
         if (ctxUserId == null) {
             throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST, "Invalid user id");
-        } else if (ctxClassId == null || ctxCourseId == null) {
-            throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
-                "Course and class both should be provided");
+        } else if (ctxCourseId == null) {
+            throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST, "Course should be provided");
         } else if ((ctxUnitId == null || ctxLessonId == null)) {
             throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
                 "Invalid unit or lesson for suggestion");
