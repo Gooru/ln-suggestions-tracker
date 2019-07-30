@@ -7,149 +7,150 @@ import java.util.UUID;
  * @author ashish on 24/11/17.
  */
 class SuggestionTrackerModel {
-    private Long id;
-    private UUID ctxUserId;
-    private UUID ctxClassId;
-    private UUID ctxCourseId;
-    private UUID ctxUnitId;
-    private UUID ctxLessonId;
-    private UUID ctxCollectionId;
-    private Long pathId;
-    private UUID suggestedContentId;
-    private String suggestedContentType;
-    private String suggestedContentSubType;
-    private Boolean acceptedByUser;
-    private String suggestionType;
-    private Date acceptedAt;
-    private Date createdAt;
-    private Date updatedAt;
 
-    public Long getId() {
-        return id;
-    }
+  private Long id;
+  private UUID ctxUserId;
+  private UUID ctxClassId;
+  private UUID ctxCourseId;
+  private UUID ctxUnitId;
+  private UUID ctxLessonId;
+  private UUID ctxCollectionId;
+  private Long pathId;
+  private UUID suggestedContentId;
+  private String suggestedContentType;
+  private String suggestedContentSubType;
+  private Boolean acceptedByUser;
+  private String suggestionType;
+  private Date acceptedAt;
+  private Date createdAt;
+  private Date updatedAt;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public UUID getCtxUserId() {
-        return ctxUserId;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setCtxUserId(UUID ctxUserId) {
-        this.ctxUserId = ctxUserId;
-    }
+  public UUID getCtxUserId() {
+    return ctxUserId;
+  }
 
-    public UUID getCtxClassId() {
-        return ctxClassId;
-    }
+  public void setCtxUserId(UUID ctxUserId) {
+    this.ctxUserId = ctxUserId;
+  }
 
-    public void setCtxClassId(UUID ctxClassId) {
-        this.ctxClassId = ctxClassId;
-    }
+  public UUID getCtxClassId() {
+    return ctxClassId;
+  }
 
-    public UUID getCtxCourseId() {
-        return ctxCourseId;
-    }
+  public void setCtxClassId(UUID ctxClassId) {
+    this.ctxClassId = ctxClassId;
+  }
 
-    public void setCtxCourseId(UUID ctxCourseId) {
-        this.ctxCourseId = ctxCourseId;
-    }
+  public UUID getCtxCourseId() {
+    return ctxCourseId;
+  }
 
-    public UUID getCtxUnitId() {
-        return ctxUnitId;
-    }
+  public void setCtxCourseId(UUID ctxCourseId) {
+    this.ctxCourseId = ctxCourseId;
+  }
 
-    public void setCtxUnitId(UUID ctxUnitId) {
-        this.ctxUnitId = ctxUnitId;
-    }
+  public UUID getCtxUnitId() {
+    return ctxUnitId;
+  }
 
-    public UUID getCtxLessonId() {
-        return ctxLessonId;
-    }
+  public void setCtxUnitId(UUID ctxUnitId) {
+    this.ctxUnitId = ctxUnitId;
+  }
 
-    public void setCtxLessonId(UUID ctxLessonId) {
-        this.ctxLessonId = ctxLessonId;
-    }
+  public UUID getCtxLessonId() {
+    return ctxLessonId;
+  }
 
-    public UUID getCtxCollectionId() {
-        return ctxCollectionId;
-    }
+  public void setCtxLessonId(UUID ctxLessonId) {
+    this.ctxLessonId = ctxLessonId;
+  }
 
-    public void setCtxCollectionId(UUID ctxCollectionId) {
-        this.ctxCollectionId = ctxCollectionId;
-    }
+  public UUID getCtxCollectionId() {
+    return ctxCollectionId;
+  }
 
-    public Long getPathId() {
-        return pathId;
-    }
+  public void setCtxCollectionId(UUID ctxCollectionId) {
+    this.ctxCollectionId = ctxCollectionId;
+  }
 
-    public void setPathId(Long pathId) {
-        this.pathId = pathId;
-    }
+  public Long getPathId() {
+    return pathId;
+  }
 
-    public UUID getSuggestedContentId() {
-        return suggestedContentId;
-    }
+  public void setPathId(Long pathId) {
+    this.pathId = pathId;
+  }
 
-    public void setSuggestedContentId(UUID suggestedContentId) {
-        this.suggestedContentId = suggestedContentId;
-    }
+  public UUID getSuggestedContentId() {
+    return suggestedContentId;
+  }
 
-    public String getSuggestedContentType() {
-        return suggestedContentType;
-    }
+  public void setSuggestedContentId(UUID suggestedContentId) {
+    this.suggestedContentId = suggestedContentId;
+  }
 
-    public void setSuggestedContentType(String suggestedContentType) {
-        this.suggestedContentType = suggestedContentType;
-    }
+  public String getSuggestedContentType() {
+    return suggestedContentType;
+  }
 
-    public String getSuggestedContentSubType() {
-        return suggestedContentSubType;
-    }
+  public void setSuggestedContentType(String suggestedContentType) {
+    this.suggestedContentType = suggestedContentType;
+  }
 
-    public void setSuggestedContentSubType(String suggestedContentSubType) {
-        this.suggestedContentSubType = suggestedContentSubType;
-    }
+  public String getSuggestedContentSubType() {
+    return suggestedContentSubType;
+  }
 
-    public Boolean getAcceptedByUser() {
-        return acceptedByUser;
-    }
+  public void setSuggestedContentSubType(String suggestedContentSubType) {
+    this.suggestedContentSubType = suggestedContentSubType;
+  }
 
-    public void setAcceptedByUser(Boolean acceptedByUser) {
-        this.acceptedByUser = acceptedByUser;
-    }
+  public Boolean getAcceptedByUser() {
+    return acceptedByUser;
+  }
 
-    public String getSuggestionType() {
-        return suggestionType;
-    }
+  public void setAcceptedByUser(Boolean acceptedByUser) {
+    this.acceptedByUser = acceptedByUser;
+  }
 
-    public void setSuggestionType(String suggestionType) {
-        this.suggestionType = suggestionType;
-    }
+  public String getSuggestionType() {
+    return suggestionType;
+  }
 
-    public Date getAcceptedAt() {
-        return acceptedAt;
-    }
+  public void setSuggestionType(String suggestionType) {
+    this.suggestionType = suggestionType;
+  }
 
-    public void setAcceptedAt(Date acceptedAt) {
-        this.acceptedAt = acceptedAt;
-    }
+  public Date getAcceptedAt() {
+    return acceptedAt;
+  }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+  public void setAcceptedAt(Date acceptedAt) {
+    this.acceptedAt = acceptedAt;
+  }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+  public Date getCreatedAt() {
+    return createdAt;
+  }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+  public void setCreatedAt(Date createdAt) {
+    this.createdAt = createdAt;
+  }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+  public Date getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(Date updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 
 }

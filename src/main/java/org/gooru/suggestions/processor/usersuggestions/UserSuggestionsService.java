@@ -1,7 +1,6 @@
 package org.gooru.suggestions.processor.usersuggestions;
 
 import java.util.List;
-
 import org.skife.jdbi.v2.DBI;
 
 /**
@@ -9,17 +8,17 @@ import org.skife.jdbi.v2.DBI;
  */
 class UserSuggestionsService {
 
-    private final UserSuggestionsDao userSuggestionsDao;
+  private final UserSuggestionsDao userSuggestionsDao;
 
-    UserSuggestionsService(DBI dbi) {
-        this.userSuggestionsDao = dbi.onDemand(UserSuggestionsDao.class);
-    }
+  UserSuggestionsService(DBI dbi) {
+    this.userSuggestionsDao = dbi.onDemand(UserSuggestionsDao.class);
+  }
 
-    List<SuggestionTrackerModel> fetchSuggestionsForCourse(UserSuggestionsForCourseCommand command) {
-        return userSuggestionsDao.fetchSuggestionsForCourse(command.asBean());
-    }
+  List<SuggestionTrackerModel> fetchSuggestionsForCourse(UserSuggestionsForCourseCommand command) {
+    return userSuggestionsDao.fetchSuggestionsForCourse(command.asBean());
+  }
 
-    List<SuggestionTrackerModel> fetchSuggestionsInClass(UserSuggestionsInClassCommand command) {
-        return userSuggestionsDao.fetchSuggestionsInClass(command.asBean());
-    }
+  List<SuggestionTrackerModel> fetchSuggestionsInClass(UserSuggestionsInClassCommand command) {
+    return userSuggestionsDao.fetchSuggestionsInClass(command.asBean());
+  }
 }
