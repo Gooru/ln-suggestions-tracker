@@ -3,7 +3,7 @@ package org.gooru.suggestions.processor.utilities.jdbi;
 import java.util.Collection;
 
 /**
- * @author ashish on 15/3/17.
+ * @author ashish
  */
 public class PGArray<T> {
 

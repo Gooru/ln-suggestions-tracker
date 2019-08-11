@@ -4,7 +4,7 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 
 /**
- * @author ashish on 3/11/17.
+ * @author ashish
  */
 public final class AuthSessionResponseHolderBuilder {
 

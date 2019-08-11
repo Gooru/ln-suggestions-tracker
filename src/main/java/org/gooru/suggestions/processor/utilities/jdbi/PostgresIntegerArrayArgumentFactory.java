@@ -6,7 +6,7 @@ import org.skife.jdbi.v2.tweak.Argument;
 import org.skife.jdbi.v2.tweak.ArgumentFactory;
 
 /**
- * @author ashish on 15/3/17.
+ * @author ashish
  */
 public class PostgresIntegerArrayArgumentFactory implements ArgumentFactory<PGArray<Integer>> {
 

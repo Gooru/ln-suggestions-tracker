@@ -7,7 +7,7 @@ import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.Handle;
 
 /**
- * @author ashish on 12/9/17.
+ * @author ashish
  */
 class DBITestHelper {
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/nucleus";

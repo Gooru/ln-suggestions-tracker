@@ -1,7 +1,7 @@
 package org.gooru.suggestions.test;
 
 /**
- * @author ashish on 12/9/17.
+ * @author ashish
  */
 class MiscTest {
     void dummyTest() {

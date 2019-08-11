@@ -6,7 +6,7 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 
 /**
- * @author ashish on 24/11/17.
+ * @author ashish
  */
 interface ListUserSuggestionsDao {
 

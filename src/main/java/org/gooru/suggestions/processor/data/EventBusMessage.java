@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.gooru.suggestions.constants.Constants;
 
 /**
- * @author ashish on 23/11/17.
+ * @author ashish
  */
 public final class EventBusMessage {
 

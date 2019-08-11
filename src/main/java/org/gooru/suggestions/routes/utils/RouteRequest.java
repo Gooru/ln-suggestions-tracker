@@ -7,7 +7,7 @@ import java.util.Objects;
 import org.gooru.suggestions.constants.Constants;
 
 /**
- * @author ashish on 12/4/17.
+ * @author ashish
  */
 final class RouteRequest {
 

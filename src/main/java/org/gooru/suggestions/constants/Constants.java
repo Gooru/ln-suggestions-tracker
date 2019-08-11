@@ -1,7 +1,7 @@
 package org.gooru.suggestions.constants;
 
 /**
- * @author ashish on 3/11/17.
+ * @author ashish
  */
 public final class Constants {
 

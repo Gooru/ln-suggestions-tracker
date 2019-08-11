@@ -8,7 +8,7 @@ import java.util.Objects;
 import javax.sql.DataSource;
 
 /**
- * @author ashish on 3/11/17.
+ * @author ashish
  */
 public final class DatasourceHelper {
 

@@ -3,7 +3,7 @@ package org.gooru.suggestions.exceptions;
 import org.gooru.suggestions.responses.MessageResponse;
 
 /**
- * @author ashish on 24/2/2017.
+ * @author ashish
  */
 public class MessageResponseWrapperException extends RuntimeException {
 

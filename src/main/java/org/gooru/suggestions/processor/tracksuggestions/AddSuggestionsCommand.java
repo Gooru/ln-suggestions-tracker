@@ -12,7 +12,7 @@ import org.gooru.suggestions.processor.data.SuggestedContentSubType;
 import org.gooru.suggestions.processor.data.SuggestedContentType;
 
 /**
- * @author ashish on 17/11/17.
+ * @author ashish
  */
 class AddSuggestionsCommand {
 

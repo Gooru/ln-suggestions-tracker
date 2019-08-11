@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import org.gooru.suggestions.processor.utilities.jdbi.PGArray;
 
 /**
- * @author ashish on 15/3/17.
+ * @author ashish
  */
 public final class CollectionUtils {
 

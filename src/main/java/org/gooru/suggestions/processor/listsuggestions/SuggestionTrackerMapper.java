@@ -3,13 +3,19 @@ package org.gooru.suggestions.processor.listsuggestions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
+import org.gooru.suggestions.processor.data.SuggestedContentType;
+import org.gooru.suggestions.processor.data.SuggestedTo;
+import org.gooru.suggestions.processor.data.SuggestionArea;
+import org.gooru.suggestions.processor.data.SuggestionCriteria;
+import org.gooru.suggestions.processor.data.SuggestionOrigin;
+import org.gooru.suggestions.processor.data.TxCodeType;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author ashish on 24/11/17.
+ * @author ashish
  */
 public class SuggestionTrackerMapper implements ResultSetMapper<SuggestionTrackerModel> {
 
@@ -21,23 +27,52 @@ public class SuggestionTrackerMapper implements ResultSetMapper<SuggestionTracke
     SuggestionTrackerModel result = new SuggestionTrackerModel();
 
     result.setId(r.getLong(MapperFields.ID));
-    result.setCtxUserId(safeStringToUUID(r.getString(MapperFields.CTX_USER_ID)));
-    result.setCtxCourseId(safeStringToUUID(r.getString(MapperFields.CTX_COURSE_ID)));
-    result.setCtxUnitId(safeStringToUUID(r.getString(MapperFields.CTX_UNIT_ID)));
-    result.setCtxLessonId(safeStringToUUID(r.getString(MapperFields.CTX_LESSON_ID)));
-    result.setCtxCollectionId(safeStringToUUID(r.getString(MapperFields.CTX_COLLECTION_ID)));
-    result.setCtxClassId(safeStringToUUID(r.getString(MapperFields.CTX_CLASS_ID)));
-    result.setPathId(r.getLong(MapperFields.PATH_ID));
+    result.setUserId(safeStringToUUID(r.getString(MapperFields.USER_ID)));
+    result.setCourseId(safeStringToUUID(r.getString(MapperFields.COURSE_ID)));
+    result.setUnitId(safeStringToUUID(r.getString(MapperFields.UNIT_ID)));
+    result.setLessonId(safeStringToUUID(r.getString(MapperFields.LESSON_ID)));
+    result.setCollectionId(safeStringToUUID(r.getString(MapperFields.COLLECTION_ID)));
+    result.setClassId(safeStringToUUID(r.getString(MapperFields.CLASS_ID)));
     result.setSuggestedContentId(safeStringToUUID(r.getString(MapperFields.SUGGESTED_CONTENT_ID)));
-    result.setSuggestedContentType(r.getString(MapperFields.SUGGESTED_CONTENT_TYPE));
-    result.setSuggestedContentSubType(r.getString(MapperFields.SUGGESTED_CONTENT_SUBTYPE));
-    result.setSuggestionType(r.getString(MapperFields.SUGGESTION_TYPE));
-    result.setAcceptedByUser(r.getBoolean(MapperFields.ACCEPTED_BY_USER));
+    result.setSuggestedContentType(
+        SuggestedContentType.builder(r.getString(MapperFields.SUGGESTED_CONTENT_TYPE)));
+    result
+        .setSuggestionOrigin(SuggestionOrigin.builder(r.getString(MapperFields.SUGGESTION_ORIGIN)));
+    result.setSuggestionOriginatorId(
+        safeStringToUUID(r.getString(MapperFields.SUGGESTION_ORIGINATOR_ID)));
+    result.setSuggestionCriteria(
+        convertToSuggestionCriteria(r.getString(MapperFields.SUGGESTION_CRITERIA)));
+    result.setSuggestedTo(convertToSuggestionTo(r.getString(MapperFields.SUGGESTED_TO)));
+    result.setAccepted(r.getBoolean(MapperFields.ACCEPTED));
     result.setAcceptedAt(r.getDate(MapperFields.ACCEPTED_AT));
     result.setCreatedAt(r.getDate(MapperFields.CREATED_AT));
     result.setUpdatedAt(r.getDate(MapperFields.UPDATED_AT));
+    result.setSuggestionArea(SuggestionArea.builder(r.getString(MapperFields.SUGGESTION_AREA)));
+    result.setTxCode(r.getString(MapperFields.TX_CODE));
+    result.setTxCodeType(convertToTxCodeType(r.getString(MapperFields.TX_CODE_TYPE)));
 
     return result;
+  }
+
+  private static TxCodeType convertToTxCodeType(String codeType) {
+    if (codeType != null) {
+      return TxCodeType.builder(codeType);
+    }
+    return null;
+  }
+
+  private static SuggestedTo convertToSuggestionTo(String suggestionTo) {
+    if (suggestionTo != null) {
+      return SuggestedTo.builder(suggestionTo);
+    }
+    return null;
+  }
+
+  private static SuggestionCriteria convertToSuggestionCriteria(String criteria) {
+    if (criteria != null) {
+      return SuggestionCriteria.builder(criteria);
+    }
+    return null;
   }
 
   private static UUID safeStringToUUID(String input) {
@@ -55,18 +90,23 @@ public class SuggestionTrackerMapper implements ResultSetMapper<SuggestionTracke
   private static class MapperFields {
 
     private static final String ID = "id";
-    private static final String CTX_USER_ID = "ctx_user_id";
-    private static final String CTX_COURSE_ID = "ctx_course_id";
-    private static final String CTX_UNIT_ID = "ctx_unit_id";
-    private static final String CTX_LESSON_ID = "ctx_lesson_id";
-    private static final String CTX_COLLECTION_ID = "ctx_collection_id";
-    private static final String CTX_CLASS_ID = "ctx_class_id";
-    private static final String PATH_ID = "path_id";
+    private static final String USER_ID = "user_id";
+    private static final String COURSE_ID = "course_id";
+    private static final String UNIT_ID = "unit_id";
+    private static final String LESSON_ID = "lesson_id";
+    private static final String COLLECTION_ID = "collection_id";
+    private static final String CLASS_ID = "class_id";
     private static final String SUGGESTED_CONTENT_ID = "suggested_content_id";
     private static final String SUGGESTED_CONTENT_TYPE = "suggested_content_type";
-    private static final String SUGGESTED_CONTENT_SUBTYPE = "suggested_content_subtype";
-    private static final String SUGGESTION_TYPE = "suggestion_type";
-    private static final String ACCEPTED_BY_USER = "accepted_by_user";
+    private static final String SUGGESTION_ORIGIN = "suggestion_origin";
+    private static final String SUGGESTION_ORIGINATOR_ID = "suggestion_originator_id";
+    private static final String SUGGESTION_CRITERIA = "suggestion_criteria";
+    private static final String SUGGESTED_TO = "suggested_to";
+    private static final String ACCEPTED = "accepted";
+    private static final String SUGGESTION_AREA = "suggestion_area";
+    private static final String TX_CODE = "tx_code";
+    private static final String TX_CODE_TYPE = "tx_code_type";
+    private static final String CTX = "ctx";
     private static final String ACCEPTED_AT = "accepted_at";
     private static final String CREATED_AT = "created_at";
     private static final String UPDATED_AT = "updated_at";

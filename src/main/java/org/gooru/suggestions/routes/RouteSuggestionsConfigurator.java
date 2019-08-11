@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author ashish on 24/2/17.
+ * @author ashish
  */
 public class RouteSuggestionsConfigurator implements RouteConfigurator {
 

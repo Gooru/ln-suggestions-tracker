@@ -1,7 +1,7 @@
 package org.gooru.suggestions.processor.utilities.jdbi;
 
 /**
- * @author ashish on 15/3/17.
+ * @author ashish
  */
 
 import java.sql.Array;

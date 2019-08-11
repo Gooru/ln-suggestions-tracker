@@ -4,7 +4,8 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 
 /**
- * @author ashish on 3/11/17. This is a manager class to initialize the utilities, Utilities
+ * @author ashish
+ * This is a manager class to initialize the utilities, Utilities
  * initialized may depend on the DB or application state. Thus their initialization sequence may
  * matter. It is advisable to keep the utility initialization for last.
  */

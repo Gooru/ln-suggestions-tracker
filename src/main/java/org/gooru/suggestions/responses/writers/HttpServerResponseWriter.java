@@ -12,7 +12,7 @@ import org.gooru.suggestions.responses.transformers.ResponseTransformer;
 import org.gooru.suggestions.responses.transformers.ResponseTransformerBuilder;
 
 /**
- * @author ashish on 3/1/2017.
+ * @author ashish
  */
 class HttpServerResponseWriter implements ResponseWriter {
 

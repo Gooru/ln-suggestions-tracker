@@ -6,7 +6,7 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 
 /**
- * @author ashish on 3/11/17.
+ * @author ashish
  */
 class RouteGlobalConfigurator implements RouteConfigurator {
 

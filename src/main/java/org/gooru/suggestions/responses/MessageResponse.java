@@ -6,7 +6,7 @@ import org.gooru.suggestions.constants.Constants;
 import org.gooru.suggestions.constants.HttpConstants;
 
 /**
- * @author ashish on 24/2/2017.
+ * @author ashish
  */
 public final class MessageResponse {
 

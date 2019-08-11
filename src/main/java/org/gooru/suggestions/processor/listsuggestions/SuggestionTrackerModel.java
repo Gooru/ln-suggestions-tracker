@@ -2,28 +2,38 @@ package org.gooru.suggestions.processor.listsuggestions;
 
 import java.util.Date;
 import java.util.UUID;
+import org.gooru.suggestions.processor.data.SuggestedContentType;
+import org.gooru.suggestions.processor.data.SuggestedTo;
+import org.gooru.suggestions.processor.data.SuggestionArea;
+import org.gooru.suggestions.processor.data.SuggestionCriteria;
+import org.gooru.suggestions.processor.data.SuggestionOrigin;
+import org.gooru.suggestions.processor.data.TxCodeType;
 
 /**
- * @author ashish on 24/11/17.
+ * @author ashish
  */
 class SuggestionTrackerModel {
 
   private Long id;
-  private UUID ctxUserId;
-  private UUID ctxClassId;
-  private UUID ctxCourseId;
-  private UUID ctxUnitId;
-  private UUID ctxLessonId;
-  private UUID ctxCollectionId;
-  private Long pathId;
+  private UUID userId;
+  private UUID courseId;
+  private UUID unitId;
+  private UUID lessonId;
+  private UUID classId;
+  private UUID collectionId;
   private UUID suggestedContentId;
-  private String suggestedContentType;
-  private String suggestedContentSubType;
-  private Boolean acceptedByUser;
-  private String suggestionType;
+  private SuggestionOrigin suggestionOrigin;
+  private UUID suggestionOriginatorId;
+  private SuggestionCriteria suggestionCriteria;
+  private SuggestedContentType suggestedContentType;
+  private SuggestedTo suggestedTo;
+  private Boolean accepted;
   private Date acceptedAt;
   private Date createdAt;
   private Date updatedAt;
+  private SuggestionArea suggestionArea;
+  private String txCode;
+  private TxCodeType txCodeType;
 
   public Long getId() {
     return id;
@@ -33,60 +43,52 @@ class SuggestionTrackerModel {
     this.id = id;
   }
 
-  public UUID getCtxUserId() {
-    return ctxUserId;
+  public UUID getUserId() {
+    return userId;
   }
 
-  public void setCtxUserId(UUID ctxUserId) {
-    this.ctxUserId = ctxUserId;
+  public void setUserId(UUID userId) {
+    this.userId = userId;
   }
 
-  public UUID getCtxClassId() {
-    return ctxClassId;
+  public UUID getCourseId() {
+    return courseId;
   }
 
-  public void setCtxClassId(UUID ctxClassId) {
-    this.ctxClassId = ctxClassId;
+  public void setCourseId(UUID courseId) {
+    this.courseId = courseId;
   }
 
-  public UUID getCtxCourseId() {
-    return ctxCourseId;
+  public UUID getUnitId() {
+    return unitId;
   }
 
-  public void setCtxCourseId(UUID ctxCourseId) {
-    this.ctxCourseId = ctxCourseId;
+  public void setUnitId(UUID unitId) {
+    this.unitId = unitId;
   }
 
-  public UUID getCtxUnitId() {
-    return ctxUnitId;
+  public UUID getLessonId() {
+    return lessonId;
   }
 
-  public void setCtxUnitId(UUID ctxUnitId) {
-    this.ctxUnitId = ctxUnitId;
+  public void setLessonId(UUID lessonId) {
+    this.lessonId = lessonId;
   }
 
-  public UUID getCtxLessonId() {
-    return ctxLessonId;
+  public UUID getClassId() {
+    return classId;
   }
 
-  public void setCtxLessonId(UUID ctxLessonId) {
-    this.ctxLessonId = ctxLessonId;
+  public void setClassId(UUID classId) {
+    this.classId = classId;
   }
 
-  public UUID getCtxCollectionId() {
-    return ctxCollectionId;
+  public UUID getCollectionId() {
+    return collectionId;
   }
 
-  public void setCtxCollectionId(UUID ctxCollectionId) {
-    this.ctxCollectionId = ctxCollectionId;
-  }
-
-  public Long getPathId() {
-    return pathId;
-  }
-
-  public void setPathId(Long pathId) {
-    this.pathId = pathId;
+  public void setCollectionId(UUID collectionId) {
+    this.collectionId = collectionId;
   }
 
   public UUID getSuggestedContentId() {
@@ -97,36 +99,54 @@ class SuggestionTrackerModel {
     this.suggestedContentId = suggestedContentId;
   }
 
-  public String getSuggestedContentType() {
+  public SuggestionOrigin getSuggestionOrigin() {
+    return suggestionOrigin;
+  }
+
+  public void setSuggestionOrigin(SuggestionOrigin suggestionOrigin) {
+    this.suggestionOrigin = suggestionOrigin;
+  }
+
+  public UUID getSuggestionOriginatorId() {
+    return suggestionOriginatorId;
+  }
+
+  public void setSuggestionOriginatorId(UUID suggestionOriginatorId) {
+    this.suggestionOriginatorId = suggestionOriginatorId;
+  }
+
+  public SuggestionCriteria getSuggestionCriteria() {
+    return suggestionCriteria;
+  }
+
+  public void setSuggestionCriteria(
+      SuggestionCriteria suggestionCriteria) {
+    this.suggestionCriteria = suggestionCriteria;
+  }
+
+  public SuggestedContentType getSuggestedContentType() {
     return suggestedContentType;
   }
 
-  public void setSuggestedContentType(String suggestedContentType) {
+  public void setSuggestedContentType(
+      SuggestedContentType suggestedContentType) {
     this.suggestedContentType = suggestedContentType;
   }
 
-  public String getSuggestedContentSubType() {
-    return suggestedContentSubType;
+  public SuggestedTo getSuggestedTo() {
+    return suggestedTo;
   }
 
-  public void setSuggestedContentSubType(String suggestedContentSubType) {
-    this.suggestedContentSubType = suggestedContentSubType;
+  public void setSuggestedTo(SuggestedTo suggestedTo) {
+    this.suggestedTo = suggestedTo;
   }
 
-  public Boolean getAcceptedByUser() {
-    return acceptedByUser;
+  public Boolean getAccepted() {
+    return accepted;
   }
 
-  public void setAcceptedByUser(Boolean acceptedByUser) {
-    this.acceptedByUser = acceptedByUser;
-  }
-
-  public String getSuggestionType() {
-    return suggestionType;
-  }
-
-  public void setSuggestionType(String suggestionType) {
-    this.suggestionType = suggestionType;
+  public void setAccepted(Boolean accepted) {
+    this.accepted = accepted;
   }
 
   public Date getAcceptedAt() {
@@ -153,4 +173,27 @@ class SuggestionTrackerModel {
     this.updatedAt = updatedAt;
   }
 
+  public SuggestionArea getSuggestionArea() {
+    return suggestionArea;
+  }
+
+  public void setSuggestionArea(SuggestionArea suggestionArea) {
+    this.suggestionArea = suggestionArea;
+  }
+
+  public String getTxCode() {
+    return txCode;
+  }
+
+  public void setTxCode(String txCode) {
+    this.txCode = txCode;
+  }
+
+  public TxCodeType getTxCodeType() {
+    return txCodeType;
+  }
+
+  public void setTxCodeType(TxCodeType txCodeType) {
+    this.txCodeType = txCodeType;
+  }
 }

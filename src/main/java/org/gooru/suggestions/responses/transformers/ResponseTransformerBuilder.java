@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import org.gooru.suggestions.exceptions.HttpResponseWrapperException;
 
 /**
- * @author ashish on 24/2/2017.
+ * @author ashish
  */
 public final class ResponseTransformerBuilder {
 

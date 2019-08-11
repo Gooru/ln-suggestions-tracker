@@ -1,7 +1,7 @@
 package org.gooru.suggestions.app.components;
 
 /**
- * @author ashish on 3/11/17.
+ * @author ashish
  */
 public interface Finalizer {
 

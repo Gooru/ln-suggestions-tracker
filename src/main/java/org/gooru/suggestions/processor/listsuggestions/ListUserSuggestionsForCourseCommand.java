@@ -6,7 +6,7 @@ import org.gooru.suggestions.constants.HttpConstants;
 import org.gooru.suggestions.exceptions.HttpResponseWrapperException;
 
 /**
- * @author ashish on 24/11/17.
+ * @author ashish
  */
 class ListUserSuggestionsForCourseCommand {
 

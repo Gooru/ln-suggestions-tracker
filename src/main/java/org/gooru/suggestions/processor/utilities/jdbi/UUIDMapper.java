@@ -7,7 +7,7 @@ import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
 /**
- * @author ashish on 16/12/17.
+ * @author ashish
  */
 public class UUIDMapper implements ResultSetMapper<UUID> {
 

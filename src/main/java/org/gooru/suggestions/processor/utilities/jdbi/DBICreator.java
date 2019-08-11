@@ -5,7 +5,7 @@ import org.gooru.suggestions.app.components.DataSourceRegistry;
 import org.skife.jdbi.v2.DBI;
 
 /**
- * @author ashish on 15/3/17.
+ * @author ashish
  */
 public final class DBICreator {
 

@@ -51,11 +51,7 @@
     }
   },
   "app.configuration": {
-    "context.mbus.timeout.seconds": 60,
-    "suggestions.advise": true,
-    "serve.content.details": false,
-    "non.global.strategy.apply.visibility": false,
-    "suggestions.limit": 1
+    "context.mbus.timeout.seconds": 60
   },
   "vertxOptions": {
     "workerPoolSize": 40,

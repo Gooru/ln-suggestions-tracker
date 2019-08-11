@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 
 /**
- * @author ashish on 3/11/17.
+ * @author ashish
  */
 public interface RouteConfigurator {
 

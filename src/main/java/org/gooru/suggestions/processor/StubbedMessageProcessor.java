@@ -8,7 +8,7 @@ import org.gooru.suggestions.responses.MessageResponse;
 import org.gooru.suggestions.responses.MessageResponseFactory;
 
 /**
- * @author ashish on 17/11/17.
+ * @author ashish
  */
 public class StubbedMessageProcessor implements MessageProcessor {
 

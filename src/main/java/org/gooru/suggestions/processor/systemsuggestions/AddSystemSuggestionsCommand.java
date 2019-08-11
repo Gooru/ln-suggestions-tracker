@@ -8,7 +8,7 @@ import org.gooru.suggestions.processor.data.SuggestedContentSubType;
 import org.gooru.suggestions.processor.data.SuggestedContentType;
 
 /**
- * @author ashish on 29/11/17.
+ * @author ashish
  */
 class AddSystemSuggestionsCommand {
 

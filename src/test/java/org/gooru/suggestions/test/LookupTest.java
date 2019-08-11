@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 /**
- * @author ashish on 12/9/17.
+ * @author ashish
  */
 class LookupTest {
 

@@ -4,7 +4,7 @@ import java.util.List;
 import org.skife.jdbi.v2.DBI;
 
 /**
- * @author ashish on 24/11/17.
+ * @author ashish
  */
 class ListUserSuggestionsService {
 

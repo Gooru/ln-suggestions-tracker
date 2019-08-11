@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import org.gooru.suggestions.constants.Constants;
 
 /**
- * @author ashish on 3/11/17.
+ * @author ashish
  */
 public final class ResponseUtil {
 

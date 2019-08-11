@@ -7,7 +7,7 @@ import io.vertx.ext.web.RoutingContext;
 import org.gooru.suggestions.responses.transformers.ResponseTransformer;
 
 /**
- * @author ashish on 3/1/2017.
+ * @author ashish
  */
 public final class ResponseWriterBuilder {
 

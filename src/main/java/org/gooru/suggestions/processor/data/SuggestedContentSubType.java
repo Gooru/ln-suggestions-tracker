@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author ashish on 17/11/17.
+ * @author ashish
  */
 public enum SuggestedContentSubType {
   PreTest("pre-test"),
