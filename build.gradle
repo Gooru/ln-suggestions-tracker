@@ -25,7 +25,7 @@ ext {
     junitVersion = '4.12'
     logbackVersion = '1.0.13'
     hikariVersion = '2.7.6'
-    postgresVersion = '9.4-1206-jdbc42'
+    postgresVersion = '42.2.6'
     jdbiVersion = '2.78'
 }
 
