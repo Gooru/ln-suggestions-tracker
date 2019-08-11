@@ -23,7 +23,7 @@ public class SuggestionsTrackerVerticle extends AbstractVerticle {
   private static final Logger LOGGER = LoggerFactory.getLogger(SuggestionsTrackerVerticle.class);
 
   @Override
-  public void start(Future<Void> startFuture) throws Exception {
+  public void start(Future<Void> startFuture) {
 
     EventBus eb = vertx.eventBus();
     eb.localConsumer(Constants.EventBus.MBEP_SUGGEST_TRACKER, this::processMessage)
@@ -42,8 +42,8 @@ public class SuggestionsTrackerVerticle extends AbstractVerticle {
   private void processMessage(Message<JsonObject> message) {
     String op = message.headers().get(Constants.Message.MSG_OP);
     switch (op) {
-      case Constants.Message.MSG_OP_TEACHER_SUGGESTIONS_ADD:
-        MessageProcessor.buildAddTeacherSuggestionsProcessor(vertx, message).process()
+      case Constants.Message.MSG_OP_SUGGESTIONS_ADD:
+        MessageProcessor.buildAddSuggestionsProcessor(vertx, message).process()
             .setHandler(event -> finishResponse(message, event));
         break;
       case Constants.Message.MSG_OP_USER_SUGGESTIONS_FOR_COURSE:
@@ -52,10 +52,6 @@ public class SuggestionsTrackerVerticle extends AbstractVerticle {
         break;
       case Constants.Message.MSG_OP_USER_SUGGESTIONS_IN_CLASS:
         MessageProcessor.buildUserSuggestionsInClassProcessor(vertx, message).process()
-            .setHandler(event -> finishResponse(message, event));
-        break;
-      case Constants.Message.MSG_OP_SYSTEM_SUGGESTIONS_ADD:
-        MessageProcessor.buildAddSystemSuggestionsProcessor(vertx, message).process()
             .setHandler(event -> finishResponse(message, event));
         break;
       default:

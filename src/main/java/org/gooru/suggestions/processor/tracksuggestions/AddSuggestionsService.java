@@ -1,4 +1,4 @@
-package org.gooru.suggestions.processor.teachersuggestions;
+package org.gooru.suggestions.processor.tracksuggestions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,24 +11,24 @@ import org.slf4j.LoggerFactory;
 /**
  * @author ashish on 24/11/17.
  */
-class AddTeacherSuggestionsService {
+class AddSuggestionsService {
 
-  private final AddTeacherSuggestionsDao addTeacherSuggestionsDao;
-  private AddTeacherSuggestionsCommand addTeacherSuggestionsCommand;
-  private static final Logger LOGGER = LoggerFactory.getLogger(AddTeacherSuggestionsService.class);
-  private AddTeacherSuggestionsCommand command;
+  private final AddSuggestionsDao addSuggestionsDao;
+  private AddSuggestionsCommand addSuggestionsCommand;
+  private static final Logger LOGGER = LoggerFactory.getLogger(AddSuggestionsService.class);
+  private AddSuggestionsCommand command;
 
-  AddTeacherSuggestionsService(DBI dbi) {
+  AddSuggestionsService(DBI dbi) {
 
-    this.addTeacherSuggestionsDao = dbi.onDemand(AddTeacherSuggestionsDao.class);
+    this.addSuggestionsDao = dbi.onDemand(AddSuggestionsDao.class);
   }
 
-  void addTeacherSuggestion(AddTeacherSuggestionsCommand command) {
+  void addTeacherSuggestion(AddSuggestionsCommand command) {
     this.command = command;
     List<UUID> usersNotHavingSpecifiedSuggestions = findUsersNotHavingSpecifiedSuggestion();
     if (usersNotHavingSpecifiedSuggestions != null && !usersNotHavingSpecifiedSuggestions
         .isEmpty()) {
-      addTeacherSuggestionsDao
+      addSuggestionsDao
           .addTeacherSuggestion(command.getBean(), usersNotHavingSpecifiedSuggestions);
     } else {
       LOGGER.info("All specified users already have specified suggestion");
@@ -49,11 +49,11 @@ class AddTeacherSuggestionsService {
 
   private List<UUID> findUsersHavingSpecifiedSuggestionForClass() {
     if (command.getCtxCollectionId() == null) {
-      return addTeacherSuggestionsDao
+      return addSuggestionsDao
           .findUsersHavingSpecifiedSuggestionForClassRootedAtLesson(command.getBean(),
               CollectionUtils.convertFromListUUIDToSqlArrayOfUUID(command.getCtxUserIds()));
     } else {
-      return addTeacherSuggestionsDao
+      return addSuggestionsDao
           .findUsersHavingSpecifiedSuggestionForClassRootedAtCollection(command.getBean(),
               CollectionUtils.convertFromListUUIDToSqlArrayOfUUID(command.getCtxUserIds()));
     }

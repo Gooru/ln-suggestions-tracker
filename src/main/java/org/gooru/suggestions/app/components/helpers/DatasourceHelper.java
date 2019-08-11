@@ -65,8 +65,9 @@ public final class DatasourceHelper {
           config.setMaximumPoolSize((Integer) entry.getValue());
           break;
         case "metricRegistry":
-          throw new UnsupportedOperationException(entry.getKey());
         case "healthCheckRegistry":
+        case "dataSource":
+        case "threadFactory":
           throw new UnsupportedOperationException(entry.getKey());
         case "poolName":
           config.setPoolName((String) entry.getValue());
@@ -101,10 +102,6 @@ public final class DatasourceHelper {
         case "leakDetectionThreshold":
           config.setLeakDetectionThreshold((Long) entry.getValue());
           break;
-        case "dataSource":
-          throw new UnsupportedOperationException(entry.getKey());
-        case "threadFactory":
-          throw new UnsupportedOperationException(entry.getKey());
         case "datasource":
           for (Map.Entry<String, Object> key : ((JsonObject) entry.getValue())) {
             config.addDataSourceProperty(key.getKey(), key.getValue());

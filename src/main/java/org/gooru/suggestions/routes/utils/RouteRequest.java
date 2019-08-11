@@ -9,7 +9,7 @@ import org.gooru.suggestions.constants.Constants;
 /**
  * @author ashish on 12/4/17.
  */
-public final class RouteRequest {
+final class RouteRequest {
 
   private final JsonObject routeRequestBody;
   private final JsonObject httpBody;

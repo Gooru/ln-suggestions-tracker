@@ -26,17 +26,16 @@ public class RouteSuggestionsConfigurator implements RouteConfigurator {
   public void configureRoutes(Vertx vertx, Router router, JsonObject config) {
     eb = vertx.eventBus();
     mbusTimeout = config.getLong(Constants.EventBus.MBUS_TIMEOUT, 30L) * 1000;
-    router.post(Constants.Route.API_TEACHER_SUGGESTION_ADD).handler(this::addTeacherSuggestion);
     router.get(Constants.Route.API_USER_SUGGESTIONS_FOR_COURSE)
         .handler(this::userSuggestionsForCourse);
     router.get(Constants.Route.API_USER_SUGGESTIONS_IN_CLASS).handler(this::userSuggestionsInClass);
-    router.post(Constants.Route.API_SYSTEM_SUGGESTIONS_ADD).handler(this::addSystemSuggestion);
+    router.post(Constants.Route.API_SUGGESTIONS_ADD).handler(this::handleTrackSuggestion);
   }
 
-  private void addTeacherSuggestion(RoutingContext routingContext) {
+  private void handleTrackSuggestion(RoutingContext routingContext) {
     DeliveryOptions options = DeliveryOptionsBuilder.buildWithApiVersion(routingContext)
         .setSendTimeout(mbusTimeout)
-        .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_TEACHER_SUGGESTIONS_ADD);
+        .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_SUGGESTIONS_ADD);
     eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER,
         RouteRequestUtility.getBodyForMessage(routingContext), options,
         reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
@@ -59,14 +58,4 @@ public class RouteSuggestionsConfigurator implements RouteConfigurator {
         RouteRequestUtility.getBodyForMessage(routingContext, true), options,
         reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
   }
-
-  private void addSystemSuggestion(RoutingContext routingContext) {
-    DeliveryOptions options = DeliveryOptionsBuilder.buildWithApiVersion(routingContext)
-        .setSendTimeout(mbusTimeout)
-        .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_SYSTEM_SUGGESTIONS_ADD);
-    eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER,
-        RouteRequestUtility.getBodyForMessage(routingContext), options,
-        reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
-  }
-
 }

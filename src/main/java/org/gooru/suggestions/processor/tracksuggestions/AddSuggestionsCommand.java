@@ -1,4 +1,4 @@
-package org.gooru.suggestions.processor.teachersuggestions;
+package org.gooru.suggestions.processor.tracksuggestions;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -14,7 +14,7 @@ import org.gooru.suggestions.processor.data.SuggestedContentType;
 /**
  * @author ashish on 17/11/17.
  */
-class AddTeacherSuggestionsCommand {
+class AddSuggestionsCommand {
 
   private List<UUID> ctxUserIds;
   private UUID ctxClassId;
@@ -27,8 +27,8 @@ class AddTeacherSuggestionsCommand {
   private SuggestedContentType suggestedContentType;
   private SuggestedContentSubType suggestedContentSubType;
 
-  static AddTeacherSuggestionsCommand builder(JsonObject input) {
-    AddTeacherSuggestionsCommand result = buildFromJsonObject(input);
+  static AddSuggestionsCommand builder(JsonObject input) {
+    AddSuggestionsCommand result = buildFromJsonObject(input);
     result.validate();
     return result;
   }
@@ -112,8 +112,8 @@ class AddTeacherSuggestionsCommand {
     }
   }
 
-  private static AddTeacherSuggestionsCommand buildFromJsonObject(JsonObject input) {
-    AddTeacherSuggestionsCommand command = new AddTeacherSuggestionsCommand();
+  private static AddSuggestionsCommand buildFromJsonObject(JsonObject input) {
+    AddSuggestionsCommand command = new AddSuggestionsCommand();
 
     try {
       command.ctxUserIds = initializeUsers(input);
@@ -165,7 +165,7 @@ class AddTeacherSuggestionsCommand {
     return UUID.fromString(value);
   }
 
-  public static final class CommandAttributes {
+  static final class CommandAttributes {
 
     static final String USER_ID = "ctx_user_id";
     static final String CLASS_ID = "ctx_class_id";

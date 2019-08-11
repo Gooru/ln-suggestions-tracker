@@ -24,8 +24,9 @@ public final class Constants {
     public static final String MSG_OP_STATUS = "mb.op.status";
     public static final String MSG_OP_STATUS_SUCCESS = "mb.op.status.success";
     public static final String MSG_OP_STATUS_FAIL = "mb.op.status.fail";
-    public static final String MSG_OP_TEACHER_SUGGESTIONS_ADD = "mb.op.teacher.suggestions.add";
+    public static final String MSG_OP_SUGGESTIONS_ADD = "mb.op.suggestion.track";
     public static final String MSG_OP_SYSTEM_SUGGESTIONS_ADD = "mb.op.system.suggestions.add";
+    public static final String MSG_OP_TEACHER_SUGGESTIONS_ADD = "mb.op.teacher.suggestions.add";
     public static final String MSG_OP_USER_SUGGESTIONS_IN_CLASS = "mb.op.user.suggestions.in.class";
     public static final String MSG_OP_USER_SUGGESTIONS_FOR_COURSE = "mb.op.user.suggestions.for.course";
 
@@ -74,6 +75,7 @@ public final class Constants {
     private static final String API_BASE_ROUTE = "/api/stracker/:version/";
     public static final String API_TEACHER_SUGGESTION_ADD = API_BASE_ROUTE + "teacher";
     public static final String API_SYSTEM_SUGGESTIONS_ADD = API_BASE_ROUTE + "system";
+    public static final String API_SUGGESTIONS_ADD = API_BASE_ROUTE + "track";
 
     public static final String API_USER_SUGGESTIONS_IN_CLASS =
         API_BASE_ROUTE + "user/:userId/class/:classId";

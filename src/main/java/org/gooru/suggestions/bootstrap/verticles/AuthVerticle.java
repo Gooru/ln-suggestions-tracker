@@ -21,7 +21,7 @@ public class AuthVerticle extends AbstractVerticle {
   private RedisClient redisClient;
 
   @Override
-  public void start(Future<Void> startFuture) throws Exception {
+  public void start(Future<Void> startFuture) {
     EventBus eb = vertx.eventBus();
 
     initializeVerticle(startFuture);
@@ -91,7 +91,7 @@ public class AuthVerticle extends AbstractVerticle {
   }
 
   @Override
-  public void stop(Future<Void> stopFuture) throws Exception {
+  public void stop(Future<Void> stopFuture) {
     finalizeVerticle(stopFuture);
   }
 

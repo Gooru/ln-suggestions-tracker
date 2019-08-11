@@ -1,4 +1,4 @@
-package org.gooru.suggestions.processor.teachersuggestions;
+package org.gooru.suggestions.processor.tracksuggestions;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
@@ -15,18 +15,18 @@ import org.slf4j.LoggerFactory;
 /**
  * @author ashish on 17/11/17.
  */
-public class AddTeacherSuggestionsProcessor implements MessageProcessor {
+public class AddSuggestionsProcessor implements MessageProcessor {
 
   private final Message<JsonObject> message;
   private final Vertx vertx;
   private final Future<MessageResponse> result;
   private EventBusMessage eventBusMessage;
   private static final Logger LOGGER = LoggerFactory
-      .getLogger(AddTeacherSuggestionsProcessor.class);
-  private final AddTeacherSuggestionsService addTeacherSuggestionsService =
-      new AddTeacherSuggestionsService(DBICreator.getDbiForDefaultDS());
+      .getLogger(AddSuggestionsProcessor.class);
+  private final AddSuggestionsService addSuggestionsService =
+      new AddSuggestionsService(DBICreator.getDbiForDefaultDS());
 
-  public AddTeacherSuggestionsProcessor(Vertx vertx, Message<JsonObject> message) {
+  public AddSuggestionsProcessor(Vertx vertx, Message<JsonObject> message) {
     this.vertx = vertx;
     this.message = message;
     this.result = Future.future();
@@ -36,8 +36,8 @@ public class AddTeacherSuggestionsProcessor implements MessageProcessor {
   public Future<MessageResponse> process() {
     try {
       this.eventBusMessage = EventBusMessage.eventBusMessageBuilder(message);
-      AddTeacherSuggestionsCommand command =
-          AddTeacherSuggestionsCommand.builder(eventBusMessage.getRequestBody());
+      AddSuggestionsCommand command =
+          AddSuggestionsCommand.builder(eventBusMessage.getRequestBody());
       addTeacherSuggestion(command);
     } catch (Throwable throwable) {
       LOGGER.warn("Encountered exception", throwable);
@@ -46,10 +46,10 @@ public class AddTeacherSuggestionsProcessor implements MessageProcessor {
     return result;
   }
 
-  private void addTeacherSuggestion(AddTeacherSuggestionsCommand command) {
+  private void addTeacherSuggestion(AddSuggestionsCommand command) {
     vertx.executeBlocking(future -> {
       try {
-        addTeacherSuggestionsService.addTeacherSuggestion(command);
+        addSuggestionsService.addTeacherSuggestion(command);
         future.complete();
       } catch (Throwable throwable) {
         LOGGER.warn("Encountered exception accepting suggestion", throwable);

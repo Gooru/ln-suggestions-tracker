@@ -1,4 +1,4 @@
-package org.gooru.suggestions.processor.teachersuggestions;
+package org.gooru.suggestions.processor.tracksuggestions;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,7 +13,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 /**
  * @author ashish on 24/11/17.
  */
-interface AddTeacherSuggestionsDao {
+interface AddSuggestionsDao {
 
   @SqlBatch(
       "insert into suggestions_tracker (ctx_user_id, ctx_course_id, ctx_unit_id, ctx_lesson_id, ctx_class_id,"
@@ -22,7 +22,7 @@ interface AddTeacherSuggestionsDao {
           + ":ctxCourseId, :ctxUnitId, :ctxLessonId, :ctxClassId, :ctxCollectionId, :pathId,   "
           + ":suggestedContentId, :suggestedContentType, :suggestedContentSubType, 'teacher', null, null)")
   void addTeacherSuggestion(
-      @BindBean AddTeacherSuggestionsCommand.AddTeacherSuggestionsBean command,
+      @BindBean AddSuggestionsCommand.AddTeacherSuggestionsBean command,
       @Bind("ctxUserId") List<UUID> ctxUserIds);
 
   @SqlQuery(
@@ -32,7 +32,7 @@ interface AddTeacherSuggestionsDao {
           + "'teacher' and ctx_user_id = any(:ctxUserIds)")
   @Mapper(UUIDMapper.class)
   List<UUID> findUsersHavingSpecifiedSuggestionForClassRootedAtLesson(
-      @BindBean AddTeacherSuggestionsCommand.AddTeacherSuggestionsBean bean,
+      @BindBean AddSuggestionsCommand.AddTeacherSuggestionsBean bean,
       @Bind("ctxUserIds") PGArray<UUID> ctxUserIds);
 
   @SqlQuery(
@@ -42,7 +42,7 @@ interface AddTeacherSuggestionsDao {
           + "suggestion_type = " + "'teacher' and ctx_user_id = any(:ctxUserIds)")
   @Mapper(UUIDMapper.class)
   List<UUID> findUsersHavingSpecifiedSuggestionForClassRootedAtCollection(
-      @BindBean AddTeacherSuggestionsCommand.AddTeacherSuggestionsBean bean,
+      @BindBean AddSuggestionsCommand.AddTeacherSuggestionsBean bean,
       @Bind("ctxUserIds") PGArray<UUID> ctxUserIds);
 
 }

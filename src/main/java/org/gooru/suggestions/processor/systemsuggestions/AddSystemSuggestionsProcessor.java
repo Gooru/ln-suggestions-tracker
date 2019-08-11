@@ -25,7 +25,7 @@ public class AddSystemSuggestionsProcessor implements MessageProcessor {
   private final AddSystemSuggestionsService addSystemSuggestionsService =
       new AddSystemSuggestionsService(DBICreator.getDbiForDefaultDS());
 
-  public AddSystemSuggestionsProcessor(Vertx vertx, Message<JsonObject> message) {
+  private AddSystemSuggestionsProcessor(Vertx vertx, Message<JsonObject> message) {
 
     this.vertx = vertx;
     this.message = message;

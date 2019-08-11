@@ -2,7 +2,6 @@ package org.gooru.suggestions.app.components;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import org.gooru.suggestions.app.components.utilities.DbLookupUtility;
 
 /**
  * @author ashish on 3/11/17. This is a manager class to initialize the utilities, Utilities
@@ -27,9 +26,5 @@ public final class UtilityManager implements Initializer, Finalizer {
 
   @Override
   public void initializeComponent(Vertx vertx, JsonObject config) {
-    // TODO: Initialize tenant machinery when the dependency is included
-    //        TenantInitializer.initialize(DataSourceRegistry.getInstance().getDefaultDataSource());
-    DbLookupUtility.getInstance()
-        .initialize(DataSourceRegistry.getInstance().getDefaultDataSource());
   }
 }

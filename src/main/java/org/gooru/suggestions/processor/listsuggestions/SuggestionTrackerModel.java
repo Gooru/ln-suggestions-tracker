@@ -1,4 +1,4 @@
-package org.gooru.suggestions.processor.usersuggestions;
+package org.gooru.suggestions.processor.listsuggestions;
 
 import java.util.Date;
 import java.util.UUID;

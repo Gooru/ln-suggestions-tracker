@@ -1,4 +1,4 @@
-package org.gooru.suggestions.processor.usersuggestions;
+package org.gooru.suggestions.processor.listsuggestions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,18 +19,18 @@ import org.slf4j.LoggerFactory;
 /**
  * @author ashish on 17/11/17.
  */
-public class UserSuggestionsForCourseProcessor implements MessageProcessor {
+public class ListUserSuggestionsInClassProcessor implements MessageProcessor {
 
   private final Vertx vertx;
   private final Message<JsonObject> message;
   private final Future<MessageResponse> result;
   private static final Logger LOGGER = LoggerFactory
-      .getLogger(UserSuggestionsForCourseProcessor.class);
-  private final UserSuggestionsService userSuggestionsService =
-      new UserSuggestionsService(DBICreator.getDbiForDefaultDS());
+      .getLogger(ListUserSuggestionsInClassProcessor.class);
+  private final ListUserSuggestionsService listUserSuggestionsService =
+      new ListUserSuggestionsService(DBICreator.getDbiForDefaultDS());
   private EventBusMessage eventBusMessage;
 
-  public UserSuggestionsForCourseProcessor(Vertx vertx, Message<JsonObject> message) {
+  public ListUserSuggestionsInClassProcessor(Vertx vertx, Message<JsonObject> message) {
     this.vertx = vertx;
     this.message = message;
     result = Future.future();
@@ -40,9 +40,9 @@ public class UserSuggestionsForCourseProcessor implements MessageProcessor {
   public Future<MessageResponse> process() {
     try {
       this.eventBusMessage = EventBusMessage.eventBusMessageBuilder(message);
-      UserSuggestionsForCourseCommand command =
-          UserSuggestionsForCourseCommand.builder(eventBusMessage.getRequestBody());
-      fetchUserSuggestionForCourse(command);
+      ListUserSuggestionsInClassCommand command =
+          ListUserSuggestionsInClassCommand.builder(eventBusMessage.getRequestBody());
+      fetchUserSuggestionInClass(command);
     } catch (Throwable throwable) {
       LOGGER.warn("Encountered exception", throwable);
       result.fail(throwable);
@@ -50,10 +50,9 @@ public class UserSuggestionsForCourseProcessor implements MessageProcessor {
     return result;
   }
 
-  private void fetchUserSuggestionForCourse(UserSuggestionsForCourseCommand command) {
+  private void fetchUserSuggestionInClass(ListUserSuggestionsInClassCommand command) {
     try {
-      List<SuggestionTrackerModel> models = userSuggestionsService
-          .fetchSuggestionsForCourse(command);
+      List<SuggestionTrackerModel> models = listUserSuggestionsService.fetchSuggestionsInClass(command);
       SuggestionsList outcome = new SuggestionsList();
       outcome.setSuggestions(models);
       String resultString = new ObjectMapper().writeValueAsString(outcome);
@@ -82,5 +81,4 @@ public class UserSuggestionsForCourseProcessor implements MessageProcessor {
       this.suggestions = suggestions;
     }
   }
-
 }

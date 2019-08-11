@@ -136,7 +136,7 @@ class AddSystemSuggestionsCommand {
     return UUID.fromString(value);
   }
 
-  public static final class CommandAttributes {
+  static final class CommandAttributes {
 
     static final String USER_ID = "ctx_user_id";
     static final String CLASS_ID = "ctx_class_id";
