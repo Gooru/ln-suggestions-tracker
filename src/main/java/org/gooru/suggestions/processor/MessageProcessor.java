@@ -4,7 +4,6 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
-import org.gooru.suggestions.processor.suggestionsacceptance.SuggestionAcceptanceProcessor;
 import org.gooru.suggestions.processor.systemsuggestions.AddSystemSuggestionsProcessor;
 import org.gooru.suggestions.processor.teachersuggestions.AddTeacherSuggestionsProcessor;
 import org.gooru.suggestions.processor.usersuggestions.UserSuggestionsForCourseProcessor;
@@ -26,11 +25,6 @@ public interface MessageProcessor {
   static MessageProcessor buildAddSystemSuggestionsProcessor(Vertx vertx,
       Message<JsonObject> message) {
     return new AddSystemSuggestionsProcessor(vertx, message);
-  }
-
-  static MessageProcessor buildSuggestionAcceptanceProcessor(Vertx vertx,
-      Message<JsonObject> message) {
-    return new SuggestionAcceptanceProcessor(vertx, message);
   }
 
   static MessageProcessor buildUserSuggestionsForCourseProcessor(Vertx vertx,

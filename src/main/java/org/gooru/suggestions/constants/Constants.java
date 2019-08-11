@@ -28,7 +28,6 @@ public final class Constants {
     public static final String MSG_OP_SYSTEM_SUGGESTIONS_ADD = "mb.op.system.suggestions.add";
     public static final String MSG_OP_USER_SUGGESTIONS_IN_CLASS = "mb.op.user.suggestions.in.class";
     public static final String MSG_OP_USER_SUGGESTIONS_FOR_COURSE = "mb.op.user.suggestions.for.course";
-    public static final String MSG_OP_SUGGESTION_ACCEPTANCE = "mb.op.suggestion.acceptance";
 
     public static final String MSG_API_VERSION = "api.version";
     public static final String MSG_SESSION_TOKEN = "session.token";
@@ -71,22 +70,15 @@ public final class Constants {
 
   public static final class Route {
 
-    static final String API_INTERNAL_ROUTE = "/api/internal/suggestions/:version/";
-    public static final String API_AUTH_ROUTE = "/api/s/suggestions/*";
-    public static final String API_INTERNAL_BANNER = "/api/internal/banner";
-    public static final String API_INTERNAL_METRICS = "/api/internal/metrics";
-    private static final String API_BASE_ROUTE = "/api/s/suggestions/:version/";
+    public static final String API_AUTH_ROUTE = "/api/stracker/*";
+    private static final String API_BASE_ROUTE = "/api/stracker/:version/";
     public static final String API_TEACHER_SUGGESTION_ADD = API_BASE_ROUTE + "teacher";
+    public static final String API_SYSTEM_SUGGESTIONS_ADD = API_BASE_ROUTE + "system";
+
     public static final String API_USER_SUGGESTIONS_IN_CLASS =
         API_BASE_ROUTE + "user/:userId/class/:classId";
     public static final String API_USER_SUGGESTIONS_FOR_COURSE =
         API_BASE_ROUTE + "user/:userId/course/:courseId";
-    public static final String API_SUGGESTIONS_ACCEPTANCE = API_BASE_ROUTE + "acceptance";
-    public static final String API_SYSTEM_SUGGESTIONS_ADD = API_BASE_ROUTE + "system";
-    public static final String API_INTERNAL_TEACHER_SUGGESTION_ADD = API_INTERNAL_ROUTE + "teacher";
-    public static final String API_INTERNAL_SUGGESTIONS_ACCEPTANCE =
-        API_INTERNAL_ROUTE + "acceptance";
-    public static final String API_INTERNAL_SYSTEM_SUGGESTIONS_ADD = API_INTERNAL_ROUTE + "system";
 
     private Route() {
       throw new AssertionError();

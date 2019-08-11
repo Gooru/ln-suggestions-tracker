@@ -30,15 +30,7 @@ public class RouteSuggestionsConfigurator implements RouteConfigurator {
     router.get(Constants.Route.API_USER_SUGGESTIONS_FOR_COURSE)
         .handler(this::userSuggestionsForCourse);
     router.get(Constants.Route.API_USER_SUGGESTIONS_IN_CLASS).handler(this::userSuggestionsInClass);
-    router.put(Constants.Route.API_SUGGESTIONS_ACCEPTANCE).handler(this::userSuggestionAcceptance);
     router.post(Constants.Route.API_SYSTEM_SUGGESTIONS_ADD).handler(this::addSystemSuggestion);
-    // Internal routes
-    router.post(Constants.Route.API_INTERNAL_TEACHER_SUGGESTION_ADD)
-        .handler(this::addTeacherSuggestion);
-    router.put(Constants.Route.API_INTERNAL_SUGGESTIONS_ACCEPTANCE)
-        .handler(this::userSuggestionAcceptance);
-    router.post(Constants.Route.API_INTERNAL_SYSTEM_SUGGESTIONS_ADD)
-        .handler(this::addSystemSuggestion);
   }
 
   private void addTeacherSuggestion(RoutingContext routingContext) {
@@ -65,15 +57,6 @@ public class RouteSuggestionsConfigurator implements RouteConfigurator {
         .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_USER_SUGGESTIONS_IN_CLASS);
     eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER,
         RouteRequestUtility.getBodyForMessage(routingContext, true), options,
-        reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
-  }
-
-  private void userSuggestionAcceptance(RoutingContext routingContext) {
-    DeliveryOptions options = DeliveryOptionsBuilder.buildWithApiVersion(routingContext)
-        .setSendTimeout(mbusTimeout)
-        .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_SUGGESTION_ACCEPTANCE);
-    eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER,
-        RouteRequestUtility.getBodyForMessage(routingContext), options,
         reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
   }
 

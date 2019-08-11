@@ -42,10 +42,6 @@ public class SuggestionsTrackerVerticle extends AbstractVerticle {
   private void processMessage(Message<JsonObject> message) {
     String op = message.headers().get(Constants.Message.MSG_OP);
     switch (op) {
-      case Constants.Message.MSG_OP_SUGGESTION_ACCEPTANCE:
-        MessageProcessor.buildSuggestionAcceptanceProcessor(vertx, message).process()
-            .setHandler(event -> finishResponse(message, event));
-        break;
       case Constants.Message.MSG_OP_TEACHER_SUGGESTIONS_ADD:
         MessageProcessor.buildAddTeacherSuggestionsProcessor(vertx, message).process()
             .setHandler(event -> finishResponse(message, event));
