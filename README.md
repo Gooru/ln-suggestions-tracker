@@ -20,13 +20,13 @@ suggestions, new APIs will be used.
 #### Add suggestion API
 `
 curl -X POST \
-  http://localhost:8080/api/stracker/v1/track \
-  -H 'Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==' \
-  -H 'Cache-Control: no-cache' \
-  -H 'Content-Length: 657' \
-  -H 'Content-Type: application/json' \
-  -H 'User-Agent: PostmanRuntime/7.15.2' \
-  -H 'cache-control: no-cache' \
+  http://localhost:8080/api/stracker/v1/track 
+  -H 'Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ=='
+  -H 'Cache-Control: no-cache'
+  -H 'Content-Length: 657'
+  -H 'Content-Type: application/json' 
+  -H 'User-Agent: PostmanRuntime/7.15.2' 
+  -H 'cache-control: no-cache' 
   -d '{
   "user_id": "68492039-3713-42de-90ad-94d5945cd482",
   "course_id": "c3c5a610-0c97-4ecc-852c-8586a7ba3b52",
@@ -49,7 +49,7 @@ curl -X POST \
 
 ##### Payload Explanation
 
-`
+<pre>
 {
   "user_id": "uuid:mandatory",
   "course_id": "uuid:provide if it is course map suggestion",
@@ -67,14 +67,14 @@ curl -X POST \
   "tx_code": "string:optional: gut code for which suggestion is given",
   "tx_code_type": "string: mandatory if tx_code is populated: valid values ['competency'::text, 'micro-competency'::text, 'alt-concept'::text]"
 }
-`
+</pre>
 
 #### Fetch suggestions for User in IL 
 
 `
-curl -X GET \
-  'http://localhost:8080/api/stracker/v1/user/68492039-3713-42de-90ad-94d5945cd482/course/c3c5a610-0c97-4ecc-852c-8586a7ba3b52?scope=course-map' \
-  -H 'Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==' \
+curl -X GET 
+  'http://localhost:8080/api/stracker/v1/user/68492039-3713-42de-90ad-94d5945cd482/course/c3c5a610-0c97-4ecc-852c-8586a7ba3b52?scope=course-map' 
+  -H 'Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==' 
   -H 'cache-control: no-cache'
 `
 
@@ -86,8 +86,8 @@ Additional parameters:
 
 `
 curl -X GET \
-  'http://localhost:8080/api/stracker/v1/user/68492039-3713-42de-90ad-94d5945cd482/class/0baefeb6-4f72-49b4-85fd-a20aa4f17100?scope=' \
-  -H 'Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==' \
+  'http://localhost:8080/api/stracker/v1/user/68492039-3713-42de-90ad-94d5945cd482/class/0baefeb6-4f72-49b4-85fd-a20aa4f17100?scope=' 
+  -H 'Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==' 
   -H 'cache-control: no-cache'
   `
 Additional parameters:
