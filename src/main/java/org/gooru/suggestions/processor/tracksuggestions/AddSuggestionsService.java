@@ -25,8 +25,7 @@ class AddSuggestionsService {
   void addSuggestion(AddSuggestionsCommand command) {
     this.command = command;
     validate();
-    addSuggestionsDao
-        .addSuggestion(command.getBean());
+    addSuggestionsDao.addSuggestion(command.getBean());
   }
 
   private void validate() {
@@ -43,20 +42,28 @@ class AddSuggestionsService {
     switch (command.getSuggestedContentType()) {
       case Course:
         validateSuggestedCourseExists();
+        break;
       case Unit:
         validateSuggestedUnitExists();
+        break;
       case Lesson:
         validateSuggestedLessonExists();
+        break;
       case Collection:
         validateSuggestedCollectionExists();
+        break;
       case Assessment:
         validateSuggestedAssessmentExists();
+        break;
       case OfflineActivity:
         validateOfflineActivityExists();
+        break;
       case Question:
         validateQuestionExists();
+        break;
       case Resource:
         validateResourceExists();
+        break;
     }
   }
 

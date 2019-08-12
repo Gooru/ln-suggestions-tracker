@@ -210,6 +210,7 @@ class AddSuggestionsCommand {
     result.setUnitId(unitId);
     result.setLessonId(lessonId);
     result.setCollectionId(collectionId);
+    result.setClassId(classId);
     result.setSuggestedContentId(suggestedContentId);
     result.setSuggestionOrigin(suggestionOrigin != null ? suggestionOrigin.getName() : null);
     result.setSuggestionOriginatorId(suggestionOriginatorId);

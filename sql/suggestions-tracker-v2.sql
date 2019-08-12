@@ -13,7 +13,7 @@ ALTER TABLE suggestions_tracker ADD COLUMN tx_code text;
 ALTER TABLE suggestions_tracker ADD COLUMN tx_code_type text;
 
 ALTER TABLE suggestions_tracker ADD CONSTRAINT suggestions_tracker_tx_code_type_check
-    CHECK (suggestion_area = ANY (ARRAY['competency'::text, 'micro-competency'::text, 'alt-concept'::text]));
+    CHECK (tx_code_type = ANY (ARRAY['competency'::text, 'micro-competency'::text, 'alt-concept'::text]));
 
 ALTER TABLE suggestions_tracker DROP COLUMN ctx;
 

@@ -75,7 +75,7 @@ class ListUserSuggestionsForCourseCommand {
     } else if (userId == null) {
       throw new HttpResponseWrapperException(HttpStatus.BAD_REQUEST, "Invalid userId");
     }
-    if (scope != null) {
+    if (scope != null && !scope.isEmpty()) {
       try {
         SuggestionArea scopedArea = SuggestionArea.builder(scope);
       } catch (IllegalArgumentException e) {
