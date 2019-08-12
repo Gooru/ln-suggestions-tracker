@@ -1,48 +1,59 @@
 package org.gooru.suggestions.processor.tracksuggestions;
 
-import java.util.List;
 import java.util.UUID;
-import org.gooru.suggestions.processor.utilities.jdbi.PGArray;
-import org.gooru.suggestions.processor.utilities.jdbi.UUIDMapper;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
-import org.skife.jdbi.v2.sqlobject.SqlBatch;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
+import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 
 /**
  * @author ashish
  */
 interface AddSuggestionsDao {
 
-  @SqlBatch(
-      "insert into suggestions_tracker (ctx_user_id, ctx_course_id, ctx_unit_id, ctx_lesson_id, ctx_class_id,"
-          + " ctx_collection_id, path_id,   suggested_content_id, suggested_content_type, "
-          + "suggested_content_subtype, suggestion_type, accepted_by_user, accepted_at) values (:ctxUserId, "
-          + ":ctxCourseId, :ctxUnitId, :ctxLessonId, :ctxClassId, :ctxCollectionId, :pathId,   "
-          + ":suggestedContentId, :suggestedContentType, :suggestedContentSubType, 'teacher', null, null)")
-  void addTeacherSuggestion(
-      @BindBean AddSuggestionsCommand.AddTeacherSuggestionsBean command,
-      @Bind("ctxUserId") List<UUID> ctxUserIds);
+  @SqlUpdate(
+      "insert into suggestions_tracker (user_id, course_id, unit_id, lesson_id, class_id, collection_id, "
+          + " suggested_content_id, suggestion_origin, suggestion_originator_id, suggestion_criteria, "
+          + " suggested_content_type, suggested_to, accepted, accepted_at, suggestion_area, "
+          + " tx_code, tx_code_type) values (:userId, :courseId, :unitId, "
+          + " :lessonId, :classId, :collectionId, :suggestedContentId, :suggestionOrigin, "
+          + " :suggestionOriginatorId, :suggestionCriteria, :suggestedContentType, :suggestedTo, true, "
+          + " now(), :suggestionArea, :txCode, :txCodeType) ON CONFLICT DO NOTHING")
+  void addSuggestion(@BindBean AddSuggestionBean command);
+
+  @SqlQuery("select exists (select 1 from class where id = :classId and is_deleted = false and is_archived = false)")
+  boolean classExists(@Bind("classId") UUID classId);
 
   @SqlQuery(
-      "select ctx_user_id from suggestions_tracker where ctx_course_id = :ctxCourseId and ctx_unit_id = "
-          + ":ctxUnitId and ctx_lesson_id = :ctxLessonId and ctx_class_id =  :ctxClassId and "
-          + "ctx_collection_id is null and suggested_content_id =  :suggestedContentId and suggestion_type = "
-          + "'teacher' and ctx_user_id = any(:ctxUserIds)")
-  @Mapper(UUIDMapper.class)
-  List<UUID> findUsersHavingSpecifiedSuggestionForClassRootedAtLesson(
-      @BindBean AddSuggestionsCommand.AddTeacherSuggestionsBean bean,
-      @Bind("ctxUserIds") PGArray<UUID> ctxUserIds);
+      "select exists (select 1 from collection where course_id = :courseId and unit_id = :unitId and "
+          + " lesson_id = :lessonId and id = :collectionId and is_deleted = false)")
+  boolean culcExists(@Bind("courseId") UUID courseId, @Bind("unitId") UUID unitId,
+      @Bind("lessonId") UUID lessonId, @Bind("collectionId") UUID collectionId);
 
-  @SqlQuery(
-      "select ctx_user_id from suggestions_tracker where ctx_course_id = :ctxCourseId and ctx_unit_id = "
-          + ":ctxUnitId and ctx_lesson_id = :ctxLessonId and ctx_class_id =  :ctxClassId and "
-          + "ctx_collection_id = :ctxCollectionId and suggested_content_id =  :suggestedContentId and "
-          + "suggestion_type = " + "'teacher' and ctx_user_id = any(:ctxUserIds)")
-  @Mapper(UUIDMapper.class)
-  List<UUID> findUsersHavingSpecifiedSuggestionForClassRootedAtCollection(
-      @BindBean AddSuggestionsCommand.AddTeacherSuggestionsBean bean,
-      @Bind("ctxUserIds") PGArray<UUID> ctxUserIds);
+  @SqlQuery("select exists (select 1 from original_resource where id = :resourceId)")
+  boolean originalResourceExists(@Bind("resourceId") UUID resourceId);
 
+  @SqlQuery("select exists (select 1 from content where id = :resourceId and content_format = 'resource'::content_format_type and is_deleted = false)")
+  boolean resourceExists(@Bind("resourceId") UUID resourceId);
+
+  @SqlQuery("select exists (select 1 from content where id = :questionId and content_format = 'question'::content_format_type and is_deleted = false)")
+  boolean questionExists(@Bind("questionId") UUID questionId);
+
+  @SqlQuery("select exists (select 1 from collection where id = :offlineActivityId and format = 'offline-activity'::content_container_type and is_deleted = false)")
+  boolean offlineActivityExists(@Bind("offlineActivityId") UUID offlineActivityId);
+
+  @SqlQuery("select exists (select 1 from collection where id = :assessmentId and format = 'assessment'::content_container_type and is_deleted = false)")
+  boolean assessmentExists(@Bind("assessmentId") UUID assessmentId);
+
+  @SqlQuery("select exists (select 1 from collection where id = :collectionId and format = 'collection'::content_container_type and is_deleted = false)")
+  boolean collectionExists(@Bind("collectionId") UUID collectionId);
+
+  @SqlQuery("select exists (select 1 from lesson where lesson_id = :lessonId and is_deleted = false)")
+  boolean lessonExists(@Bind("lessonId") UUID lessonId);
+
+  @SqlQuery("select exists (select 1 from unit where unit_id = :unitId and is_deleted = false)")
+  boolean unitExists(@Bind("unitId") UUID unitId);
+
+  @SqlQuery("select exists (select 1 from course where id = :courseId and is_deleted = false)")
+  boolean courseExists(@Bind("courseId") UUID courseId);
 }

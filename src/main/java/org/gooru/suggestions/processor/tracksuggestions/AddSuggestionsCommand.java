@@ -1,31 +1,38 @@
 package org.gooru.suggestions.processor.tracksuggestions;
 
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 import org.gooru.suggestions.constants.HttpConstants;
 import org.gooru.suggestions.exceptions.HttpResponseWrapperException;
-import org.gooru.suggestions.processor.data.SuggestedContentSubType;
 import org.gooru.suggestions.processor.data.SuggestedContentType;
+import org.gooru.suggestions.processor.data.SuggestedTo;
+import org.gooru.suggestions.processor.data.SuggestionArea;
+import org.gooru.suggestions.processor.data.SuggestionCriteria;
+import org.gooru.suggestions.processor.data.SuggestionOrigin;
+import org.gooru.suggestions.processor.data.TxCodeType;
 
 /**
  * @author ashish
  */
 class AddSuggestionsCommand {
 
-  private List<UUID> ctxUserIds;
-  private UUID ctxClassId;
-  private UUID ctxCourseId;
-  private UUID ctxUnitId;
-  private UUID ctxLessonId;
-  private UUID ctxCollectionId;
-  private Long pathId;
+  private UUID userId;
+  private UUID courseId;
+  private UUID unitId;
+  private UUID lessonId;
+  private UUID classId;
+  private UUID collectionId;
   private UUID suggestedContentId;
+  private SuggestionOrigin suggestionOrigin;
+  private UUID suggestionOriginatorId;
+  private SuggestionCriteria suggestionCriteria;
   private SuggestedContentType suggestedContentType;
-  private SuggestedContentSubType suggestedContentSubType;
+  private SuggestedTo suggestedTo;
+  private Boolean accepted;
+  private SuggestionArea suggestionArea;
+  private String txCode;
+  private TxCodeType txCodeType;
+
 
   static AddSuggestionsCommand builder(JsonObject input) {
     AddSuggestionsCommand result = buildFromJsonObject(input);
@@ -33,82 +40,28 @@ class AddSuggestionsCommand {
     return result;
   }
 
-  AddTeacherSuggestionsBean getBean() {
-    AddTeacherSuggestionsBean result = new AddTeacherSuggestionsBean();
-    result.ctxClassId = ctxClassId;
-    result.ctxCourseId = ctxCourseId;
-    result.ctxUnitId = ctxUnitId;
-    result.ctxLessonId = ctxLessonId;
-    result.ctxCollectionId = ctxCollectionId;
-    result.pathId = pathId;
-    result.suggestedContentId = suggestedContentId;
-    result.suggestedContentType =
-        suggestedContentType != null ? suggestedContentType.getName() : null;
-    result.suggestedContentSubType =
-        suggestedContentSubType != null ? suggestedContentSubType.getName() : null;
-
-    return result;
-  }
-
-  public List<UUID> getCtxUserIds() {
-    return ctxUserIds;
-  }
-
-  public UUID getCtxClassId() {
-    return ctxClassId;
-  }
-
-  public UUID getCtxCourseId() {
-    return ctxCourseId;
-  }
-
-  public UUID getCtxUnitId() {
-    return ctxUnitId;
-  }
-
-  public UUID getCtxLessonId() {
-    return ctxLessonId;
-  }
-
-  public UUID getCtxCollectionId() {
-    return ctxCollectionId;
-  }
-
-  public Long getPathId() {
-    return pathId;
-  }
-
-  public UUID getSuggestedContentId() {
-    return suggestedContentId;
-  }
-
-  public SuggestedContentType getSuggestedContentType() {
-    return suggestedContentType;
-  }
-
-  public SuggestedContentSubType getSuggestedContentSubType() {
-    return suggestedContentSubType;
-  }
-
   private void validate() {
-    if (ctxUserIds == null || ctxUserIds.isEmpty()) {
+    if (userId == null) {
       throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
           "Invalid user id");
-    } else if (ctxClassId == null || ctxCourseId == null) {
-      throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
-          "Course and class both should be provided");
-    } else if ((ctxUnitId == null || ctxLessonId == null)) {
-      throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
-          "Invalid unit or lesson for suggestion");
-    } else if (suggestedContentId == null) {
+    }
+    if (suggestedContentId == null) {
       throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
           "Invalid content id for suggestion");
-    } else if (suggestedContentType == null) {
+    }
+    if (suggestedContentType == null) {
       throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
           "Invalid suggested content type");
-    } else if (pathId == null) {
+    }
+    if (suggestionArea == SuggestionArea.CourseMap) {
+      if (courseId == null || unitId == null || lessonId == null || collectionId == null) {
+        throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
+            "CULC should be present for Course Map suggestion");
+      }
+    }
+    if ((txCode == null && txCodeType != null) || (txCodeType == null && txCode != null)) {
       throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
-          "Invalid path id");
+          "Both tx_code and tx_code_type should be present or absent");
     }
   }
 
@@ -116,20 +69,26 @@ class AddSuggestionsCommand {
     AddSuggestionsCommand command = new AddSuggestionsCommand();
 
     try {
-      command.ctxUserIds = initializeUsers(input);
-      command.ctxClassId = toUuid(input, CommandAttributes.CLASS_ID);
-      command.ctxCourseId = toUuid(input, CommandAttributes.COURSE_ID);
-      command.ctxUnitId = toUuid(input, CommandAttributes.UNIT_ID);
-      command.ctxLessonId = toUuid(input, CommandAttributes.LESSON_ID);
-      command.ctxCollectionId = toUuid(input, CommandAttributes.COLLECTION_ID);
+      command.userId = toUuid(input, CommandAttributes.USER_ID);
+      command.courseId = toUuid(input, CommandAttributes.COURSE_ID);
+      command.unitId = toUuid(input, CommandAttributes.UNIT_ID);
+      command.lessonId = toUuid(input, CommandAttributes.LESSON_ID);
+      command.classId = toUuid(input, CommandAttributes.CLASS_ID);
+      command.collectionId = toUuid(input, CommandAttributes.COLLECTION_ID);
       command.suggestedContentId = toUuid(input, CommandAttributes.SUGGESTED_CONTENT_ID);
-      command.pathId = input.getLong(CommandAttributes.PATH_ID);
-      String value = input.getString(CommandAttributes.SUGGESTED_CONTENT_TYPE);
-      command.suggestedContentType =
-          (value != null && !value.isEmpty()) ? SuggestedContentType.builder(value) : null;
-      value = input.getString(CommandAttributes.SUGGESTED_CONTENT_SUBTYPE);
-      command.suggestedContentSubType =
-          (value != null && !value.isEmpty()) ? SuggestedContentSubType.builder(value) : null;
+      command.suggestionOrigin = SuggestionOrigin.builder(
+          input.getString(CommandAttributes.SUGGESTION_ORIGIN));
+      command.suggestionOriginatorId = toUuid(input, CommandAttributes.SUGGESTION_ORIGINATOR_ID);
+      command.suggestionCriteria = SuggestionCriteria.builder(
+          input.getString(CommandAttributes.SUGGESTION_CRITERIA));
+      command.suggestedContentType = SuggestedContentType
+          .builder(input.getString(CommandAttributes.SUGGESTED_CONTENT_TYPE));
+      command.suggestedTo = SuggestedTo.builder(input.getString(CommandAttributes.SUGGESTED_TO));
+      command.suggestionArea = SuggestionArea
+          .builder(input.getString(CommandAttributes.SUGGESTION_AREA));
+      command.txCode = input.getString(CommandAttributes.TX_CODE);
+      command.txCodeType = toTxCodeType(input.getString(CommandAttributes.TX_CODE_TYPE));
+
     } catch (IllegalArgumentException e) {
       throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST, e.getMessage());
     }
@@ -137,20 +96,11 @@ class AddSuggestionsCommand {
     return command;
   }
 
-  private static List<UUID> initializeUsers(JsonObject input) {
-    JsonArray userArray = input.getJsonArray(CommandAttributes.USER_ID);
-    if (userArray != null) {
-      List<UUID> result = new ArrayList<>(userArray.size());
-      for (Object user : userArray) {
-        UUID userId = convertStringToUuid(user.toString());
-        if (userId == null) {
-          throw new IllegalArgumentException("Invalid userid");
-        }
-        result.add(userId);
-      }
-      return result;
+  private static TxCodeType toTxCodeType(String txCodeType) {
+    if (txCodeType != null) {
+      return TxCodeType.builder(txCodeType);
     }
-    return Collections.emptyList();
+    return null;
   }
 
   private static UUID toUuid(JsonObject input, String key) {
@@ -165,106 +115,111 @@ class AddSuggestionsCommand {
     return UUID.fromString(value);
   }
 
-  static final class CommandAttributes {
+  public UUID getUserId() {
+    return userId;
+  }
 
-    static final String USER_ID = "ctx_user_id";
-    static final String CLASS_ID = "ctx_class_id";
-    static final String COURSE_ID = "ctx_course_id";
-    static final String LESSON_ID = "ctx_lesson_id";
-    static final String UNIT_ID = "ctx_unit_id";
-    static final String COLLECTION_ID = "ctx_collection_id";
-    static final String SUGGESTED_CONTENT_ID = "suggested_content_id";
-    static final String SUGGESTED_CONTENT_TYPE = "suggested_content_type";
-    static final String SUGGESTED_CONTENT_SUBTYPE = "suggested_content_subtype";
-    static final String PATH_ID = "path_id";
+  public UUID getCourseId() {
+    return courseId;
+  }
+
+  public UUID getUnitId() {
+    return unitId;
+  }
+
+  public UUID getLessonId() {
+    return lessonId;
+  }
+
+  public UUID getClassId() {
+    return classId;
+  }
+
+  public UUID getCollectionId() {
+    return collectionId;
+  }
+
+  public UUID getSuggestedContentId() {
+    return suggestedContentId;
+  }
+
+  public SuggestionOrigin getSuggestionOrigin() {
+    return suggestionOrigin;
+  }
+
+  public UUID getSuggestionOriginatorId() {
+    return suggestionOriginatorId;
+  }
+
+  public SuggestionCriteria getSuggestionCriteria() {
+    return suggestionCriteria;
+  }
+
+  public SuggestedContentType getSuggestedContentType() {
+    return suggestedContentType;
+  }
+
+  public SuggestedTo getSuggestedTo() {
+    return suggestedTo;
+  }
+
+  public Boolean getAccepted() {
+    return accepted;
+  }
+
+  public SuggestionArea getSuggestionArea() {
+    return suggestionArea;
+  }
+
+  public String getTxCode() {
+    return txCode;
+  }
+
+  public TxCodeType getTxCodeType() {
+    return txCodeType;
+  }
+
+  private static final class CommandAttributes {
+
+    private static final String USER_ID = "user_id";
+    private static final String COURSE_ID = "course_id";
+    private static final String UNIT_ID = "unit_id";
+    private static final String LESSON_ID = "lesson_id";
+    private static final String COLLECTION_ID = "collection_id";
+    private static final String CLASS_ID = "class_id";
+    private static final String SUGGESTED_CONTENT_ID = "suggested_content_id";
+    private static final String SUGGESTED_CONTENT_TYPE = "suggested_content_type";
+    private static final String SUGGESTION_ORIGIN = "suggestion_origin";
+    private static final String SUGGESTION_ORIGINATOR_ID = "suggestion_originator_id";
+    private static final String SUGGESTION_CRITERIA = "suggestion_criteria";
+    private static final String SUGGESTED_TO = "suggested_to";
+    private static final String SUGGESTION_AREA = "suggestion_area";
+    private static final String TX_CODE = "tx_code";
+    private static final String TX_CODE_TYPE = "tx_code_type";
 
     private CommandAttributes() {
       throw new AssertionError();
     }
   }
 
-  public static final class AddTeacherSuggestionsBean {
+  AddSuggestionBean getBean() {
+    AddSuggestionBean result = new AddSuggestionBean();
 
-    private UUID ctxClassId;
-    private UUID ctxCourseId;
-    private UUID ctxUnitId;
-    private UUID ctxLessonId;
-    private UUID ctxCollectionId;
-    private Long pathId;
-    private UUID suggestedContentId;
-    private String suggestedContentType;
-    private String suggestedContentSubType;
+    result.setUserId(userId);
+    result.setCourseId(courseId);
+    result.setUnitId(unitId);
+    result.setLessonId(lessonId);
+    result.setCollectionId(collectionId);
+    result.setSuggestedContentId(suggestedContentId);
+    result.setSuggestionOrigin(suggestionOrigin != null ? suggestionOrigin.getName() : null);
+    result.setSuggestionOriginatorId(suggestionOriginatorId);
+    result.setSuggestionCriteria(suggestionCriteria != null ? suggestionCriteria.getName() : null);
+    result.setSuggestedContentType(suggestedContentType.getName());
+    result.setSuggestedTo(suggestedTo != null ? suggestedTo.getName() : null);
+    result.setSuggestionArea(suggestionArea != null ? suggestionArea.getName() : null);
+    result.setTxCode(txCode);
+    result.setTxCodeType(txCodeType != null ? txCodeType.getName() : null);
 
-    public UUID getCtxClassId() {
-      return ctxClassId;
-    }
-
-    public void setCtxClassId(UUID ctxClassId) {
-      this.ctxClassId = ctxClassId;
-    }
-
-    public UUID getCtxCourseId() {
-      return ctxCourseId;
-    }
-
-    public void setCtxCourseId(UUID ctxCourseId) {
-      this.ctxCourseId = ctxCourseId;
-    }
-
-    public UUID getCtxUnitId() {
-      return ctxUnitId;
-    }
-
-    public void setCtxUnitId(UUID ctxUnitId) {
-      this.ctxUnitId = ctxUnitId;
-    }
-
-    public UUID getCtxLessonId() {
-      return ctxLessonId;
-    }
-
-    public void setCtxLessonId(UUID ctxLessonId) {
-      this.ctxLessonId = ctxLessonId;
-    }
-
-    public UUID getCtxCollectionId() {
-      return ctxCollectionId;
-    }
-
-    public void setCtxCollectionId(UUID ctxCollectionId) {
-      this.ctxCollectionId = ctxCollectionId;
-    }
-
-    public Long getPathId() {
-      return pathId;
-    }
-
-    public void setPathId(Long pathId) {
-      this.pathId = pathId;
-    }
-
-    public UUID getSuggestedContentId() {
-      return suggestedContentId;
-    }
-
-    public void setSuggestedContentId(UUID suggestedContentId) {
-      this.suggestedContentId = suggestedContentId;
-    }
-
-    public String getSuggestedContentType() {
-      return suggestedContentType;
-    }
-
-    public void setSuggestedContentType(String suggestedContentType) {
-      this.suggestedContentType = suggestedContentType;
-    }
-
-    public String getSuggestedContentSubType() {
-      return suggestedContentSubType;
-    }
-
-    public void setSuggestedContentSubType(String suggestedContentSubType) {
-      this.suggestedContentSubType = suggestedContentSubType;
-    }
+    return result;
   }
 }

@@ -49,7 +49,7 @@ public class AddSuggestionsProcessor implements MessageProcessor {
   private void addTeacherSuggestion(AddSuggestionsCommand command) {
     vertx.executeBlocking(future -> {
       try {
-        addSuggestionsService.addTeacherSuggestion(command);
+        addSuggestionsService.addSuggestion(command);
         future.complete();
       } catch (Throwable throwable) {
         LOGGER.warn("Encountered exception accepting suggestion", throwable);
