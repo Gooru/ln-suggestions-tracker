@@ -51,6 +51,7 @@
     }
   },
   "app.configuration": {
+    "max.allowed": 50,
     "context.mbus.timeout.seconds": 60
   },
   "vertxOptions": {

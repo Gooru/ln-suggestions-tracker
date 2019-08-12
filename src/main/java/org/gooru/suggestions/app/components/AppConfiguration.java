@@ -56,21 +56,8 @@ public final class AppConfiguration implements Initializer {
     return configuration.getValue(key);
   }
 
-  public boolean suggestionsTurnedOn() {
-    return configuration.getBoolean("suggestions.advise");
-  }
-
-  public Integer suggestionsLimit() {
-    return configuration.getInteger("suggestions.limit");
-  }
-
-  public boolean serveContentDetails() {
-    return configuration.getBoolean("serve.content.details");
-  }
-
-  public boolean applyContentVisibilityToNonGlobalStrategy() {
-    Boolean result = configuration.getBoolean("non.global.strategy.apply.visibility");
-    return result != null && result;
+  public Integer maxAllowed() {
+    return configuration.getInteger("max.allowed");
   }
 
   private static final class Holder {

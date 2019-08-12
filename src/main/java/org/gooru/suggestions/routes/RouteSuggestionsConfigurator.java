@@ -44,7 +44,7 @@ public class RouteSuggestionsConfigurator implements RouteConfigurator {
   private void userSuggestionsForCourse(RoutingContext routingContext) {
     DeliveryOptions options = DeliveryOptionsBuilder.buildWithApiVersion(routingContext)
         .setSendTimeout(mbusTimeout)
-        .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_USER_SUGGESTIONS_FOR_COURSE);
+        .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_LIST_USER_SUGGESTIONS_FOR_COURSE);
     eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER,
         RouteRequestUtility.getBodyForMessage(routingContext, true), options,
         reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
@@ -53,7 +53,7 @@ public class RouteSuggestionsConfigurator implements RouteConfigurator {
   private void userSuggestionsInClass(RoutingContext routingContext) {
     DeliveryOptions options = DeliveryOptionsBuilder.buildWithApiVersion(routingContext)
         .setSendTimeout(mbusTimeout)
-        .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_USER_SUGGESTIONS_IN_CLASS);
+        .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_LIST_USER_SUGGESTIONS_IN_CLASS);
     eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER,
         RouteRequestUtility.getBodyForMessage(routingContext, true), options,
         reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));

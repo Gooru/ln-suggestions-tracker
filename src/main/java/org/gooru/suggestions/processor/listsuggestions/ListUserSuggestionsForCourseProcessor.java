@@ -52,11 +52,9 @@ public class ListUserSuggestionsForCourseProcessor implements MessageProcessor {
 
   private void fetchUserSuggestionForCourse(ListUserSuggestionsForCourseCommand command) {
     try {
-      List<SuggestionTrackerModel> models = listUserSuggestionsService
+      ListSuggestionsResponse response = listUserSuggestionsService
           .fetchSuggestionsForCourse(command);
-      SuggestionsList outcome = new SuggestionsList();
-      outcome.setSuggestions(models);
-      String resultString = new ObjectMapper().writeValueAsString(outcome);
+      String resultString = new ObjectMapper().writeValueAsString(response);
       result.complete(MessageResponseFactory.createOkayResponse(new JsonObject(resultString)));
     } catch (JsonProcessingException e) {
       LOGGER.error("Not able to convert data to JSON", e);
@@ -67,19 +65,6 @@ public class ListUserSuggestionsForCourseProcessor implements MessageProcessor {
     } catch (Throwable throwable) {
       LOGGER.warn("Encountered exception", throwable);
       result.fail(throwable);
-    }
-  }
-
-  private static final class SuggestionsList {
-
-    List<SuggestionTrackerModel> suggestions;
-
-    public List<SuggestionTrackerModel> getSuggestions() {
-      return suggestions;
-    }
-
-    public void setSuggestions(List<SuggestionTrackerModel> suggestions) {
-      this.suggestions = suggestions;
     }
   }
 

@@ -25,8 +25,8 @@ public final class Constants {
     public static final String MSG_OP_STATUS_SUCCESS = "mb.op.status.success";
     public static final String MSG_OP_STATUS_FAIL = "mb.op.status.fail";
     public static final String MSG_OP_SUGGESTIONS_ADD = "mb.op.suggestion.track";
-    public static final String MSG_OP_USER_SUGGESTIONS_IN_CLASS = "mb.op.user.suggestions.in.class";
-    public static final String MSG_OP_USER_SUGGESTIONS_FOR_COURSE = "mb.op.user.suggestions.for.course";
+    public static final String MSG_OP_LIST_USER_SUGGESTIONS_IN_CLASS = "mb.op.user.suggestions.class.list";
+    public static final String MSG_OP_LIST_USER_SUGGESTIONS_FOR_COURSE = "mb.op.user.suggestions.course.list";
 
     public static final String MSG_API_VERSION = "api.version";
     public static final String MSG_SESSION_TOKEN = "session.token";
