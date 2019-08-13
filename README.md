@@ -94,3 +94,10 @@ Additional parameters:
 - max
 - offset
 
+### Suggestions Play
+
+When the suggestions are played from Navigation flow, the path id and path type parameters are sent to analytics.
+However, these id/type are currently stored in navigation path store which is different from suggestions store.
+To bridge the gap, whenever, suggestions will be played from this store, player needs to send path type as "suggestion"
+and suggestion id as path id. Based on this type, system should be able to decipher which store needs to be accessed.
+The player sub system, quizzes API, analytics and datascope subsystem may need modification to support new path type.
