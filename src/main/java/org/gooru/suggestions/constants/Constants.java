@@ -27,6 +27,8 @@ public final class Constants {
     public static final String MSG_OP_SUGGESTIONS_ADD = "mb.op.suggestion.track";
     public static final String MSG_OP_LIST_USER_SUGGESTIONS_IN_CLASS = "mb.op.user.suggestions.class.list";
     public static final String MSG_OP_LIST_USER_SUGGESTIONS_FOR_COURSE = "mb.op.user.suggestions.course.list";
+    public static final String MSG_OP_LIST_USER_SUGGESTIONS_FOR_COMPETENCY = "mb.op.user.suggestions.competency.list";
+    public static final String MSG_OP_LIST_USER_SUGGESTIONS_IN_CA = "mb.op.user.suggestions.ca.list";
 
     public static final String MSG_API_VERSION = "api.version";
     public static final String MSG_SESSION_TOKEN = "session.token";
@@ -77,7 +79,10 @@ public final class Constants {
         API_BASE_ROUTE + "user/:userId/class/:classId";
     public static final String API_USER_SUGGESTIONS_FOR_COURSE =
         API_BASE_ROUTE + "user/:userId/course/:courseId";
-
+    public static final String API_USER_SUGGESTIONS_FOR_COMPETENCY =
+        API_BASE_ROUTE + "user/:userId/code/:codeId";
+    public static final String API_USER_SUGGESTIONS_IN_CA =
+        API_BASE_ROUTE + "ca/user/:userId/class/:classId";
     private Route() {
       throw new AssertionError();
     }

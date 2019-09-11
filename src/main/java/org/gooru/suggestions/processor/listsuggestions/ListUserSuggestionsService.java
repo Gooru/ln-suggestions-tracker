@@ -1,6 +1,7 @@
 package org.gooru.suggestions.processor.listsuggestions;
 
 import java.util.List;
+import org.gooru.suggestions.processor.utilities.PGUtils;
 import org.skife.jdbi.v2.DBI;
 
 /**
@@ -83,6 +84,64 @@ class ListUserSuggestionsService {
     ListSuggestionsResponse response = new ListSuggestionsResponse();
     response.setSuggestions(suggestions);
     response.setTotal(total);
+    return response;
+  }
+
+  ListSuggestionsResponse fetchSuggestionsForCompetency(
+      ListUserSuggestionsForCompetencyCommand command) {
+    if (command.getClassId() != null) {
+      return fetchSuggestionsForCompetencyInClass(command);
+    } else {
+      return fetchAllSuggestionsForCompetency(command);
+    }
+  }
+
+  private ListSuggestionsResponse fetchAllSuggestionsForCompetency(
+      ListUserSuggestionsForCompetencyCommand command) {
+    List<SuggestionTrackerModel> suggestions = listUserSuggestionsDao.fetchSuggestionsForCompetency(
+        command.getUserId(), command.getCodeId(), command.getPaginationInfo().getOffset(),
+        command.getPaginationInfo().getMax());
+    int total = listUserSuggestionsDao.countSuggestionForCompetency(command.getUserId(),
+        command.getCodeId());
+    ListSuggestionsResponse response = new ListSuggestionsResponse();
+    response.setSuggestions(suggestions);
+    response.setTotal(total);
+    return response;
+  }
+
+  private ListSuggestionsResponse fetchSuggestionsForCompetencyInClass(
+      ListUserSuggestionsForCompetencyCommand command) {
+    List<SuggestionTrackerModel> suggestions =
+        listUserSuggestionsDao.fetchSuggestionsForCompetencyInClass(command.getUserId(),
+            command.getCodeId(), command.getClassId(), command.getPaginationInfo().getOffset(),
+            command.getPaginationInfo().getMax());
+    int total = listUserSuggestionsDao.countSuggestionForCompetencyInClass(command.getUserId(),
+        command.getCodeId(), command.getClassId());
+    ListSuggestionsResponse response = new ListSuggestionsResponse();
+    response.setSuggestions(suggestions);
+    response.setTotal(total);
+    return response;
+  }
+
+  ListSuggestionsResponse fetchSuggestionsForCAId(ListUserSuggestionsInCACommand command) {
+    List<SuggestionTrackerModel> suggestions =
+        listUserSuggestionsDao.fetchSuggestionsForCAId(command.getUserId(), command.getClassId(),
+            command.getCollectionId(), command.getCaContentId(),
+            command.getPaginationInfo().getOffset(), command.getPaginationInfo().getMax());
+    int total = listUserSuggestionsDao.countSuggestionsForCAId(command.getUserId(),
+        command.getClassId(), command.getCollectionId(), command.getCaContentId());
+    ListSuggestionsResponse response = new ListSuggestionsResponse();
+    response.setSuggestions(suggestions);
+    response.setTotal(total);
+    return response;
+  }
+
+  ListSuggestCountResponse fetchSuggestionsCountForCAIds(ListUserSuggestionsInCACommand command) {
+    List<SuggestionCountModel> suggestions =
+        listUserSuggestionsDao.countSuggestionsForCAIds(command.getUserId(), command.getClassId(),
+            PGUtils.listToPostgresArrayLong(command.getCaContentIds()));
+    ListSuggestCountResponse response = new ListSuggestCountResponse();
+    response.setSuggestCountInfo(suggestions);
     return response;
   }
 }

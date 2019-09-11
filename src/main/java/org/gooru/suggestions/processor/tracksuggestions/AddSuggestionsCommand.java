@@ -22,6 +22,7 @@ class AddSuggestionsCommand {
   private UUID lessonId;
   private UUID classId;
   private UUID collectionId;
+  private Long caContentId;
   private UUID suggestedContentId;
   private SuggestionOrigin suggestionOrigin;
   private UUID suggestionOriginatorId;
@@ -59,9 +60,17 @@ class AddSuggestionsCommand {
             "CULC should be present for Course Map suggestion");
       }
     }
-    if ((txCode == null && txCodeType != null) || (txCodeType == null && txCode != null)) {
-      throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
-          "Both tx_code and tx_code_type should be present or absent");
+    if (suggestionArea == SuggestionArea.Proficiency) {
+      if (classId == null || ((txCode == null && txCodeType != null) || (txCodeType == null && txCode != null))) {
+        throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
+            "All class_id, tx_code and tx_code_type should be present for Proficiency Suggestion");
+      }
+    }
+    if (suggestionArea == SuggestionArea.ClassActivity) {
+      if (classId == null || caContentId == null || collectionId == null) {
+        throw new HttpResponseWrapperException(HttpConstants.HttpStatus.BAD_REQUEST,
+            "ClassId, caContentId, collectionId should be present for Classactivity suggestion");
+      }
     }
   }
 
@@ -75,17 +84,18 @@ class AddSuggestionsCommand {
       command.lessonId = toUuid(input, CommandAttributes.LESSON_ID);
       command.classId = toUuid(input, CommandAttributes.CLASS_ID);
       command.collectionId = toUuid(input, CommandAttributes.COLLECTION_ID);
+      command.caContentId = input.getLong(CommandAttributes.CA_CONTENT_ID);
       command.suggestedContentId = toUuid(input, CommandAttributes.SUGGESTED_CONTENT_ID);
-      command.suggestionOrigin = SuggestionOrigin.builder(
-          input.getString(CommandAttributes.SUGGESTION_ORIGIN));
+      command.suggestionOrigin =
+          SuggestionOrigin.builder(input.getString(CommandAttributes.SUGGESTION_ORIGIN));
       command.suggestionOriginatorId = toUuid(input, CommandAttributes.SUGGESTION_ORIGINATOR_ID);
-      command.suggestionCriteria = SuggestionCriteria.builder(
-          input.getString(CommandAttributes.SUGGESTION_CRITERIA));
-      command.suggestedContentType = SuggestedContentType
-          .builder(input.getString(CommandAttributes.SUGGESTED_CONTENT_TYPE));
+      command.suggestionCriteria =
+          SuggestionCriteria.builder(input.getString(CommandAttributes.SUGGESTION_CRITERIA));
+      command.suggestedContentType =
+          SuggestedContentType.builder(input.getString(CommandAttributes.SUGGESTED_CONTENT_TYPE));
       command.suggestedTo = SuggestedTo.builder(input.getString(CommandAttributes.SUGGESTED_TO));
-      command.suggestionArea = SuggestionArea
-          .builder(input.getString(CommandAttributes.SUGGESTION_AREA));
+      command.suggestionArea =
+          SuggestionArea.builder(input.getString(CommandAttributes.SUGGESTION_AREA));
       command.txCode = input.getString(CommandAttributes.TX_CODE);
       command.txCodeType = toTxCodeType(input.getString(CommandAttributes.TX_CODE_TYPE));
 
@@ -115,6 +125,18 @@ class AddSuggestionsCommand {
     return UUID.fromString(value);
   }
 
+  private static Long toLong(JsonObject input, String key) {
+    String value = input.getString(key);
+    return convertStringToLong(value);
+  }
+
+  private static Long convertStringToLong(String value) {
+    if (value == null || value.isEmpty()) {
+      return null;
+    }
+    return Long.valueOf(value);
+  }
+
   public UUID getUserId() {
     return userId;
   }
@@ -137,6 +159,10 @@ class AddSuggestionsCommand {
 
   public UUID getCollectionId() {
     return collectionId;
+  }
+
+  public Long getCaContentId() {
+    return caContentId;
   }
 
   public UUID getSuggestedContentId() {
@@ -186,6 +212,7 @@ class AddSuggestionsCommand {
     private static final String UNIT_ID = "unit_id";
     private static final String LESSON_ID = "lesson_id";
     private static final String COLLECTION_ID = "collection_id";
+    private static final String CA_CONTENT_ID = "ca_content_id";
     private static final String CLASS_ID = "class_id";
     private static final String SUGGESTED_CONTENT_ID = "suggested_content_id";
     private static final String SUGGESTED_CONTENT_TYPE = "suggested_content_type";
@@ -210,6 +237,7 @@ class AddSuggestionsCommand {
     result.setUnitId(unitId);
     result.setLessonId(lessonId);
     result.setCollectionId(collectionId);
+    result.setCaContentId(caContentId);
     result.setClassId(classId);
     result.setSuggestedContentId(suggestedContentId);
     result.setSuggestionOrigin(suggestionOrigin != null ? suggestionOrigin.getName() : null);

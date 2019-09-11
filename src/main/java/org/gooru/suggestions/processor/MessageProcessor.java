@@ -1,13 +1,15 @@
 package org.gooru.suggestions.processor;
 
+import org.gooru.suggestions.processor.listsuggestions.ListUserSuggestionsForCompetencyProcessor;
+import org.gooru.suggestions.processor.listsuggestions.ListUserSuggestionsForCourseProcessor;
+import org.gooru.suggestions.processor.listsuggestions.ListUserSuggestionsInCAProcessor;
+import org.gooru.suggestions.processor.listsuggestions.ListUserSuggestionsInClassProcessor;
+import org.gooru.suggestions.processor.tracksuggestions.AddSuggestionsProcessor;
+import org.gooru.suggestions.responses.MessageResponse;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
-import org.gooru.suggestions.processor.listsuggestions.ListUserSuggestionsForCourseProcessor;
-import org.gooru.suggestions.processor.listsuggestions.ListUserSuggestionsInClassProcessor;
-import org.gooru.suggestions.processor.tracksuggestions.AddSuggestionsProcessor;
-import org.gooru.suggestions.responses.MessageResponse;
 
 /**
  * @author ashish
@@ -33,5 +35,15 @@ public interface MessageProcessor {
 
   static MessageProcessor buildStubbedProcessor(Vertx vertx, Message<JsonObject> message) {
     return new StubbedMessageProcessor(vertx, message);
+  }
+  
+  static MessageProcessor buildUserSuggestionsForCompetencyProcessor(Vertx vertx,
+      Message<JsonObject> message) {
+    return new ListUserSuggestionsForCompetencyProcessor(vertx, message);
+  }
+  
+  static MessageProcessor buildUserSuggestionsForCAProcessor(Vertx vertx,
+      Message<JsonObject> message) {
+    return new ListUserSuggestionsInCAProcessor(vertx, message);
   }
 }
