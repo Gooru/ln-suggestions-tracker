@@ -17,4 +17,6 @@ ALTER TABLE suggestions_tracker ADD CONSTRAINT suggestions_tracker_tx_code_type_
 
 ALTER TABLE suggestions_tracker DROP COLUMN ctx;
 
+ALTER TABLE suggestions_tracker ADD COLUMN ca_content_id bigint;
 
+ALTER TABLE suggestions_tracker ADD COLUMN path_id bigint;
