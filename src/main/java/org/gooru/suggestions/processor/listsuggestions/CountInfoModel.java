@@ -4,16 +4,16 @@ package org.gooru.suggestions.processor.listsuggestions;
  * @author renuka.
  */
 
-public class SuggestionCountModel {
+public class CountInfoModel {
 
-  private Long caContentId;
+  private Long id;
   private int total;
 
-  public Long getCaContentId() {
-    return caContentId;
+  public Long getId() {
+    return id;
   }
-  public void setCaContentId(Long caContentId) {
-    this.caContentId = caContentId;
+  public void setId(Long id) {
+    this.id = id;
   }
   public int getTotal() {
     return total;

@@ -54,8 +54,8 @@ public class SuggestionsTrackerVerticle extends AbstractVerticle {
         MessageProcessor.buildUserSuggestionsInClassProcessor(vertx, message).process()
             .setHandler(event -> finishResponse(message, event));
         break;
-      case Constants.Message.MSG_OP_LIST_USER_SUGGESTIONS_FOR_COMPETENCY:
-        MessageProcessor.buildUserSuggestionsForCompetencyProcessor(vertx, message).process()
+      case Constants.Message.MSG_OP_LIST_USER_SUGGESTIONS_FOR_TX_CODE:
+        MessageProcessor.buildUserSuggestionsForTxCodeProcessor(vertx, message).process()
             .setHandler(event -> finishResponse(message, event));
         break;
       case Constants.Message.MSG_OP_LIST_USER_SUGGESTIONS_IN_CA:

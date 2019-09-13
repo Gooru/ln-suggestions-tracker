@@ -12,11 +12,11 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 interface AddSuggestionsDao {
 
   @SqlUpdate(
-      "insert into suggestions_tracker (user_id, course_id, unit_id, lesson_id, class_id, collection_id, ca_content_id, "
+      "insert into suggestions_tracker (user_id, course_id, unit_id, lesson_id, class_id, collection_id, ca_id, "
           + " suggested_content_id, suggestion_origin, suggestion_originator_id, suggestion_criteria, "
           + " suggested_content_type, suggested_to, accepted, accepted_at, suggestion_area, "
           + " tx_code, tx_code_type) values (:userId, :courseId, :unitId, "
-          + " :lessonId, :classId, :collectionId, :caContentId, :suggestedContentId, :suggestionOrigin, "
+          + " :lessonId, :classId, :collectionId, :caId, :suggestedContentId, :suggestionOrigin, "
           + " :suggestionOriginatorId, :suggestionCriteria, :suggestedContentType, :suggestedTo, true, "
           + " now(), :suggestionArea, :txCode, :txCodeType) ON CONFLICT DO NOTHING")
   void addSuggestion(@BindBean AddSuggestionBean command);

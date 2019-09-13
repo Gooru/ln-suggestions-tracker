@@ -51,16 +51,10 @@ public class ListUserSuggestionsInCAProcessor implements MessageProcessor {
 
   private void fetchUserSuggestionForCA(ListUserSuggestionsInCACommand command) {
     try {
-      String resultString;
-      if (command.getCaContentIds() != null && !command.getCaContentIds().isEmpty()) {
-        ListSuggestCountResponse response = listUserSuggestionsService
-            .fetchSuggestionsCountForCAIds(command);
-        resultString = new ObjectMapper().writeValueAsString(response);
-      } else {
-        ListSuggestionsResponse response = listUserSuggestionsService.fetchSuggestionsForCAId(command);
-        resultString = new ObjectMapper().writeValueAsString(response);
-      }
-      
+      ListSuggestionsInCAResponse response =
+          listUserSuggestionsService.fetchSuggestionsInCA(command);
+
+      String resultString = new ObjectMapper().writeValueAsString(response);
       result.complete(MessageResponseFactory.createOkayResponse(new JsonObject(resultString)));
     } catch (JsonProcessingException e) {
       LOGGER.error("Not able to convert data to JSON", e);

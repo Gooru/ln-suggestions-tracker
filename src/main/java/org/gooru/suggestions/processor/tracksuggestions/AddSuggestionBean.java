@@ -15,7 +15,7 @@ public class AddSuggestionBean {
   private UUID lessonId;
   private UUID classId;
   private UUID collectionId;
-  private Long caContentId;
+  private Long caId;
   private UUID suggestedContentId;
   private String suggestionOrigin;
   private UUID suggestionOriginatorId;
@@ -78,12 +78,12 @@ public class AddSuggestionBean {
     this.collectionId = collectionId;
   }
 
-  public Long getCaContentId() {
-    return caContentId;
+  public Long getCaId() {
+    return caId;
   }
 
-  public void setCaContentId(Long caContentId) {
-    this.caContentId = caContentId;
+  public void setCaId(Long caId) {
+    this.caId = caId;
   }
 
   public UUID getSuggestedContentId() {

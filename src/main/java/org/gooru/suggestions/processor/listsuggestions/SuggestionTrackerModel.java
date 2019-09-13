@@ -35,7 +35,7 @@ class SuggestionTrackerModel {
   private String txCode;
   private TxCodeType txCodeType;
   private Long pathId;
-  private Long caContentId;
+  private Long caId;
 
   public Long getId() {
     return id;
@@ -207,11 +207,11 @@ class SuggestionTrackerModel {
     this.pathId = pathId;
   }
 
-  public Long getCaContentId() {
-    return caContentId;
+  public Long getCaId() {
+    return caId;
   }
 
-  public void setCaContentId(Long caContentId) {
-    this.caContentId = caContentId;
+  public void setCaId(Long caId) {
+    this.caId = caId;
   }
 }

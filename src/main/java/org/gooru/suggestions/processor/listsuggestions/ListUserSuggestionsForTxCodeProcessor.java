@@ -18,18 +18,18 @@ import io.vertx.core.json.JsonObject;
 /**
  * @author renuka
  */
-public class ListUserSuggestionsForCompetencyProcessor implements MessageProcessor {
+public class ListUserSuggestionsForTxCodeProcessor implements MessageProcessor {
 
   private final Vertx vertx;
   private final Message<JsonObject> message;
   private final Future<MessageResponse> result;
   private static final Logger LOGGER = LoggerFactory
-      .getLogger(ListUserSuggestionsForCompetencyProcessor.class);
+      .getLogger(ListUserSuggestionsForTxCodeProcessor.class);
   private final ListUserSuggestionsService listUserSuggestionsService =
       new ListUserSuggestionsService(DBICreator.getDbiForDefaultDS());
   private EventBusMessage eventBusMessage;
 
-  public ListUserSuggestionsForCompetencyProcessor(Vertx vertx, Message<JsonObject> message) {
+  public ListUserSuggestionsForTxCodeProcessor(Vertx vertx, Message<JsonObject> message) {
     this.vertx = vertx;
     this.message = message;
     result = Future.future();
@@ -39,9 +39,9 @@ public class ListUserSuggestionsForCompetencyProcessor implements MessageProcess
   public Future<MessageResponse> process() {
     try {
       this.eventBusMessage = EventBusMessage.eventBusMessageBuilder(message);
-      ListUserSuggestionsForCompetencyCommand command =
-          ListUserSuggestionsForCompetencyCommand.builder(eventBusMessage.getRequestBody());
-      fetchUserSuggestionForCompetency(command);
+      ListUserSuggestionsForTxCodeCommand command =
+          ListUserSuggestionsForTxCodeCommand.builder(eventBusMessage.getRequestBody());
+      fetchUserSuggestionForTxCode(command);
     } catch (Throwable throwable) {
       LOGGER.warn("Encountered exception", throwable);
       result.fail(throwable);
@@ -49,10 +49,10 @@ public class ListUserSuggestionsForCompetencyProcessor implements MessageProcess
     return result;
   }
 
-  private void fetchUserSuggestionForCompetency(ListUserSuggestionsForCompetencyCommand command) {
+  private void fetchUserSuggestionForTxCode(ListUserSuggestionsForTxCodeCommand command) {
     try {
       ListSuggestionsResponse response = listUserSuggestionsService
-          .fetchSuggestionsForCompetency(command);
+          .fetchSuggestionsForTxCode(command);
       String resultString = new ObjectMapper().writeValueAsString(response);
       result.complete(MessageResponseFactory.createOkayResponse(new JsonObject(resultString)));
     } catch (JsonProcessingException e) {

@@ -30,7 +30,7 @@ public class RouteSuggestionsConfigurator implements RouteConfigurator {
         .handler(this::userSuggestionsForCourse);
     router.get(Constants.Route.API_USER_SUGGESTIONS_IN_CLASS).handler(this::userSuggestionsInClass);
     router.post(Constants.Route.API_USER_SUGGESTIONS_IN_CA).handler(this::userSuggestionsInCA);
-    router.get(Constants.Route.API_USER_SUGGESTIONS_FOR_COMPETENCY).handler(this::userSuggestionsForCompetency);
+    router.get(Constants.Route.API_USER_SUGGESTIONS_FOR_TX_CODE).handler(this::userSuggestionsForTxCode);
     router.post(Constants.Route.API_SUGGESTIONS_ADD).handler(this::handleTrackSuggestion);
   }
 
@@ -70,10 +70,10 @@ public class RouteSuggestionsConfigurator implements RouteConfigurator {
         reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));
   }
   
-  private void userSuggestionsForCompetency(RoutingContext routingContext) {
+  private void userSuggestionsForTxCode(RoutingContext routingContext) {
     DeliveryOptions options = DeliveryOptionsBuilder.buildWithApiVersion(routingContext)
         .setSendTimeout(mbusTimeout)
-        .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_LIST_USER_SUGGESTIONS_FOR_COMPETENCY);
+        .addHeader(Constants.Message.MSG_OP, Constants.Message.MSG_OP_LIST_USER_SUGGESTIONS_FOR_TX_CODE);
     eb.<JsonObject>send(Constants.EventBus.MBEP_SUGGEST_TRACKER,
         RouteRequestUtility.getBodyForMessage(routingContext, true), options,
         reply -> RouteResponseUtility.responseHandler(routingContext, reply, LOGGER));

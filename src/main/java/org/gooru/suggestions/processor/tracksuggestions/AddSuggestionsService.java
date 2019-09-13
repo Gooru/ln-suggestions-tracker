@@ -156,7 +156,7 @@ class AddSuggestionsService {
   }
   
   private void validateCAItem() {
-    if (!addSuggestionsDao.caItemExists(command.getClassId(), command.getCaContentId(), command.getCollectionId())) {
+    if (!addSuggestionsDao.caItemExists(command.getClassId(), command.getCaId(), command.getCollectionId())) {
       LOGGER.warn(
           "Class: '{}', CaContent: ;{}', Collection: '{}' combination does not exist",
           command.getCourseId(), command.getUnitId(), command.getLessonId(),

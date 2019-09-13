@@ -51,7 +51,7 @@ public class SuggestionTrackerMapper implements ResultSetMapper<SuggestionTracke
     result.setTxCode(r.getString(MapperFields.TX_CODE));
     result.setTxCodeType(convertToTxCodeType(r.getString(MapperFields.TX_CODE_TYPE)));
     result.setPathId(r.getLong(MapperFields.PATH_ID));
-    result.setCaContentId(r.getLong(MapperFields.CA_CONTENT_ID));
+    result.setCaId(r.getLong(MapperFields.CA_ID));
     return result;
   }
 
@@ -112,6 +112,6 @@ public class SuggestionTrackerMapper implements ResultSetMapper<SuggestionTracke
     private static final String CREATED_AT = "created_at";
     private static final String UPDATED_AT = "updated_at";
     private static final String PATH_ID = "path_id";
-    private static final String CA_CONTENT_ID = "ca_content_id";
+    private static final String CA_ID = "ca_id";
   }
 }

@@ -1,6 +1,6 @@
 package org.gooru.suggestions.processor;
 
-import org.gooru.suggestions.processor.listsuggestions.ListUserSuggestionsForCompetencyProcessor;
+import org.gooru.suggestions.processor.listsuggestions.ListUserSuggestionsForTxCodeProcessor;
 import org.gooru.suggestions.processor.listsuggestions.ListUserSuggestionsForCourseProcessor;
 import org.gooru.suggestions.processor.listsuggestions.ListUserSuggestionsInCAProcessor;
 import org.gooru.suggestions.processor.listsuggestions.ListUserSuggestionsInClassProcessor;
@@ -37,9 +37,9 @@ public interface MessageProcessor {
     return new StubbedMessageProcessor(vertx, message);
   }
   
-  static MessageProcessor buildUserSuggestionsForCompetencyProcessor(Vertx vertx,
+  static MessageProcessor buildUserSuggestionsForTxCodeProcessor(Vertx vertx,
       Message<JsonObject> message) {
-    return new ListUserSuggestionsForCompetencyProcessor(vertx, message);
+    return new ListUserSuggestionsForTxCodeProcessor(vertx, message);
   }
   
   static MessageProcessor buildUserSuggestionsForCAProcessor(Vertx vertx,
