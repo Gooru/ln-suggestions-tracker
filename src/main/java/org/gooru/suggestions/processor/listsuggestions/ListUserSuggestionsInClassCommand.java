@@ -1,11 +1,12 @@
 package org.gooru.suggestions.processor.listsuggestions;
 
-import io.vertx.core.json.JsonObject;
 import java.util.UUID;
 import org.gooru.suggestions.constants.HttpConstants;
 import org.gooru.suggestions.constants.HttpConstants.HttpStatus;
 import org.gooru.suggestions.exceptions.HttpResponseWrapperException;
 import org.gooru.suggestions.processor.data.SuggestionArea;
+import org.gooru.suggestions.processor.utilities.ConverterUtils;
+import io.vertx.core.json.JsonObject;
 
 /**
  * @author ashish
@@ -36,8 +37,8 @@ class ListUserSuggestionsInClassCommand {
   private static ListUserSuggestionsInClassCommand buildFromJsonObject(JsonObject input) {
     ListUserSuggestionsInClassCommand command = new ListUserSuggestionsInClassCommand();
     try {
-      command.userId = toUuid(input, ListUserSuggestionsInClassCommand.CommandAttributes.USER_ID);
-      command.classId = toUuid(input, ListUserSuggestionsInClassCommand.CommandAttributes.CLASS_ID);
+      command.userId = ConverterUtils.convertToUuid(input, ListUserSuggestionsInClassCommand.CommandAttributes.USER_ID);
+      command.classId = ConverterUtils.convertToUuid(input, ListUserSuggestionsInClassCommand.CommandAttributes.CLASS_ID);
       command.scope = input.getString(CommandAttributes.SCOPE);
       command.paginationInfo = PaginationInfo.buildFromRequest(input);
     } catch (IllegalArgumentException e) {
@@ -45,14 +46,6 @@ class ListUserSuggestionsInClassCommand {
     }
 
     return command;
-  }
-
-  private static UUID toUuid(JsonObject input, String key) {
-    String value = input.getString(key);
-    if (value == null || value.isEmpty()) {
-      return null;
-    }
-    return UUID.fromString(value);
   }
 
   public static ListUserSuggestionsInClassCommand builder(JsonObject input) {

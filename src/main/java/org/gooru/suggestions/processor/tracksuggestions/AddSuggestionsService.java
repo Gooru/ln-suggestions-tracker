@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 class AddSuggestionsService {
 
   private final AddSuggestionsDao addSuggestionsDao;
-  private AddSuggestionsCommand addSuggestionsCommand;
   private static final Logger LOGGER = LoggerFactory.getLogger(AddSuggestionsService.class);
   private AddSuggestionsCommand command;
 
@@ -31,6 +30,9 @@ class AddSuggestionsService {
   private void validate() {
     if (command.getSuggestionArea() == SuggestionArea.CourseMap) {
       validateCULC();
+    }
+    if (command.getSuggestionArea() == SuggestionArea.ClassActivity) {
+      validateCAItem();
     }
     if (command.getClassId() != null) {
       validateClassId();
@@ -150,6 +152,16 @@ class AddSuggestionsService {
           command.getCollectionId());
       throw new HttpResponseWrapperException(HttpStatus.BAD_REQUEST,
           "CULC combination does not exists");
+    }
+  }
+  
+  private void validateCAItem() {
+    if (!addSuggestionsDao.caItemExists(command.getClassId(), command.getCaId(), command.getCollectionId())) {
+      LOGGER.warn(
+          "Class: '{}', CaContent: ;{}', Collection: '{}' combination does not exist",
+          command.getCourseId(), command.getUnitId(), command.getLessonId(),
+          command.getCollectionId());
+      throw new HttpResponseWrapperException(HttpStatus.BAD_REQUEST, "Invalid CA item. CCaC does not exists");
     }
   }
 }

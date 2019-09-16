@@ -55,4 +55,45 @@ interface ListUserSuggestionsDao {
       + " and suggestion_area = :scope")
   int countSuggestionsInClassWithScope(@Bind("userId") UUID userId,
       @Bind("classId") UUID classId, @Bind("scope") String scope);
+
+  // Fetch TxCode Suggestions
+  @Mapper(SuggestionTrackerMapper.class)
+  @SqlQuery("select * from suggestions_tracker where tx_code = :txCode and tx_code_type = :txCodeType "
+      + " and user_id = :userId order by created_at desc offset :offset limit :max")
+  List<SuggestionTrackerModel> fetchSuggestionsForTxCode(@Bind("userId") UUID userId,
+      @Bind("txCode") String txCode, @Bind("txCodeType") String txCodeType,
+      @Bind("offset") int offset, @Bind("max") int max);
+
+  @SqlQuery("select count(*) from suggestions_tracker where tx_code = :txCode and tx_code_type = :txCodeType "
+      + " and user_id = :userId ")
+  int countSuggestionForTxCode(@Bind("userId") UUID userId, @Bind("txCode") String txCode,
+      @Bind("txCodeType") String txCodeType);
+
+  @Mapper(SuggestionTrackerMapper.class)
+  @SqlQuery("select * from suggestions_tracker where tx_code = :txCode and tx_code_type = :txCodeType "
+      + " and user_id = :userId and class_id = :classId order by created_at desc offset :offset limit :max")
+  List<SuggestionTrackerModel> fetchSuggestionsForTxCodeInClass(@Bind("userId") UUID userId,
+      @Bind("txCode") String txCode, @Bind("txCodeType") String txCodeType,
+      @Bind("classId") UUID classId, @Bind("offset") int offset, @Bind("max") int max);
+
+  @SqlQuery("select count(*) from suggestions_tracker where tx_code = :txCode and tx_code_type = :txCodeType "
+      + " and user_id = :userId and class_id = :classId")
+  int countSuggestionForTxCodeInClass(@Bind("userId") UUID userId,
+      @Bind("txCode") String txCode, @Bind("txCodeType") String txCodeType,
+      @Bind("classId") UUID classId);
+
+  // Fetch CA Suggestions
+  @Mapper(SuggestionTrackerMapper.class)
+  @SqlQuery("select * from suggestions_tracker where class_id = :classId and user_id = :userId "
+      + " and ca_id = ANY(:caIds::bigint[]) order by created_at desc offset :offset limit :max")
+  List<SuggestionTrackerModel> fetchSuggestionsForCAIds(@Bind("userId") UUID userId,
+      @Bind("classId") UUID classId, @Bind("caIds") String caIds, @Bind("offset") int offset,
+      @Bind("max") int max);
+
+  @Mapper(CountInfoMapper.class)
+  @SqlQuery("select ca_id as id, count(*) as total from suggestions_tracker where class_id = :classId and user_id = :userId "
+      + " and ca_id = ANY(:caIds::bigint[]) group by ca_id")
+  List<CountInfoModel> countSuggestionsForCAIds(@Bind("userId") UUID userId,
+      @Bind("classId") UUID classId, @Bind("caIds") String caIds);
+
 }

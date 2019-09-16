@@ -103,6 +103,185 @@
 				"url": "http://localhost:8080/api/stracker/v1/track"
 			},
 			"response": []
+		},
+		{
+			"name": "Add class-activity suggestions",
+			"request": {
+				"url": "http://localhost:8080/api/stracker/v2/track",
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Token MTQ2ODM5MTY4MTIxNzoyN2I1MjFkNC05Y2VlLTQ4YzUtYTUwMi0wMmVhNTgzODQzNDY6YmE5NTZhOTctYWUxNS0xMWU1LWEzMDItZjhhOTYzMDY1OTc2",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"user_id\":\"0219090c-abe6-4a09-8c9f-343911f5cd86\",\n\"collection_id\":\"c45e4e59-3dde-4253-a4df-e27e5b77330f\",\n\"class_id\":\"0baefeb6-4f72-49b4-85fd-a20aa4f17100\",\n\"suggested_content_id\":\"8b6ae917-e757-44dd-b0e7-4e081cd9342b\",\n\"suggestion_origin\":\"teacher\",\n\"suggestion_originator_id\":\"0607cf97-6f9e-47c0-b610-01b36e02b4c6\",\n\"suggestion_criteria\":\"performance\",\n\"suggested_content_type\":\"assessment\",\n\"suggested_to\":\"student\",\n\"suggestion_area\":\"class-activity\",\n\"tx_code\":null,\n\"tx_code_type\":null,\n\"ca_content_id\":1\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch class-activity suggestions count",
+			"request": {
+				"url": "http://localhost:8080/api/stracker/v1/ca/user/0219090c-abe6-4a09-8c9f-343911f5cd86/class/0baefeb6-4f72-49b4-85fd-a20aa4f17100",
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Token MTQ2ODM5MTY4MTIxNzoyN2I1MjFkNC05Y2VlLTQ4YzUtYTUwMi0wMmVhNTgzODQzNDY6YmE5NTZhOTctYWUxNS0xMWU1LWEzMDItZjhhOTYzMDY1OTc2",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"scope\":\"class-activity\",\n\"caContentIds\":[\n8000\n],\n\"collectionId\":\"c45e4e59-3dde-4253-a4df-e27e5b77330f\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch class-activity suggestion detail",
+			"request": {
+				"url": "http://localhost:8080/api/stracker/v1/ca/user/0219090c-abe6-4a09-8c9f-343911f5cd86/class/0baefeb6-4f72-49b4-85fd-a20aa4f17100",
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Token MTQ2ODM5MTY4MTIxNzoyN2I1MjFkNC05Y2VlLTQ4YzUtYTUwMi0wMmVhNTgzODQzNDY6YmE5NTZhOTctYWUxNS0xMWU1LWEzMDItZjhhOTYzMDY1OTc2",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"scope\":\"class-activity\",\n\"caContentId\":80000,\n\"collectionId\":\"c45e4e59-3dde-4253-a4df-e27e5b77330f\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Add Competency Suggestions",
+			"request": {
+				"url": "http://localhost:8080/api/stracker/v2/track",
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Token MTQ2ODM5MTY4MTIxNzoyN2I1MjFkNC05Y2VlLTQ4YzUtYTUwMi0wMmVhNTgzODQzNDY6YmE5NTZhOTctYWUxNS0xMWU1LWEzMDItZjhhOTYzMDY1OTc2",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"user_id\":\"0219090c-abe6-4a09-8c9f-343911f5cd86\",\n\"class_id\":\"0baefeb6-4f72-49b4-85fd-a20aa4f17100\",\n\"suggested_content_id\":\"8b6ae917-e757-44dd-b0e7-4e081cd9342b\",\n\"suggestion_origin\":\"teacher\",\n\"suggestion_originator_id\":\"0607cf97-6f9e-47c0-b610-01b36e02b4c6\",\n\"suggestion_criteria\":\"performance\",\n\"suggested_content_type\":\"assessment\",\n\"suggested_to\":\"student\",\n\"suggestion_area\":\"proficiency\",\n\"tx_code\":\"K12.MA-MA1-NO-A1\",\n\"tx_code_type\":\"competency\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Competency Suggestions from all classes",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/stracker/v1/user/0219090c-abe6-4a09-8c9f-343911f5cd86/code/K12.MA-MA1-NO-A1?scope=proficiency",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stracker",
+						"v1",
+						"user",
+						"0219090c-abe6-4a09-8c9f-343911f5cd86",
+						"code",
+						"K12.MA-MA1-NO-A1"
+					],
+					"query": [
+						{
+							"key": "scope",
+							"value": "proficiency",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Token MTQ2ODM5MTY4MTIxNzoyN2I1MjFkNC05Y2VlLTQ4YzUtYTUwMi0wMmVhNTgzODQzNDY6YmE5NTZhOTctYWUxNS0xMWU1LWEzMDItZjhhOTYzMDY1OTc2",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Competency Suggestion for given class",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/stracker/v1/user/0219090c-abe6-4a09-8c9f-343911f5cd86/code/K12.MA-MA1-NO-A1?scope=proficiency?classId=0baefeb6-4f72-49b4-85fd-a20aa4f17100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stracker",
+						"v1",
+						"user",
+						"0219090c-abe6-4a09-8c9f-343911f5cd86",
+						"code",
+						"K12.MA-MA1-NO-A1"
+					],
+					"query": [
+						{
+							"key": "scope",
+							"value": "proficiency?classId=0baefeb6-4f72-49b4-85fd-a20aa4f17100",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Token MTQ2ODM5MTY4MTIxNzoyN2I1MjFkNC05Y2VlLTQ4YzUtYTUwMi0wMmVhNTgzODQzNDY6YmE5NTZhOTctYWUxNS0xMWU1LWEzMDItZjhhOTYzMDY1OTc2",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
