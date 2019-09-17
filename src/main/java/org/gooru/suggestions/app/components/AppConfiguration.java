@@ -60,6 +60,10 @@ public final class AppConfiguration implements Initializer {
     return configuration.getInteger("max.allowed");
   }
 
+  public String getNotificationTopic() {
+    return configuration.getString("notification.topic.name");
+  }
+  
   private static final class Holder {
 
     private static final AppConfiguration INSTANCE = new AppConfiguration();

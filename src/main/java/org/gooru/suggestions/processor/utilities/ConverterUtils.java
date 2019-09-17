@@ -20,6 +20,18 @@ public final class ConverterUtils {
     return UUID.fromString(value);
   }
   
+  public static Long convertToLong(JsonObject input, String key) {
+    try {
+      Long value = input.getLong(key);
+      if (value == null) {
+        return null;
+      }
+      return value;
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Invalid value for long");
+    }
+  }
+  
   public static Boolean convertToBoolean(JsonObject input, String key) {
     try {
       Boolean value = input.getBoolean(key);

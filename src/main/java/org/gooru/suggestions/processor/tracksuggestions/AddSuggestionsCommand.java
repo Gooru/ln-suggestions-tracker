@@ -83,7 +83,7 @@ class AddSuggestionsCommand {
       command.lessonId = ConverterUtils.convertToUuid(input, CommandAttributes.LESSON_ID);
       command.classId = ConverterUtils.convertToUuid(input, CommandAttributes.CLASS_ID);
       command.collectionId = ConverterUtils.convertToUuid(input, CommandAttributes.COLLECTION_ID);
-      command.caId = input.getLong(CommandAttributes.CA_ID);
+      command.caId = ConverterUtils.convertToLong(input, CommandAttributes.CA_ID);
       command.suggestedContentId =
           ConverterUtils.convertToUuid(input, CommandAttributes.SUGGESTED_CONTENT_ID);
       command.suggestionOrigin =
