@@ -3,9 +3,6 @@ package org.gooru.suggestions.processor.postprocessor;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author renuka
- */
 public enum PathType {
 
   System("system"),

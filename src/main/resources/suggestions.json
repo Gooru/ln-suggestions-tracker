@@ -75,7 +75,7 @@
   },
   "kafka.producers.enabled": true,
   "kafka.producers": {
-    "producer.teacher.suggestion": {
+    "producer.suggestion": {
       "bootstrap.servers": "127.0.0.1:9092",
       "batch.size": 1,
       "retries": 5,

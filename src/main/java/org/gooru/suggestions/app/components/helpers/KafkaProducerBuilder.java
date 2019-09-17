@@ -13,7 +13,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
  * Currently only producers it can create are of String key and String record type. If there is a
  * need to create a different type of producer, the class needs to be modified to handle that.
  *
- * @author renuka
+ * @author ashish
  */
 
 public final class KafkaProducerBuilder {

@@ -21,7 +21,7 @@ class AddSuggestionsService {
     this.addSuggestionsDao = dbi.onDemand(AddSuggestionsDao.class);
   }
 
-  int addSuggestion(AddSuggestionsCommand command) {
+  long addSuggestion(AddSuggestionsCommand command) {
     this.command = command;
     validate();
     return addSuggestionsDao.addSuggestion(command.getBean());

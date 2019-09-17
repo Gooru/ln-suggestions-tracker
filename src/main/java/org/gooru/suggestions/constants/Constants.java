@@ -30,7 +30,7 @@ public final class Constants {
     public static final String MSG_OP_LIST_USER_SUGGESTIONS_FOR_COURSE = "mb.op.user.suggestions.course.list";
     public static final String MSG_OP_LIST_USER_SUGGESTIONS_FOR_TX_CODE = "mb.op.user.suggestions.txcode.list";
     public static final String MSG_OP_LIST_USER_SUGGESTIONS_IN_CA = "mb.op.user.suggestions.ca.list";
-    public static final String MSG_OP_POSTPROCESS_TEACHER_SUGGESTION_ADD = "postprocess.suggestion.add.teacher";
+    public static final String MSG_OP_POSTPROCESS_SUGGESTION_ADD = "mb.op.postprocess.suggestions.add";
 
     public static final String MSG_API_VERSION = "api.version";
     public static final String MSG_SESSION_TOKEN = "session.token";
@@ -44,6 +44,8 @@ public final class Constants {
     public static final String MSG_MESSAGE = "message";
     public static final String PROCESSING_AUTH_TIME = "auth.processing.time";
     public static final String PROCESSING_HANDLER_START_TIME = "handler.start.time";
+    public static final String MSG_TEACHER_ID = "teacher_id";
+    public static final String MSG_ID = "id";
 
     private Message() {
       throw new AssertionError();

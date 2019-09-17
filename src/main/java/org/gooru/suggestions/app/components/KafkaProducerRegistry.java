@@ -11,12 +11,12 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 
 /**
- * @author renuka
+ * @author ashish
  */
 public final class KafkaProducerRegistry implements Initializer, Finalizer {
 
   private static final String CONFIG_KAFKA_PRODUCERS_KEY = "kafka.producers";
-  private static final String PRODUCER_TEACHER_SUGGESTION = "producer.teacher.suggestion";
+  private static final String PRODUCER_SUGGESTION = "producer.suggestion";
   private static final Logger LOGGER = LoggerFactory.getLogger(KafkaProducerRegistry.class);
   private static final String KAFKA_PRODUCERS_ENABLED = "kafka.producers.enabled";
   private static final String MOCK_PRODUCER_NAME = "mock.producer";
@@ -78,14 +78,14 @@ public final class KafkaProducerRegistry implements Initializer, Finalizer {
 
   public Producer<String, String> getDefaultKafkaProducer() {
     if (isKafkaEnabled) {
-      return registry.get(PRODUCER_TEACHER_SUGGESTION);
+      return registry.get(PRODUCER_SUGGESTION);
     } else {
       return registry.get(MOCK_PRODUCER_NAME);
     }
   }
 
   public Producer<String, String> getTeacherSuggestionKafkaProducer() {
-    return getKafkaProducerByName(PRODUCER_TEACHER_SUGGESTION);
+    return getKafkaProducerByName(PRODUCER_SUGGESTION);
   }
 
   public Producer<String, String> getKafkaProducerByName(String name) {

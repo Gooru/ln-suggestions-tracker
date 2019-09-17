@@ -1,9 +1,5 @@
 package org.gooru.suggestions.processor.postprocessor;
 
-/**
- * @author renuka
- */
-
 class NotificationsPayload {
 
   private String userId;

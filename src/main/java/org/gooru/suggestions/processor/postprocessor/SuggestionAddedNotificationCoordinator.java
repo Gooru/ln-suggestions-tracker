@@ -7,21 +7,16 @@ import org.gooru.suggestions.app.components.KafkaProducerRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * @author renuka
- */
-
-class TeacherSuggestionAddedNotificationCoordinator implements NotificationCoordinator {
-
+class SuggestionAddedNotificationCoordinator implements NotificationCoordinator {
 
   private static final String NOTIFICATION_TEACHER_SUGGESTION = "teacher.suggestion";
   private static final String ACTION_INITIATE = "initiate";
-  private final PostProcessTeacherSuggestionAddHandler.TeacherSuggestionPayload command;
+  private final PostProcessSuggestionAddHandler.SuggestionPayload command;
   private static final Logger LOGGER = LoggerFactory
-      .getLogger(TeacherSuggestionAddedNotificationCoordinator.class);
+      .getLogger(SuggestionAddedNotificationCoordinator.class);
 
-  TeacherSuggestionAddedNotificationCoordinator(
-      PostProcessTeacherSuggestionAddHandler.TeacherSuggestionPayload command) {
+  SuggestionAddedNotificationCoordinator(
+      PostProcessSuggestionAddHandler.SuggestionPayload command) {
     this.command = command;
   }
 

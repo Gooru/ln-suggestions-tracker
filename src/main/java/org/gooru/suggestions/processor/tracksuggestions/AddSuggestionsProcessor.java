@@ -42,7 +42,7 @@ public class AddSuggestionsProcessor implements MessageProcessor {
       this.eventBusMessage = EventBusMessage.eventBusMessageBuilder(message);
       AddSuggestionsCommand command =
           AddSuggestionsCommand.builder(eventBusMessage.getRequestBody());
-      addTeacherSuggestion(command);
+      addSuggestion(command);
     } catch (Throwable throwable) {
       LOGGER.warn("Encountered exception", throwable);
       result.fail(throwable);
@@ -50,10 +50,10 @@ public class AddSuggestionsProcessor implements MessageProcessor {
     return result;
   }
 
-  private void addTeacherSuggestion(AddSuggestionsCommand command) {
+  private void addSuggestion(AddSuggestionsCommand command) {
     vertx.executeBlocking(future -> {
       try {
-        int result = addSuggestionsService.addSuggestion(command);
+        long result = addSuggestionsService.addSuggestion(command);
         if ((command.getSuggestionArea() == SuggestionArea.ClassActivity
             || command.getSuggestionArea() == SuggestionArea.Proficiency) && result > 0) {
           JsonObject postProcessorPayload = createPostProcessorPayload(result);
@@ -70,7 +70,9 @@ public class AddSuggestionsProcessor implements MessageProcessor {
         if (asyncResult.result() != null) {
           vertx.eventBus().send(Constants.EventBus.MBEP_POST_PROCESS, asyncResult.result(),
               DeliveryOptionsBuilder.createDeliveryOptionsWithMsgOp(
-                  Constants.Message.MSG_OP_POSTPROCESS_TEACHER_SUGGESTION_ADD));
+                  Constants.Message.MSG_OP_POSTPROCESS_SUGGESTION_ADD));
+        } else {
+          LOGGER.info("No new suggestion is tracked, nothing to notify");
         }
         result.complete(MessageResponseFactory.createNoContentResponse());
       } else {
@@ -79,10 +81,11 @@ public class AddSuggestionsProcessor implements MessageProcessor {
     });
 
   }
-    private JsonObject createPostProcessorPayload(int result) {
+
+  private JsonObject createPostProcessorPayload(long result) {
     JsonObject postProcessorPayload = eventBusMessage.getRequestBody().copy();
     UUID teacherId = eventBusMessage.getUserId();
-    return postProcessorPayload.put("teacher_id", teacherId.toString())
-        .put("id", result);
+    return postProcessorPayload.put(Constants.Message.MSG_TEACHER_ID, teacherId.toString())
+        .put(Constants.Message.MSG_ID, result);
   }
 }

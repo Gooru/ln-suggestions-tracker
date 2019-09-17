@@ -7,21 +7,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.vertx.core.json.JsonObject;
 
-/**
- * @author renuka
- */
-class PostProcessTeacherSuggestionAddHandler implements PostProcessorHandler {
+class PostProcessSuggestionAddHandler implements PostProcessorHandler {
 
   private static final Logger LOGGER =
-      LoggerFactory.getLogger(PostProcessTeacherSuggestionAddHandler.class);
-  private TeacherSuggestionPayload command;
+      LoggerFactory.getLogger(PostProcessSuggestionAddHandler.class);
+  private SuggestionPayload command;
 
   @Override
   public void handle(JsonObject requestData) {
     LOGGER.info("Processing teacher suggestion accept handler for payload: '{}'", requestData);
     initialize(requestData);
     if (command.getUserId() != null) {
-      NotificationCoordinator.buildForTeacherSuggestionAdded(command)
+      NotificationCoordinator.buildForSuggestionAdded(command)
           .coordinateNotification();
     } else {
       LOGGER.warn("User id list is null or empty for teacher suggestions.");
@@ -33,12 +30,12 @@ class PostProcessTeacherSuggestionAddHandler implements PostProcessorHandler {
     command = buildFromJson(requestData);
   }
 
-  private TeacherSuggestionPayload buildFromJson(JsonObject request) {
-    return request.mapTo(TeacherSuggestionPayload.class);
+  private SuggestionPayload buildFromJson(JsonObject request) {
+    return request.mapTo(SuggestionPayload.class);
   }
 
   @JsonIgnoreProperties(ignoreUnknown = true)
-  public static class TeacherSuggestionPayload {
+  public static class SuggestionPayload {
 
     @JsonProperty("user_id")
     private UUID userId;

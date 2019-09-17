@@ -21,7 +21,7 @@ interface AddSuggestionsDao {
           + " :lessonId, :classId, :collectionId, :caId, :suggestedContentId, :suggestionOrigin, "
           + " :suggestionOriginatorId, :suggestionCriteria, :suggestedContentType, :suggestedTo, true, "
           + " now(), :suggestionArea, :txCode, :txCodeType) ON CONFLICT DO NOTHING")
-  int addSuggestion(@BindBean AddSuggestionBean command);
+  long addSuggestion(@BindBean AddSuggestionBean command);
 
   @SqlQuery("select exists (select 1 from class where id = :classId and is_deleted = false and is_archived = false)")
   boolean classExists(@Bind("classId") UUID classId);
