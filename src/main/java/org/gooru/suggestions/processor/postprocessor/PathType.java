@@ -6,7 +6,11 @@ import java.util.Map;
 public enum PathType {
 
   System("system"),
-  Teacher("teacher");
+  Teacher("teacher"),
+  Ca_System("ca.system"),
+  Ca_Teacher("ca.teacher"),
+  Proficiency_System("proficiency.system"),
+  Proficiency_Teacher("proficiency.teacher");
 
   private final String name;
 
