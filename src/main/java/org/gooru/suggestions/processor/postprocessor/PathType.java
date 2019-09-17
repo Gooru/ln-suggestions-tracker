@@ -5,12 +5,12 @@ import java.util.Map;
 
 public enum PathType {
 
-  System("system"),
-  Teacher("teacher"),
-  Ca_System("ca.system"),
-  Ca_Teacher("ca.teacher"),
-  Proficiency_System("proficiency.system"),
-  Proficiency_Teacher("proficiency.teacher");
+  SYSTEM("system"),
+  TEACHER("teacher"),
+  CA_SYSTEM("ca.system"),
+  CA_TEACHER("ca.teacher"),
+  PROFICIENCY_SYSTEM("proficiency.system"),
+  PROFICIENCY_TEACHER("proficiency.teacher");
 
   private final String name;
 

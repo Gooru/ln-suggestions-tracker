@@ -35,27 +35,27 @@ final class PathTypeFinder {
   
   static String fetchPathTypeForClassActivity(String suggestionOrigin) {
     if (suggestionOrigin.equalsIgnoreCase(TEACHER)) {
-      return PathType.Ca_Teacher.getName();
+      return PathType.CA_TEACHER.getName();
     } else if (suggestionOrigin.equalsIgnoreCase(SYSTEM)) {
-      return PathType.Ca_System.getName();
+      return PathType.CA_SYSTEM.getName();
     }
     return null;
   }
   
   static String fetchPathTypeForProficiency(String suggestionOrigin) {
     if (suggestionOrigin.equalsIgnoreCase(TEACHER)) {
-      return PathType.Proficiency_Teacher.getName();
+      return PathType.PROFICIENCY_TEACHER.getName();
     } else if (suggestionOrigin.equalsIgnoreCase(SYSTEM)) {
-      return PathType.Proficiency_System.getName();
+      return PathType.PROFICIENCY_SYSTEM.getName();
     }
     return null;
   }
   
   static String fetchPathTypeForCoursemap(String suggestionOrigin) {
     if (suggestionOrigin.equalsIgnoreCase(TEACHER)) {
-      return PathType.Teacher.getName();
+      return PathType.TEACHER.getName();
     } else if (suggestionOrigin.equalsIgnoreCase(SYSTEM)) {
-      return PathType.System.getName();
+      return PathType.SYSTEM.getName();
     }
     return null;
   }
