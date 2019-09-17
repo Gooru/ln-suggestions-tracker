@@ -19,4 +19,7 @@ public final class DeliveryOptionsBuilder {
     return new DeliveryOptions().addHeader(Constants.Message.MSG_API_VERSION, apiVersion);
   }
 
+  public static DeliveryOptions createDeliveryOptionsWithMsgOp(String op) {
+    return new DeliveryOptions().addHeader(Constants.Message.MSG_OP, op);
+  }
 }

@@ -3,6 +3,7 @@ package org.gooru.suggestions.processor.tracksuggestions;
 import java.util.UUID;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 
@@ -11,6 +12,7 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
  */
 interface AddSuggestionsDao {
 
+  @GetGeneratedKeys
   @SqlUpdate(
       "insert into suggestions_tracker (user_id, course_id, unit_id, lesson_id, class_id, collection_id, ca_id, "
           + " suggested_content_id, suggestion_origin, suggestion_originator_id, suggestion_criteria, "
@@ -19,7 +21,7 @@ interface AddSuggestionsDao {
           + " :lessonId, :classId, :collectionId, :caId, :suggestedContentId, :suggestionOrigin, "
           + " :suggestionOriginatorId, :suggestionCriteria, :suggestedContentType, :suggestedTo, true, "
           + " now(), :suggestionArea, :txCode, :txCodeType) ON CONFLICT DO NOTHING")
-  void addSuggestion(@BindBean AddSuggestionBean command);
+  int addSuggestion(@BindBean AddSuggestionBean command);
 
   @SqlQuery("select exists (select 1 from class where id = :classId and is_deleted = false and is_archived = false)")
   boolean classExists(@Bind("classId") UUID classId);

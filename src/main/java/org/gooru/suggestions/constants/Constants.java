@@ -9,6 +9,7 @@ public final class Constants {
 
     public static final String MBEP_AUTH = "org.gooru.suggestions.eventbus.auth";
     public static final String MBEP_SUGGEST_TRACKER = "org.gooru.suggestions.tracker";
+    public static final String MBEP_POST_PROCESS = "org.gooru.suggestions.tracker.eventbus.post.process";
 
     public static final String MBUS_TIMEOUT = "event.bus.send.timeout.seconds";
 
@@ -29,6 +30,7 @@ public final class Constants {
     public static final String MSG_OP_LIST_USER_SUGGESTIONS_FOR_COURSE = "mb.op.user.suggestions.course.list";
     public static final String MSG_OP_LIST_USER_SUGGESTIONS_FOR_TX_CODE = "mb.op.user.suggestions.txcode.list";
     public static final String MSG_OP_LIST_USER_SUGGESTIONS_IN_CA = "mb.op.user.suggestions.ca.list";
+    public static final String MSG_OP_POSTPROCESS_TEACHER_SUGGESTION_ADD = "postprocess.suggestion.add.teacher";
 
     public static final String MSG_API_VERSION = "api.version";
     public static final String MSG_SESSION_TOKEN = "session.token";

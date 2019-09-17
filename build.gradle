@@ -27,6 +27,7 @@ ext {
     hikariVersion = '2.7.6'
     postgresVersion = '42.2.6'
     jdbiVersion = '2.78'
+    kafkaVersion = '0.10.1.1'
 }
 
 version = "0.1-snapshot"
@@ -42,7 +43,6 @@ tasks.withType(JavaCompile) {
     options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
 
 }
-
 
 repositories {
     // Use jcenter for resolving your dependencies.
@@ -67,6 +67,7 @@ dependencies {
     compile "org.postgresql:postgresql:${postgresVersion}"
     compile "io.vertx:vertx-redis-client:${vertxVersion}"
     compile "org.jdbi:jdbi:${jdbiVersion}"
+    compile "org.apache.kafka:kafka-clients:${kafkaVersion}"
     // Test dependencies
     testCompile "junit:junit:${junitVersion}"
 }
