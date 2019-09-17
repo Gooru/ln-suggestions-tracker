@@ -59,6 +59,8 @@ class PostProcessSuggestionAddHandler implements PostProcessorHandler {
     private UUID teacherId;
     @JsonProperty("suggestion_area")
     private String suggestionArea;
+    @JsonProperty("suggestion_origin")
+    private String suggestionOrigin;
     @JsonProperty("id")
     private Long pathId;
     @JsonProperty("tx_code")
@@ -152,6 +154,14 @@ class PostProcessSuggestionAddHandler implements PostProcessorHandler {
 
     public void setSuggestionArea(String suggestionArea) {
       this.suggestionArea = suggestionArea;
+    }
+
+    public String getSuggestionOrigin() {
+      return suggestionOrigin;
+    }
+
+    public void setSuggestionOrigin(String suggestionOrigin) {
+      this.suggestionOrigin = suggestionOrigin;
     }
 
     public Long getPathId() {

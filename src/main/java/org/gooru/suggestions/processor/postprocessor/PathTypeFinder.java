@@ -17,44 +17,47 @@ final class PathTypeFinder {
     throw new AssertionError();
   }  
   
-  static String findPathTypeForSource(String source, String suggestionType) {
+  static String findPathTypeForSource(String source, String suggestionOrigin) {
     String pathType = null;
     switch (source) {
       case CLASS_ACTIVITY:
-        pathType = fetchPathTypeForClassActivity(suggestionType);
+        pathType = fetchPathTypeForClassActivity(suggestionOrigin);
         break;
       case PROFICIENCY:
-        pathType = fetchPathTypeForProficiency(suggestionType);
+        pathType = fetchPathTypeForProficiency(suggestionOrigin);
         break;
       case COURSEMAP:
-        pathType = fetchPathTypeForCoursemap(suggestionType);
+        pathType = fetchPathTypeForCoursemap(suggestionOrigin);
         break;
     }
     return pathType;
   }
   
-  static String fetchPathTypeForClassActivity(String suggestionType) {
-    String pathType = PathType.Ca_Teacher.getName();
-    if (suggestionType.equalsIgnoreCase(SYSTEM)) {
-      pathType = PathType.Ca_System.getName();
+  static String fetchPathTypeForClassActivity(String suggestionOrigin) {
+    if (suggestionOrigin.equalsIgnoreCase(TEACHER)) {
+      return PathType.Ca_Teacher.getName();
+    } else if (suggestionOrigin.equalsIgnoreCase(SYSTEM)) {
+      return PathType.Ca_System.getName();
     }
-    return pathType;
+    return null;
   }
   
-  static String fetchPathTypeForProficiency(String suggestionType) {
-    String pathType = PathType.Proficiency_Teacher.getName();
-    if (suggestionType.equalsIgnoreCase(SYSTEM)) {
-      pathType = PathType.Proficiency_System.getName();
+  static String fetchPathTypeForProficiency(String suggestionOrigin) {
+    if (suggestionOrigin.equalsIgnoreCase(TEACHER)) {
+      return PathType.Proficiency_Teacher.getName();
+    } else if (suggestionOrigin.equalsIgnoreCase(SYSTEM)) {
+      return PathType.Proficiency_System.getName();
     }
-    return pathType;
+    return null;
   }
   
-  static String fetchPathTypeForCoursemap(String suggestionType) {
-    String pathType = PathType.Teacher.getName();
-    if (suggestionType.equalsIgnoreCase(SYSTEM)) {
-      pathType = PathType.System.getName();
+  static String fetchPathTypeForCoursemap(String suggestionOrigin) {
+    if (suggestionOrigin.equalsIgnoreCase(TEACHER)) {
+      return PathType.Teacher.getName();
+    } else if (suggestionOrigin.equalsIgnoreCase(SYSTEM)) {
+      return PathType.System.getName();
     }
-    return pathType;
+    return null;
   }
 
 }
