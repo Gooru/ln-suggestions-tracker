@@ -11,6 +11,8 @@ class SuggestionAddedNotificationCoordinator implements NotificationCoordinator 
 
   private static final String NOTIFICATION_TEACHER_SUGGESTION = "teacher.suggestion";
   private static final String ACTION_INITIATE = "initiate";
+  public static final String TEACHER = "teacher";
+  public static final String SYSTEM = "system";
   private final PostProcessSuggestionAddHandler.SuggestionPayload command;
   private static final Logger LOGGER = LoggerFactory
       .getLogger(SuggestionAddedNotificationCoordinator.class);
@@ -55,7 +57,7 @@ class SuggestionAddedNotificationCoordinator implements NotificationCoordinator 
       model.setCurrentItemType(command.getSuggestedContentType());
       model.setAction(ACTION_INITIATE);
       model.setPathId(pathId);
-      model.setPathType(PathType.Teacher.getName());
+      model.setPathType(PathTypeFinder.findPathTypeForSource(command.getSuggestionArea(), TEACHER));
       model.setNotificationType(NOTIFICATION_TEACHER_SUGGESTION);
       model.setContentSource(command.getSuggestionArea());
       model.setTxCode(command.getTxCode());
