@@ -123,7 +123,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"user_id\":\"0219090c-abe6-4a09-8c9f-343911f5cd86\",\n\"collection_id\":\"c45e4e59-3dde-4253-a4df-e27e5b77330f\",\n\"class_id\":\"0baefeb6-4f72-49b4-85fd-a20aa4f17100\",\n\"suggested_content_id\":\"8b6ae917-e757-44dd-b0e7-4e081cd9342b\",\n\"suggestion_origin\":\"teacher\",\n\"suggestion_originator_id\":\"0607cf97-6f9e-47c0-b610-01b36e02b4c6\",\n\"suggestion_criteria\":\"performance\",\n\"suggested_content_type\":\"assessment\",\n\"suggested_to\":\"student\",\n\"suggestion_area\":\"class-activity\",\n\"tx_code\":null,\n\"tx_code_type\":null,\n\"ca_content_id\":1\n}"
+					"raw": "{\n\"user_id\":\"0219090c-abe6-4a09-8c9f-343911f5cd86\",\n\"collection_id\":\"c45e4e59-3dde-4253-a4df-e27e5b77330f\",\n\"class_id\":\"0baefeb6-4f72-49b4-85fd-a20aa4f17100\",\n\"suggested_content_id\":\"8b6ae917-e757-44dd-b0e7-4e081cd9342b\",\n\"suggestion_origin\":\"teacher\",\n\"suggestion_originator_id\":\"0607cf97-6f9e-47c0-b610-01b36e02b4c6\",\n\"suggestion_criteria\":\"performance\",\n\"suggested_content_type\":\"assessment\",\n\"suggested_to\":\"student\",\n\"suggestion_area\":\"class-activity\",\n\"tx_code\":null,\n\"tx_code_type\":null,\n\"ca_id\":1\n}"
 				},
 				"description": ""
 			},
@@ -148,7 +148,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"scope\":\"class-activity\",\n\"caContentIds\":[\n8000\n],\n\"collectionId\":\"c45e4e59-3dde-4253-a4df-e27e5b77330f\"\n}"
+					"raw": "{\n\"scope\":\"class-activity\",\n\"caIds\":[\n8000\n]}"
 				},
 				"description": ""
 			},
@@ -173,7 +173,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"scope\":\"class-activity\",\n\"caContentId\":80000,\n\"collectionId\":\"c45e4e59-3dde-4253-a4df-e27e5b77330f\"\n}"
+					"raw": "{\n\"scope\":\"class-activity\",\n\"caIds\":[\n8000\n],\n\"detail\":true\n}"
 				},
 				"description": ""
 			},
@@ -189,6 +189,11 @@
 						"key": "authorization",
 						"value": "Token MTQ2ODM5MTY4MTIxNzoyN2I1MjFkNC05Y2VlLTQ4YzUtYTUwMi0wMmVhNTgzODQzNDY6YmE5NTZhOTctYWUxNS0xMWU1LWEzMDItZjhhOTYzMDY1OTc2",
 						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
 					}
 				],
 				"body": {
@@ -203,7 +208,7 @@
 			"name": "Fetch Competency Suggestions from all classes",
 			"request": {
 				"url": {
-					"raw": "http://localhost:8080/api/stracker/v1/user/0219090c-abe6-4a09-8c9f-343911f5cd86/code/K12.MA-MA1-NO-A1?scope=proficiency",
+					"raw": "http://localhost:8080/api/stracker/v1/user/0219090c-abe6-4a09-8c9f-343911f5cd86/code/K12.MA-MA1-NO-A1/codetype/competency?scope=proficiency",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -216,7 +221,9 @@
 						"user",
 						"0219090c-abe6-4a09-8c9f-343911f5cd86",
 						"code",
-						"K12.MA-MA1-NO-A1"
+						"K12.MA-MA1-NO-A1",
+						"codetype",
+						"competency"
 					],
 					"query": [
 						{
@@ -245,7 +252,7 @@
 			"name": "Fetch Competency Suggestion for given class",
 			"request": {
 				"url": {
-					"raw": "http://localhost:8080/api/stracker/v1/user/0219090c-abe6-4a09-8c9f-343911f5cd86/code/K12.MA-MA1-NO-A1?scope=proficiency?classId=0baefeb6-4f72-49b4-85fd-a20aa4f17100",
+					"raw": "http://localhost:8080/api/stracker/v1/user/0219090c-abe6-4a09-8c9f-343911f5cd86/code/K12.MA-MA1-NO-A1/codetype/competency?scope=proficiency&classId=0baefeb6-4f72-49b4-85fd-a20aa4f17100",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -258,12 +265,20 @@
 						"user",
 						"0219090c-abe6-4a09-8c9f-343911f5cd86",
 						"code",
-						"K12.MA-MA1-NO-A1"
+						"K12.MA-MA1-NO-A1",
+						"codetype",
+						"competency"
 					],
 					"query": [
 						{
 							"key": "scope",
-							"value": "proficiency?classId=0baefeb6-4f72-49b4-85fd-a20aa4f17100",
+							"value": "proficiency",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "classId",
+							"value": "0baefeb6-4f72-49b4-85fd-a20aa4f17100",
 							"equals": true,
 							"description": ""
 						}
