@@ -25,8 +25,8 @@ public class ListUserSuggestionsInCAProcessor implements MessageProcessor {
   private final Future<MessageResponse> result;
   private static final Logger LOGGER = LoggerFactory
       .getLogger(ListUserSuggestionsInCAProcessor.class);
-  private final ListUserSuggestionsService listUserSuggestionsService =
-      new ListUserSuggestionsService(DBICreator.getDbiForDefaultDS());
+  private final ListUserSuggestionsInCAService listUserSuggestionsService =
+      new ListUserSuggestionsInCAService(DBICreator.getDbiForDefaultDS());
   private EventBusMessage eventBusMessage;
 
   public ListUserSuggestionsInCAProcessor(Vertx vertx, Message<JsonObject> message) {
@@ -51,17 +51,9 @@ public class ListUserSuggestionsInCAProcessor implements MessageProcessor {
 
   private void fetchUserSuggestionForCA(ListUserSuggestionsInCACommand command) {
     try {
-      ListSuggestionsInCAResponse response =
-          listUserSuggestionsService.fetchSuggestionsInCA(command);
-
-      String resultString = new ObjectMapper().writeValueAsString(response);
-      result.complete(MessageResponseFactory.createOkayResponse(new JsonObject(resultString)));
-    } catch (JsonProcessingException e) {
-      LOGGER.error("Not able to convert data to JSON", e);
-      result.fail(e);
-    } catch (DecodeException e) {
-      LOGGER.warn("Not able to convert data to JSON", e);
-      result.fail(e);
+      JsonObject response =
+          listUserSuggestionsService.fetchSuggestionsInCA(command, eventBusMessage.getUserId());
+      result.complete(MessageResponseFactory.createOkayResponse(response));
     } catch (Throwable throwable) {
       LOGGER.warn("Encountered exception", throwable);
       result.fail(throwable);

@@ -1,25 +1,27 @@
 package org.gooru.suggestions.processor.listsuggestions;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import org.gooru.suggestions.processor.utilities.PGUtils;
+import org.gooru.suggestions.processor.listsuggestions.common.enricher.ContentEnricher;
 import org.skife.jdbi.v2.DBI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import io.vertx.core.json.JsonObject;
 
 /**
  * @author ashish
  */
 class ListUserSuggestionsService {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(ListUserSuggestionsService.class);
+
   private final ListUserSuggestionsDao listUserSuggestionsDao;
+  private ContentEnricher contentEnricher;
 
   ListUserSuggestionsService(DBI dbi) {
     this.listUserSuggestionsDao = dbi.onDemand(ListUserSuggestionsDao.class);
   }
 
-  ListSuggestionsResponse fetchSuggestionsForCourse(ListUserSuggestionsForCourseCommand command) {
+  JsonObject fetchSuggestionsForCourse(ListUserSuggestionsForCourseCommand command) {
     if (command.getScope() != null) {
       return fetchSuggestionsForCourseWithScope(command);
     } else {
@@ -27,35 +29,36 @@ class ListUserSuggestionsService {
     }
   }
 
-  private ListSuggestionsResponse fetchSuggestionsForCourseWithoutScope(
+  private JsonObject fetchSuggestionsForCourseWithoutScope(
       ListUserSuggestionsForCourseCommand command) {
     List<SuggestionTrackerModel> suggestions = listUserSuggestionsDao
         .fetchSuggestionsForCourseWithoutScope(command.getUserId(), command.getCourseId(),
             command.getPaginationInfo().getOffset(), command.getPaginationInfo().getMax());
-    int total = listUserSuggestionsDao
-        .countSuggestionsForCourseWithoutScope(command.getUserId(), command.getCourseId());
+    int total = listUserSuggestionsDao.countSuggestionsForCourseWithoutScope(command.getUserId(),
+        command.getCourseId());
     ListSuggestionsResponse response = new ListSuggestionsResponse();
     response.setSuggestions(suggestions);
     response.setTotal(total);
-    return response;
+    contentEnricher = ContentEnricher.buildContentEnricherForSuggestions(response);
+    return contentEnricher.enrichContent();
   }
 
-  private ListSuggestionsResponse fetchSuggestionsForCourseWithScope(
+  private JsonObject fetchSuggestionsForCourseWithScope(
       ListUserSuggestionsForCourseCommand command) {
-    List<SuggestionTrackerModel> suggestions = listUserSuggestionsDao
-        .fetchSuggestionsForCourseWithScope(command.getUserId(), command.getCourseId(),
-            command.getScope(), command.getPaginationInfo().getOffset(),
+    List<SuggestionTrackerModel> suggestions =
+        listUserSuggestionsDao.fetchSuggestionsForCourseWithScope(command.getUserId(),
+            command.getCourseId(), command.getScope(), command.getPaginationInfo().getOffset(),
             command.getPaginationInfo().getMax());
-    int total = listUserSuggestionsDao
-        .countSuggestionsForCourseWithScope(command.getUserId(), command.getCourseId(),
-            command.getScope());
+    int total = listUserSuggestionsDao.countSuggestionsForCourseWithScope(command.getUserId(),
+        command.getCourseId(), command.getScope());
     ListSuggestionsResponse response = new ListSuggestionsResponse();
     response.setSuggestions(suggestions);
     response.setTotal(total);
-    return response;
+    contentEnricher = ContentEnricher.buildContentEnricherForSuggestions(response);
+    return contentEnricher.enrichContent();
   }
 
-  ListSuggestionsResponse fetchSuggestionsInClass(ListUserSuggestionsInClassCommand command) {
+  JsonObject fetchSuggestionsInClass(ListUserSuggestionsInClassCommand command) {
     if (command.getScope() != null) {
       return fetchSuggestionsInClassWithScope(command);
     } else {
@@ -63,35 +66,36 @@ class ListUserSuggestionsService {
     }
   }
 
-  private ListSuggestionsResponse fetchSuggestionsInClassWithoutScope(
+  private JsonObject fetchSuggestionsInClassWithoutScope(
       ListUserSuggestionsInClassCommand command) {
-    List<SuggestionTrackerModel> suggestions = listUserSuggestionsDao
-        .fetchSuggestionsInClassWithoutScope(command.getUserId(), command.getClassId(),
+    List<SuggestionTrackerModel> suggestions =
+        listUserSuggestionsDao.fetchSuggestionsInClassWithoutScope(command.getUserId(),
+            command.getClassId(), command.getSuggestionOrigin(),
             command.getPaginationInfo().getOffset(), command.getPaginationInfo().getMax());
-    int total = listUserSuggestionsDao
-        .countSuggestionsInClassWithoutScope(command.getUserId(), command.getClassId());
+    int total = listUserSuggestionsDao.countSuggestionsInClassWithoutScope(command.getUserId(),
+        command.getClassId(), command.getSuggestionOrigin());
     ListSuggestionsResponse response = new ListSuggestionsResponse();
     response.setSuggestions(suggestions);
     response.setTotal(total);
-    return response;
+    contentEnricher = ContentEnricher.buildContentEnricherForSuggestions(response);
+    return contentEnricher.enrichContent();
   }
 
-  private ListSuggestionsResponse fetchSuggestionsInClassWithScope(
-      ListUserSuggestionsInClassCommand command) {
-    List<SuggestionTrackerModel> suggestions = listUserSuggestionsDao
-        .fetchSuggestionsInClassWithScope(command.getUserId(), command.getClassId(),
-            command.getScope(), command.getPaginationInfo().getOffset(),
-            command.getPaginationInfo().getMax());
-    int total = listUserSuggestionsDao
-        .countSuggestionsInClassWithScope(command.getUserId(), command.getClassId(),
-            command.getScope());
+  private JsonObject fetchSuggestionsInClassWithScope(ListUserSuggestionsInClassCommand command) {
+    List<SuggestionTrackerModel> suggestions =
+        listUserSuggestionsDao.fetchSuggestionsInClassWithScope(command.getUserId(),
+            command.getClassId(), command.getScope(), command.getSuggestionOrigin(),
+            command.getPaginationInfo().getOffset(), command.getPaginationInfo().getMax());
+    int total = listUserSuggestionsDao.countSuggestionsInClassWithScope(command.getUserId(),
+        command.getClassId(), command.getScope(), command.getSuggestionOrigin());
     ListSuggestionsResponse response = new ListSuggestionsResponse();
     response.setSuggestions(suggestions);
     response.setTotal(total);
-    return response;
+    contentEnricher = ContentEnricher.buildContentEnricherForSuggestions(response);
+    return contentEnricher.enrichContent();
   }
 
-  ListSuggestionsResponse fetchSuggestionsForTxCode(ListUserSuggestionsForTxCodeCommand command) {
+  JsonObject fetchSuggestionsForTxCode(ListUserSuggestionsForTxCodeCommand command) {
     if (command.getClassId() != null) {
       return fetchSuggestionsForTxCodeInClass(command);
     } else {
@@ -99,8 +103,7 @@ class ListUserSuggestionsService {
     }
   }
 
-  private ListSuggestionsResponse fetchAllSuggestionsForTxCode(
-      ListUserSuggestionsForTxCodeCommand command) {
+  private JsonObject fetchAllSuggestionsForTxCode(ListUserSuggestionsForTxCodeCommand command) {
     List<SuggestionTrackerModel> suggestions = listUserSuggestionsDao.fetchSuggestionsForTxCode(
         command.getUserId(), command.getTxCode(), command.getTxCodeType(),
         command.getPaginationInfo().getOffset(), command.getPaginationInfo().getMax());
@@ -109,11 +112,11 @@ class ListUserSuggestionsService {
     ListSuggestionsResponse response = new ListSuggestionsResponse();
     response.setSuggestions(suggestions);
     response.setTotal(total);
-    return response;
+    contentEnricher = ContentEnricher.buildContentEnricherForTxCodeSuggestions(response);
+    return contentEnricher.enrichContent();
   }
 
-  private ListSuggestionsResponse fetchSuggestionsForTxCodeInClass(
-      ListUserSuggestionsForTxCodeCommand command) {
+  private JsonObject fetchSuggestionsForTxCodeInClass(ListUserSuggestionsForTxCodeCommand command) {
     List<SuggestionTrackerModel> suggestions =
         listUserSuggestionsDao.fetchSuggestionsForTxCodeInClass(command.getUserId(),
             command.getTxCode(), command.getTxCodeType(), command.getClassId(),
@@ -123,88 +126,8 @@ class ListUserSuggestionsService {
     ListSuggestionsResponse response = new ListSuggestionsResponse();
     response.setSuggestions(suggestions);
     response.setTotal(total);
-    return response;
+    contentEnricher = ContentEnricher.buildContentEnricherForTxCodeSuggestions(response);
+    return contentEnricher.enrichContent();
   }
 
-  ListSuggestionsInCAResponse fetchSuggestionsInCA(ListUserSuggestionsInCACommand command) {
-    if (!command.getDetail()) {
-      return fetchSuggestionsCountForCAIds(command);
-    } else {
-      return fetchSuggestionsForCAIds(command);
-    }
-  }
-
-  private ListSuggestionsInCAResponse fetchSuggestionsForCAIds(
-      ListUserSuggestionsInCACommand command) {
-    List<SuggestionTrackerModel> suggestionsOfAllCAIds =
-        listUserSuggestionsDao.fetchSuggestionsForCAIds(command.getUserId(), command.getClassId(),
-            PGUtils.listToPostgresArrayLong(command.getCaIds()),
-            command.getPaginationInfo().getOffset(), command.getPaginationInfo().getMax());
-    Map<Long, List<SuggestionTrackerModel>> groupSuggestionsByCaId = new HashMap<>();
-    // Group suggestions by each ca id
-    groupSuggestionsByCaId(suggestionsOfAllCAIds, groupSuggestionsByCaId);
-
-    // Generate response object
-    ListSuggestionsInCAResponse listOfSuggestionsForAllCAIds =
-        generateResponseForAllCAIds(groupSuggestionsByCaId);
-    return listOfSuggestionsForAllCAIds;
-  }
-
-  private ListSuggestionsInCAResponse generateResponseForAllCAIds(
-      Map<Long, List<SuggestionTrackerModel>> groupSuggestionsByCaId) {
-    ListSuggestionsInCAResponse listOfSuggestionsForAllCAIds = new ListSuggestionsInCAResponse();
-    List<SuggestionInCAResponse> listSuggestionInCAResponse = new ArrayList<>();
-    for (Entry<Long, List<SuggestionTrackerModel>> groupedSuggestion : groupSuggestionsByCaId
-        .entrySet()) {
-      SuggestionInCAResponse suggestionInCAResponse =
-          generateSuggestionsResponseForCAId(groupedSuggestion.getKey(),
-              groupedSuggestion.getValue().size(), groupedSuggestion.getValue());
-      listSuggestionInCAResponse.add(suggestionInCAResponse);
-    }
-    listOfSuggestionsForAllCAIds.setSuggestions(listSuggestionInCAResponse);
-    return listOfSuggestionsForAllCAIds;
-  }
-
-  private void groupSuggestionsByCaId(List<SuggestionTrackerModel> suggestionsOfAllCAIds,
-      Map<Long, List<SuggestionTrackerModel>> groupSuggestionsByCaId) {
-    if (suggestionsOfAllCAIds != null && !suggestionsOfAllCAIds.isEmpty()) {
-      for (SuggestionTrackerModel suggestion : suggestionsOfAllCAIds) {
-        if (groupSuggestionsByCaId.containsKey(suggestion.getCaId())) {
-          List<SuggestionTrackerModel> tempSuggestions =
-              (List<SuggestionTrackerModel>) groupSuggestionsByCaId.get(suggestion.getCaId());
-          tempSuggestions.add(suggestion);
-          groupSuggestionsByCaId.put(suggestion.getCaId(), tempSuggestions);
-        } else {
-          List<SuggestionTrackerModel> suggestions = new ArrayList<>();
-          suggestions.add(suggestion);
-          groupSuggestionsByCaId.put(suggestion.getCaId(), suggestions);
-        }
-      }
-    }
-  }
-
-  private ListSuggestionsInCAResponse fetchSuggestionsCountForCAIds(
-      ListUserSuggestionsInCACommand command) {
-    List<CountInfoModel> suggestions =
-        listUserSuggestionsDao.countSuggestionsForCAIds(command.getUserId(), command.getClassId(),
-            PGUtils.listToPostgresArrayLong(command.getCaIds()));
-    ListSuggestionsInCAResponse listOfCASuggestions = new ListSuggestionsInCAResponse();
-    List<SuggestionInCAResponse> listSuggestionInCAResponse = new ArrayList<>();
-    for (CountInfoModel suggestion : suggestions) {
-      SuggestionInCAResponse suggestionInCAResponse =
-          generateSuggestionsResponseForCAId(suggestion.getId(), suggestion.getTotal(), null);
-      listSuggestionInCAResponse.add(suggestionInCAResponse);
-    }
-    listOfCASuggestions.setSuggestions(listSuggestionInCAResponse);
-    return listOfCASuggestions;
-  }
-
-  private SuggestionInCAResponse generateSuggestionsResponseForCAId(Long caId, int total,
-      List<SuggestionTrackerModel> suggestions) {
-    SuggestionInCAResponse suggestionInCAResponse = new SuggestionInCAResponse();
-    suggestionInCAResponse.setCaId(caId);
-    suggestionInCAResponse.setTotal(total);
-    suggestionInCAResponse.setSuggestions(suggestions);
-    return suggestionInCAResponse;
-  }
 }

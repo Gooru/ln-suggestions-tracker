@@ -57,6 +57,11 @@ public final class Constants {
     public static final String RESP_CONTENT = "content";
     public static final String RESP_SUGGESTIONS = "suggestions";
     public static final String RESP_CONTEXT = "context";
+    public static final String RESP_ID = "id";
+    public static final String RESP_TITLE = "title";
+    public static final String RESP_THUMBNAIL = "thumbnail";
+    public static final String RESP_TAXONOMY = "taxonomy";
+    public static final String RESP_URL = "url";
 
     private Response() {
       throw new AssertionError();
@@ -86,7 +91,7 @@ public final class Constants {
     public static final String API_USER_SUGGESTIONS_FOR_TX_CODE =
         API_BASE_ROUTE + "user/:userId/code/:txCode/codetype/:txCodeType";
     public static final String API_USER_SUGGESTIONS_IN_CA =
-        API_BASE_ROUTE + "ca/user/:userId/class/:classId";
+        API_BASE_ROUTE + "ca/class/:classId";
     private Route() {
       throw new AssertionError();
     }
