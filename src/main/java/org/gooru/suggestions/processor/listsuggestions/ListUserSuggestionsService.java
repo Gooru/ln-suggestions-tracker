@@ -60,20 +60,25 @@ class ListUserSuggestionsService {
 
   JsonObject fetchSuggestionsInClass(ListUserSuggestionsInClassCommand command) {
     if (command.getScope() != null) {
-      return fetchSuggestionsInClassWithScope(command);
+      if (command.getSuggestionOrigin() != null) {
+        return fetchSuggestionsInClassWithScopeWithOrigin(command);
+      } else {
+        return fetchSuggestionsInClassWithScope(command);
+      }
     } else {
-      return fetchSuggestionsInClassWithoutScope(command);
+      if (command.getSuggestionOrigin() != null) {
+        return fetchSuggestionsInClassWithoutScopeWithOrigin(command);
+      } else {
+        return fetchSuggestionsInClassWithoutScope(command);
+      }
     }
   }
 
   private JsonObject fetchSuggestionsInClassWithoutScope(
       ListUserSuggestionsInClassCommand command) {
     List<SuggestionTrackerModel> suggestions =
-        listUserSuggestionsDao.fetchSuggestionsInClassWithoutScope(command.getUserId(),
-            command.getClassId(), command.getSuggestionOrigin(),
-            command.getPaginationInfo().getOffset(), command.getPaginationInfo().getMax());
-    int total = listUserSuggestionsDao.countSuggestionsInClassWithoutScope(command.getUserId(),
-        command.getClassId(), command.getSuggestionOrigin());
+        listUserSuggestionsDao.fetchSuggestionsInClassWithoutScope(command.asBean());
+    int total = listUserSuggestionsDao.countSuggestionsInClassWithoutScope(command.asBean());
     ListSuggestionsResponse response = new ListSuggestionsResponse();
     response.setSuggestions(suggestions);
     response.setTotal(total);
@@ -83,11 +88,33 @@ class ListUserSuggestionsService {
 
   private JsonObject fetchSuggestionsInClassWithScope(ListUserSuggestionsInClassCommand command) {
     List<SuggestionTrackerModel> suggestions =
-        listUserSuggestionsDao.fetchSuggestionsInClassWithScope(command.getUserId(),
-            command.getClassId(), command.getScope(), command.getSuggestionOrigin(),
-            command.getPaginationInfo().getOffset(), command.getPaginationInfo().getMax());
-    int total = listUserSuggestionsDao.countSuggestionsInClassWithScope(command.getUserId(),
-        command.getClassId(), command.getScope(), command.getSuggestionOrigin());
+        listUserSuggestionsDao.fetchSuggestionsInClassWithScope(command.asBean());
+    int total = listUserSuggestionsDao.countSuggestionsInClassWithScope(command.asBean());
+    ListSuggestionsResponse response = new ListSuggestionsResponse();
+    response.setSuggestions(suggestions);
+    response.setTotal(total);
+    contentEnricher = ContentEnricher.buildContentEnricherForSuggestions(response);
+    return contentEnricher.enrichContent();
+  }
+
+  private JsonObject fetchSuggestionsInClassWithoutScopeWithOrigin(
+      ListUserSuggestionsInClassCommand command) {
+    List<SuggestionTrackerModel> suggestions =
+        listUserSuggestionsDao.fetchSuggestionsInClassWithoutScopeWithOrigin(command.asBean());
+    int total =
+        listUserSuggestionsDao.countSuggestionsInClassWithoutScopeWithOrigin(command.asBean());
+    ListSuggestionsResponse response = new ListSuggestionsResponse();
+    response.setSuggestions(suggestions);
+    response.setTotal(total);
+    contentEnricher = ContentEnricher.buildContentEnricherForSuggestions(response);
+    return contentEnricher.enrichContent();
+  }
+
+  private JsonObject fetchSuggestionsInClassWithScopeWithOrigin(
+      ListUserSuggestionsInClassCommand command) {
+    List<SuggestionTrackerModel> suggestions =
+        listUserSuggestionsDao.fetchSuggestionsInClassWithScopeWithOrigin(command.asBean());
+    int total = listUserSuggestionsDao.countSuggestionsInClassWithScopeWithOrigin(command.asBean());
     ListSuggestionsResponse response = new ListSuggestionsResponse();
     response.setSuggestions(suggestions);
     response.setTotal(total);

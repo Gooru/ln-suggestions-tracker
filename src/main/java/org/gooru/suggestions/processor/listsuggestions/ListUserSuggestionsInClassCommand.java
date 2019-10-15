@@ -67,6 +67,8 @@ class ListUserSuggestionsInClassCommand {
     bean.setUserId(userId);
     bean.setScope(scope);
     bean.setSuggestionOrigin(suggestionOrigin);
+    bean.setOffset(paginationInfo.getOffset());
+    bean.setMax(paginationInfo.getMax());
     return bean;
   }
 
@@ -106,6 +108,8 @@ class ListUserSuggestionsInClassCommand {
     private UUID classId;
     private String scope;
     private String suggestionOrigin;
+    private int offset;
+    private int max;
 
     public UUID getUserId() {
       return userId;
@@ -137,6 +141,22 @@ class ListUserSuggestionsInClassCommand {
 
     public void setSuggestionOrigin(String suggestionOrigin) {
       this.suggestionOrigin = suggestionOrigin;
+    }
+
+    public int getOffset() {
+      return offset;
+    }
+
+    public void setOffset(int offset) {
+      this.offset = offset;
+    }
+
+    public int getMax() {
+      return max;
+    }
+
+    public void setMax(int max) {
+      this.max = max;
     }
   }
 }
