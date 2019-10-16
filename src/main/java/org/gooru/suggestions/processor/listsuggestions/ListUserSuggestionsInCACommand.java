@@ -70,9 +70,7 @@ class ListUserSuggestionsInCACommand {
   }
 
   private void validate() {
-    if (userId == null) {
-      throw new HttpResponseWrapperException(HttpStatus.BAD_REQUEST, "Invalid userId");
-    } else if (classId == null) {
+    if (classId == null) {
       throw new HttpResponseWrapperException(HttpStatus.BAD_REQUEST, "Invalid classId");
     } else if (caIds == null) {
       throw new HttpResponseWrapperException(HttpStatus.BAD_REQUEST, "Invalid caId");

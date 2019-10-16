@@ -50,21 +50,8 @@ public class ListUserSuggestionsForTxCodeProcessor implements MessageProcessor {
   }
 
   private void fetchUserSuggestionForTxCode(ListUserSuggestionsForTxCodeCommand command) {
-    try {
-      ListSuggestionsResponse response = listUserSuggestionsService
-          .fetchSuggestionsForTxCode(command);
-      String resultString = new ObjectMapper().writeValueAsString(response);
-      result.complete(MessageResponseFactory.createOkayResponse(new JsonObject(resultString)));
-    } catch (JsonProcessingException e) {
-      LOGGER.error("Not able to convert data to JSON", e);
-      result.fail(e);
-    } catch (DecodeException e) {
-      LOGGER.warn("Not able to convert data to JSON", e);
-      result.fail(e);
-    } catch (Throwable throwable) {
-      LOGGER.warn("Encountered exception", throwable);
-      result.fail(throwable);
-    }
+    JsonObject response = listUserSuggestionsService.fetchSuggestionsForTxCode(command);
+    result.complete(MessageResponseFactory.createOkayResponse(response));
   }
 
 }

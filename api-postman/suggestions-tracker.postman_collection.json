@@ -132,7 +132,7 @@
 		{
 			"name": "Fetch class-activity suggestions count",
 			"request": {
-				"url": "http://localhost:8080/api/stracker/v1/ca/user/0219090c-abe6-4a09-8c9f-343911f5cd86/class/0baefeb6-4f72-49b4-85fd-a20aa4f17100",
+				"url": "http://localhost:8080/api/stracker/v1/ca/class/0baefeb6-4f72-49b4-85fd-a20aa4f17100",
 				"method": "POST",
 				"header": [
 					{
@@ -148,7 +148,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"scope\":\"class-activity\",\n\"caIds\":[\n8000\n]}"
+					"raw": "{\n\"scope\":\"class-activity\",\n\"caIds\":[\n8000\n],\n\"userId\":\"0219090c-abe6-4a09-8c9f-343911f5cd86\"}"
 				},
 				"description": ""
 			},
@@ -157,7 +157,7 @@
 		{
 			"name": "Fetch class-activity suggestion detail",
 			"request": {
-				"url": "http://localhost:8080/api/stracker/v1/ca/user/0219090c-abe6-4a09-8c9f-343911f5cd86/class/0baefeb6-4f72-49b4-85fd-a20aa4f17100",
+				"url": "http://localhost:8080/api/stracker/v1/ca/class/0baefeb6-4f72-49b4-85fd-a20aa4f17100",
 				"method": "POST",
 				"header": [
 					{
@@ -173,7 +173,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"scope\":\"class-activity\",\n\"caIds\":[\n8000\n],\n\"detail\":true\n}"
+					"raw": "{\n\"scope\":\"class-activity\",\n\"caIds\":[\n8000\n],\n\"detail\":true,\n\"userId\":\"0219090c-abe6-4a09-8c9f-343911f5cd86\"\n}"
 				},
 				"description": ""
 			},
