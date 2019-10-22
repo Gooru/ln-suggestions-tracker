@@ -117,7 +117,6 @@ class ContentEnricherForAllTypesOfActivities<T> implements ContentEnricher {
     String contentType = data.getString(SUGGESTED_CONTENT_TYPE);
     String contentId = data.getString(SUGGESTED_CONTENT_ID);
     String collectionId = data.getString(COLLECTION_ID);
-
     JsonObject suggestedData = new JsonObject();
     if (checkContentTypeIsCollection(contentType)) {
       if (collectionAssessmentEnricherService != null) {
@@ -128,19 +127,20 @@ class ContentEnricherForAllTypesOfActivities<T> implements ContentEnricher {
         suggestedData = resourceQuestionEnricherService.getEnrichmentInfo(contentId);
       }
     }
-    JsonObject suggestions = new JsonObject();
+    JsonObject suggestionsWithSuggestedForContentMeta = new JsonObject();
     if (collectionId != null) {
       if (suggestedData != null) {
-        suggestions = suggestedData.copy();
+        suggestionsWithSuggestedForContentMeta = suggestedData.copy();
       }
       JsonObject suggestedForData =
           collectionAssessmentEnricherService.getEnrichmentInfo(collectionId);
       if (suggestedForData != null && !suggestedForData.isEmpty()) {
         suggestedForData.put(COLLECTION_ID, collectionId);
-        suggestions.put(SUGGESTED_FOR_CONTENT, suggestedForData);
+        suggestionsWithSuggestedForContentMeta.put(SUGGESTED_FOR_CONTENT, suggestedForData);
       }
+      return suggestionsWithSuggestedForContentMeta;
     }
-    return suggestions;
+    return suggestedData;
   }
 
   private void initializeUnenrichedActivities() {
