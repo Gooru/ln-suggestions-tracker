@@ -90,7 +90,7 @@ class ContentEnricherForAllTypesOfActivities<T> implements ContentEnricher {
     for (Object result : suggestions) {
       enrichSuggestedContentsWithMetadata(result);
     }
-    enrichedActivities.put(SUGGESTIONS, suggestions);
+    includeEnrichedResponseFields(suggestions);
   }
 
   private void mergeCaResponseWithEnrichedData() {
@@ -101,6 +101,12 @@ class ContentEnricherForAllTypesOfActivities<T> implements ContentEnricher {
         content = enrichSuggestedContentsWithMetadata(content);
       }
     }
+    includeEnrichedResponseFields(suggestions);
+  }
+
+  //Here we are overwriting existing suggestions array with enriched suggestions
+  private void includeEnrichedResponseFields(JsonArray suggestions) {
+    enrichedActivities.mergeIn(unenrichedActivities);
     enrichedActivities.put(SUGGESTIONS, suggestions);
   }
 
