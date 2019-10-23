@@ -1,13 +1,5 @@
 package org.gooru.suggestions.processor.listsuggestions;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.vertx.core.Future;
-import io.vertx.core.Vertx;
-import io.vertx.core.eventbus.Message;
-import io.vertx.core.json.DecodeException;
-import io.vertx.core.json.JsonObject;
-import java.util.List;
 import org.gooru.suggestions.processor.MessageProcessor;
 import org.gooru.suggestions.processor.data.EventBusMessage;
 import org.gooru.suggestions.processor.utilities.jdbi.DBICreator;
@@ -15,6 +7,10 @@ import org.gooru.suggestions.responses.MessageResponse;
 import org.gooru.suggestions.responses.MessageResponseFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import io.vertx.core.Future;
+import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonObject;
 
 /**
  * @author ashish

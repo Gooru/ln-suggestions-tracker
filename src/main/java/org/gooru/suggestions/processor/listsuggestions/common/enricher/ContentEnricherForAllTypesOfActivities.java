@@ -90,7 +90,7 @@ class ContentEnricherForAllTypesOfActivities<T> implements ContentEnricher {
     for (Object result : suggestions) {
       enrichSuggestedContentsWithMetadata(result);
     }
-    enrichedActivities.put(SUGGESTIONS, suggestions);
+    addRemainingOriginalResponseFields(suggestions);
   }
 
   private void mergeCaResponseWithEnrichedData() {
@@ -101,7 +101,17 @@ class ContentEnricherForAllTypesOfActivities<T> implements ContentEnricher {
         content = enrichSuggestedContentsWithMetadata(content);
       }
     }
-    enrichedActivities.put(SUGGESTIONS, suggestions);
+    addRemainingOriginalResponseFields(suggestions);
+  }
+
+  private void addRemainingOriginalResponseFields(JsonArray suggestions) {
+    for (String fieldName : unenrichedActivities.fieldNames()) {
+      if (fieldName.equalsIgnoreCase(SUGGESTIONS)) {
+        enrichedActivities.put(SUGGESTIONS, suggestions);
+      } else {
+        enrichedActivities.put(fieldName, unenrichedActivities.getValue(fieldName));
+      }
+    }
   }
 
   private JsonObject enrichSuggestedContentsWithMetadata(Object result) {
