@@ -126,7 +126,7 @@ interface ListUserSuggestionsDao {
 
   @Mapper(CountInfoMapper.class)
   @SqlQuery("select ca_id as id, count(*) as total from suggestions_tracker where class_id = :classId and "
-      + " and ca_id = ANY(:caIds::bigint[]) group by ca_id")
+      + " ca_id = ANY(:caIds::bigint[]) group by ca_id")
   List<CountInfoModel> countSuggestionsForCAIds(@Bind("classId") UUID classId,
       @Bind("caIds") String caIds);
 
