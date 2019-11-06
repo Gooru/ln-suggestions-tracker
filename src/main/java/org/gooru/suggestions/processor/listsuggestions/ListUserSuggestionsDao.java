@@ -15,7 +15,7 @@ interface ListUserSuggestionsDao {
   // Fetch In Course Suggestions
   @Mapper(SuggestionTrackerMapper.class)
   @SqlQuery("select * from suggestions_tracker where course_id = :courseId and user_id = :userId and "
-      + " class_id is null order by created_at desc offset :offset limit :max")
+      + " class_id is null order by accepted asc, created_at desc offset :offset limit :max")
   List<SuggestionTrackerModel> fetchSuggestionsForCourseWithoutScope(@Bind("userId") UUID userId,
       @Bind("courseId") UUID courseId, @Bind("offset") int offset, @Bind("max") int max);
 
@@ -25,7 +25,7 @@ interface ListUserSuggestionsDao {
 
   @Mapper(SuggestionTrackerMapper.class)
   @SqlQuery("select * from suggestions_tracker where user_id = :userId and course_id = :courseId "
-      + " and class_id is null and suggestion_area = :scope order by created_at desc offset :offset limit :max")
+      + " and class_id is null and suggestion_area = :scope order by accepted asc, created_at desc offset :offset limit :max")
   List<SuggestionTrackerModel> fetchSuggestionsForCourseWithScope(@Bind("userId") UUID userId,
       @Bind("courseId") UUID courseId, @Bind("scope") String scope, @Bind("offset") int offset,
       @Bind("max") int max);
@@ -38,13 +38,13 @@ interface ListUserSuggestionsDao {
   // Fetch In Class Suggestions
   @Mapper(SuggestionTrackerMapper.class)
   @SqlQuery("select * from suggestions_tracker where class_id = :classId and user_id = :userId "
-      + " order by created_at desc offset :offset limit :max")
+      + " order by accepted asc, created_at desc offset :offset limit :max")
   List<SuggestionTrackerModel> fetchSuggestionsInClassWithoutScope(
       @BindBean ListUserSuggestionsInClassCommand.UserSuggestionsInClassBean userSuggestionsInClassBean);
 
   @Mapper(SuggestionTrackerMapper.class)
   @SqlQuery("select * from suggestions_tracker where class_id = :classId and user_id = :userId "
-      + " AND suggestion_origin = :suggestionOrigin::text order by created_at desc offset :offset limit :max")
+      + " AND suggestion_origin = :suggestionOrigin::text order by accepted asc, created_at desc offset :offset limit :max")
   List<SuggestionTrackerModel> fetchSuggestionsInClassWithoutScopeWithOrigin(
       @BindBean ListUserSuggestionsInClassCommand.UserSuggestionsInClassBean userSuggestionsInClassBean);
 
@@ -59,14 +59,14 @@ interface ListUserSuggestionsDao {
 
   @Mapper(SuggestionTrackerMapper.class)
   @SqlQuery("select * from suggestions_tracker where class_id = :classId and user_id = :userId "
-      + " and suggestion_area = :scope order by created_at desc offset :offset limit :max")
+      + " and suggestion_area = :scope order by accepted asc, created_at desc offset :offset limit :max")
   List<SuggestionTrackerModel> fetchSuggestionsInClassWithScope(
       @BindBean ListUserSuggestionsInClassCommand.UserSuggestionsInClassBean userSuggestionsInClassBean);
 
   @Mapper(SuggestionTrackerMapper.class)
   @SqlQuery("select * from suggestions_tracker where class_id = :classId and user_id = :userId "
       + " and suggestion_origin = :suggestionOrigin::text and suggestion_area = :scope "
-      + " order by created_at desc offset :offset limit :max")
+      + " order by accepted asc, created_at desc offset :offset limit :max")
   List<SuggestionTrackerModel> fetchSuggestionsInClassWithScopeWithOrigin(
       @BindBean ListUserSuggestionsInClassCommand.UserSuggestionsInClassBean userSuggestionsInClassBean);
 
