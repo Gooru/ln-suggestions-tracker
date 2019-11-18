@@ -4,37 +4,43 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author ashish on 17/11/17.
+ * @author ashish
  */
 public enum SuggestedContentType {
-    Collection("collection"),
-    Assessment("assessment"),
-    Resource("resource");
+  Course("course"),
+  Unit("unit"),
+  Lesson("lesson"),
+  Collection("collection"),
+  Assessment("assessment"),
+  Resource("resource"),
+  Question("question"),
+  OfflineActivity("offline-activity");
 
-    private final String name;
 
-    SuggestedContentType(String name) {
-        this.name = name;
+  private final String name;
+
+  SuggestedContentType(String name) {
+    this.name = name;
+  }
+
+  public String getName() {
+    return this.name;
+  }
+
+  private static final Map<String, SuggestedContentType> LOOKUP = new HashMap<>(values().length);
+
+  static {
+    for (SuggestedContentType suggestedContentType : values()) {
+      LOOKUP.put(suggestedContentType.name, suggestedContentType);
     }
+  }
 
-    public String getName() {
-        return this.name;
+  public static SuggestedContentType builder(String type) {
+    SuggestedContentType result = LOOKUP.get(type);
+    if (result == null) {
+      throw new IllegalArgumentException("Invalid suggested content type: " + type);
     }
-
-    private static final Map<String, SuggestedContentType> LOOKUP = new HashMap<>(values().length);
-
-    static {
-        for (SuggestedContentType suggestedContentType : values()) {
-            LOOKUP.put(suggestedContentType.name, suggestedContentType);
-        }
-    }
-
-    public static SuggestedContentType builder(String type) {
-        SuggestedContentType result = LOOKUP.get(type);
-        if (result == null) {
-            throw new IllegalArgumentException("Invalid suggested content type: " + type);
-        }
-        return result;
-    }
+    return result;
+  }
 
 }

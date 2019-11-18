@@ -1,288 +1,302 @@
 {
-	"id": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
-	"name": "suggestions-tracker",
-	"description": "",
-	"order": [
-		"c473cedd-690c-10c3-c84b-9b13b48b400c",
-		"37456d83-4331-8546-fc81-6c133ad0ffd2",
-		"7777e9b3-2ee6-926b-e08f-57ad104d54b4",
-		"e15c5484-50e7-d413-5f42-825cd6ba5246",
-		"29164b09-8cb3-85f7-39c0-4702afb0595e",
-		"9d2f6710-9dda-c788-45c2-3dcf2b560743",
-		"ec7583f1-7f81-18d9-d26a-36eaaa2d5edf",
-		"917e28c8-22f5-9d00-7728-68bc76a69582"
-	],
-	"folders": [],
-	"folders_order": [],
-	"timestamp": 1510907933583,
-	"owner": "1962403",
-	"public": false,
-	"requests": [
+	"info": {
+		"_postman_id": "c2bf8abb-bff5-47cd-a73e-89c2d9c38ece",
+		"name": "sugg-tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
 		{
-			"id": "29164b09-8cb3-85f7-39c0-4702afb0595e",
-			"headers": "Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==\nContent-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Authorization",
-					"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==",
-					"description": "",
-					"enabled": true
+			"name": "Fetch suggestions for user in class",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/stracker/v1/user/68492039-3713-42de-90ad-94d5945cd482/class/0baefeb6-4f72-49b4-85fd-a20aa4f17100?scope=course-map",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stracker",
+						"v1",
+						"user",
+						"68492039-3713-42de-90ad-94d5945cd482",
+						"class",
+						"0baefeb6-4f72-49b4-85fd-a20aa4f17100"
+					],
+					"query": [
+						{
+							"key": "scope",
+							"value": "course-map"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch suggestions for user for course",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ=="
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/stracker/v1/user/68492039-3713-42de-90ad-94d5945cd482/course/c3c5a610-0c97-4ecc-852c-8586a7ba3b52?scope=course-map",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stracker",
+						"v1",
+						"user",
+						"68492039-3713-42de-90ad-94d5945cd482",
+						"course",
+						"c3c5a610-0c97-4ecc-852c-8586a7ba3b52"
+					],
+					"query": [
+						{
+							"key": "scope",
+							"value": "course-map"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add suggestions for user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ=="
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": \"68492039-3713-42de-90ad-94d5945cd482\",\n  \"course_id\": \"c3c5a610-0c97-4ecc-852c-8586a7ba3b52\",\n  \"unit_id\": \"c7ed7287-e114-4a7b-9381-6af4513284d7\",\n  \"lesson_id\": \"a8548fc3-bb1d-40d4-b52c-0b76211dad10\",\n  \"collection_id\": \"c45e4e59-3dde-4253-a4df-e27e5b77330f\",\n  \"class_id\": \"0baefeb6-4f72-49b4-85fd-a20aa4f17100\",\n  \"suggested_content_id\": \"8b6ae917-e757-44dd-b0e7-4e081cd9342b\",\n  \"suggestion_origin\": \"teacher\",\n  \"suggestion_originator_id\": \"0607cf97-6f9e-47c0-b610-01b36e02b4c6\",\n  \"suggestion_criteria\": \"performance\",\n  \"suggested_content_type\": \"collection\",\n  \"suggested_to\": \"student\",\n  \"suggestion_area\": \"course-map\",\n  \"tx_code\": null,\n  \"tx_code_type\": null\n}\n"
 				},
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/api/s/suggestions/v1/acceptance",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "PUT",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1511429090116,
-			"name": "Local: Suggestion Acceptance",
-			"description": "",
-			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
-			"responses": [],
-			"rawModeData": "{\n\t\"ctx_user_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"path_id\": 1\n}"
+				"url": "http://localhost:8080/api/stracker/v1/track"
+			},
+			"response": []
 		},
 		{
-			"id": "37456d83-4331-8546-fc81-6c133ad0ffd2",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/api/internal/suggestions/v1/teacher",
-			"folder": null,
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1514371031673,
-			"name": "Local: Add Teacher Suggestion Internal",
-			"description": "",
-			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
-			"responses": [],
-			"rawModeData": "{\n  \"ctx_user_id\": [\"e7d051d8-9bd8-4888-8085-1028e41b7391\", \"6f005dbf-7db9-40a8-aa8d-e62b954283d0\", \"add37191-faa8-4330-821e-f351287d2713\"],\n  \"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_type\": \"assessment\",\n  \"path_id\": 1\n}"
-		},
-		{
-			"id": "7777e9b3-2ee6-926b-e08f-57ad104d54b4",
-			"headers": "Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==\nContent-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Authorization",
-					"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==",
-					"description": "",
-					"enabled": true
+			"name": "Add class-activity suggestions",
+			"request": {
+				"url": "http://localhost:8080/api/stracker/v2/track",
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Token MTQ2ODM5MTY4MTIxNzoyN2I1MjFkNC05Y2VlLTQ4YzUtYTUwMi0wMmVhNTgzODQzNDY6YmE5NTZhOTctYWUxNS0xMWU1LWEzMDItZjhhOTYzMDY1OTc2",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"user_id\":\"0219090c-abe6-4a09-8c9f-343911f5cd86\",\n\"collection_id\":\"c45e4e59-3dde-4253-a4df-e27e5b77330f\",\n\"class_id\":\"0baefeb6-4f72-49b4-85fd-a20aa4f17100\",\n\"suggested_content_id\":\"8b6ae917-e757-44dd-b0e7-4e081cd9342b\",\n\"suggestion_origin\":\"teacher\",\n\"suggestion_originator_id\":\"0607cf97-6f9e-47c0-b610-01b36e02b4c6\",\n\"suggestion_criteria\":\"performance\",\n\"suggested_content_type\":\"assessment\",\n\"suggested_to\":\"student\",\n\"suggestion_area\":\"class-activity\",\n\"tx_code\":null,\n\"tx_code_type\":null,\n\"ca_id\":1\n}"
 				},
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/api/s/suggestions/v1/system",
-			"folder": null,
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1513675539387,
-			"name": "Local: Add System Suggestion",
-			"description": "",
-			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
-			"responses": [],
-			"rawModeData": "{\n  \"ctx_user_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_type\": \"assessment\",\n  \"suggested_content_subtype\": \"pre-test\"\n}"
+				"description": ""
+			},
+			"response": []
 		},
 		{
-			"id": "917e28c8-22f5-9d00-7728-68bc76a69582",
-			"headers": "Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==\nContent-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Authorization",
-					"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==",
-					"description": "",
-					"enabled": true
+			"name": "Fetch class-activity suggestions count",
+			"request": {
+				"url": "http://localhost:8080/api/stracker/v1/ca/class/0baefeb6-4f72-49b4-85fd-a20aa4f17100",
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Token MTQ2ODM5MTY4MTIxNzoyN2I1MjFkNC05Y2VlLTQ4YzUtYTUwMi0wMmVhNTgzODQzNDY6YmE5NTZhOTctYWUxNS0xMWU1LWEzMDItZjhhOTYzMDY1OTc2",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"scope\":\"class-activity\",\n\"caIds\":[\n8000\n],\n\"userId\":\"0219090c-abe6-4a09-8c9f-343911f5cd86\"}"
 				},
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/api/s/suggestions/v1/user/e7d051d8-9bd8-4888-8085-1028e41b7391/course/e7d051d8-9bd8-4888-8085-1028e41b7391",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1511516303414,
-			"name": "Local: User Suggestions for Course",
-			"description": "",
-			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
-			"responses": [],
-			"rawModeData": "{}"
+				"description": ""
+			},
+			"response": []
 		},
 		{
-			"id": "9d2f6710-9dda-c788-45c2-3dcf2b560743",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/api/internal/suggestions/v1/acceptance",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "PUT",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1514371042281,
-			"name": "Local: Suggestion Acceptance Internal",
-			"description": "",
-			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
-			"responses": [],
-			"rawModeData": "{\n\t\"ctx_user_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n\t\"path_id\": 1\n}"
-		},
-		{
-			"id": "c473cedd-690c-10c3-c84b-9b13b48b400c",
-			"headers": "Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==\nContent-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Authorization",
-					"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==",
-					"description": "",
-					"enabled": true
+			"name": "Fetch class-activity suggestion detail",
+			"request": {
+				"url": "http://localhost:8080/api/stracker/v1/ca/class/0baefeb6-4f72-49b4-85fd-a20aa4f17100",
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Token MTQ2ODM5MTY4MTIxNzoyN2I1MjFkNC05Y2VlLTQ4YzUtYTUwMi0wMmVhNTgzODQzNDY6YmE5NTZhOTctYWUxNS0xMWU1LWEzMDItZjhhOTYzMDY1OTc2",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"scope\":\"class-activity\",\n\"caIds\":[\n8000\n],\n\"detail\":true,\n\"userId\":\"0219090c-abe6-4a09-8c9f-343911f5cd86\"\n}"
 				},
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/api/s/suggestions/v1/teacher",
-			"folder": null,
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1513675528631,
-			"name": "Local: Add Teacher Suggestion",
-			"description": "",
-			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
-			"responses": [],
-			"rawModeData": "{\n  \"ctx_user_id\": [\"e7d051d8-9bd8-4888-8085-1028e41b7391\", \"6f005dbf-7db9-40a8-aa8d-e62b954283d0\", \"add37191-faa8-4330-821e-f351287d2713\"],\n  \"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_type\": \"assessment\",\n  \"path_id\": 1\n}"
+				"description": ""
+			},
+			"response": []
 		},
 		{
-			"id": "e15c5484-50e7-d413-5f42-825cd6ba5246",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/api/internal/suggestions/v1/system",
-			"folder": null,
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1514371037120,
-			"name": "Local: Add System Suggestion Internal",
-			"description": "",
-			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
-			"responses": [],
-			"rawModeData": "{\n  \"ctx_user_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_class_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_course_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_unit_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_lesson_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"ctx_collection_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_id\": \"e7d051d8-9bd8-4888-8085-1028e41b7391\",\n  \"suggested_content_type\": \"assessment\",\n  \"suggested_content_subtype\": \"pre-test\"\n}"
-		},
-		{
-			"id": "ec7583f1-7f81-18d9-d26a-36eaaa2d5edf",
-			"headers": "Authorization: Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==\nContent-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Authorization",
-					"value": "Token Njg0OTIwMzktMzcxMy00MmRlLTkwYWQtOTRkNTk0NWNkNDgyOlR1ZSBGZWIgMTYgMDQ6NTI6MTUgVVRDIDIwMTY6MTQ1NTU5ODMzNTExNQ==",
-					"description": "",
-					"enabled": true
+			"name": "Add Competency Suggestions",
+			"request": {
+				"url": "http://localhost:8080/api/stracker/v2/track",
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Token MTQ2ODM5MTY4MTIxNzoyN2I1MjFkNC05Y2VlLTQ4YzUtYTUwMi0wMmVhNTgzODQzNDY6YmE5NTZhOTctYWUxNS0xMWU1LWEzMDItZjhhOTYzMDY1OTc2",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"user_id\":\"0219090c-abe6-4a09-8c9f-343911f5cd86\",\n\"class_id\":\"0baefeb6-4f72-49b4-85fd-a20aa4f17100\",\n\"suggested_content_id\":\"8b6ae917-e757-44dd-b0e7-4e081cd9342b\",\n\"suggestion_origin\":\"teacher\",\n\"suggestion_originator_id\":\"0607cf97-6f9e-47c0-b610-01b36e02b4c6\",\n\"suggestion_criteria\":\"performance\",\n\"suggested_content_type\":\"assessment\",\n\"suggested_to\":\"student\",\n\"suggestion_area\":\"proficiency\",\n\"tx_code\":\"K12.MA-MA1-NO-A1\",\n\"tx_code_type\":\"competency\"\n}"
 				},
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/api/s/suggestions/v1/user/e7d051d8-9bd8-4888-8085-1028e41b7391/class/e7d051d8-9bd8-4888-8085-1028e41b7391",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1511517843878,
-			"name": "Local: User Suggestions In Class",
-			"description": "",
-			"collectionId": "176d3ec8-9078-a0f4-aa57-98dcae5bb278",
-			"responses": [],
-			"rawModeData": "{}"
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Competency Suggestions from all classes",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/stracker/v1/user/0219090c-abe6-4a09-8c9f-343911f5cd86/code/K12.MA-MA1-NO-A1/codetype/competency?scope=proficiency",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stracker",
+						"v1",
+						"user",
+						"0219090c-abe6-4a09-8c9f-343911f5cd86",
+						"code",
+						"K12.MA-MA1-NO-A1",
+						"codetype",
+						"competency"
+					],
+					"query": [
+						{
+							"key": "scope",
+							"value": "proficiency",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Token MTQ2ODM5MTY4MTIxNzoyN2I1MjFkNC05Y2VlLTQ4YzUtYTUwMi0wMmVhNTgzODQzNDY6YmE5NTZhOTctYWUxNS0xMWU1LWEzMDItZjhhOTYzMDY1OTc2",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Competency Suggestion for given class",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/stracker/v1/user/0219090c-abe6-4a09-8c9f-343911f5cd86/code/K12.MA-MA1-NO-A1/codetype/competency?scope=proficiency&classId=0baefeb6-4f72-49b4-85fd-a20aa4f17100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stracker",
+						"v1",
+						"user",
+						"0219090c-abe6-4a09-8c9f-343911f5cd86",
+						"code",
+						"K12.MA-MA1-NO-A1",
+						"codetype",
+						"competency"
+					],
+					"query": [
+						{
+							"key": "scope",
+							"value": "proficiency",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "classId",
+							"value": "0baefeb6-4f72-49b4-85fd-a20aa4f17100",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Token MTQ2ODM5MTY4MTIxNzoyN2I1MjFkNC05Y2VlLTQ4YzUtYTUwMi0wMmVhNTgzODQzNDY6YmE5NTZhOTctYWUxNS0xMWU1LWEzMDItZjhhOTYzMDY1OTc2",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

@@ -1,7 +1,7 @@
 package org.gooru.suggestions.test;
 
 /**
- * @author ashish on 14/3/17.
+ * @author ashish
  */
 public class TestRunner {
 
